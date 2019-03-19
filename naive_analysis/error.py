@@ -1,4 +1,6 @@
 from numpy import *
+from matplotlib import pylab as plt
+
 seterr(over='ignore')
 def evolution_error(r,n):
     t = n
@@ -27,5 +29,18 @@ def binary_search(low,up,n,error):
         return binary_search(low,mid,n,error)
     else:
         return binary_search(mid,up,n,error)
-    
-print(find_r(1000))
+
+n = 10
+result_n = []
+result_r = []
+while n <= 100:
+    r = find_r(n)
+    print('n is: ' + str(n))
+    print('r: ' + str(r))
+    result_n.append(n)
+    result_r.append(r)
+    n += 1
+
+plt.loglog(result_n,result_r,basex = 10)
+plt.grid(True)
+plt.show()
