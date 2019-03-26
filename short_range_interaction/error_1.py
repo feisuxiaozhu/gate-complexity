@@ -49,10 +49,7 @@ def evolution_error_3(r,n):
     total_sum = first_factor*(2*gamma*mu*running_sum)**p * third_factor
     return total_sum
 
-total_error(r,n):
-    return 
-a=evolution_error_1(100000,100)
-b=evolution_error_3(100000,100)
-print(a)
-print(b)
+def total_error_product(r,n):
+    return evolution_error_1(r,n) + evolution_error_2(r,n) + evolution_error_3(r,n)
+
 
