@@ -35,11 +35,18 @@ def evolution_error_3(r,n):
     gamma = 4
     k = 2
     p_k = 1/float(4-4**(1/(2*k-1)))
-    mu = max(abs(p_k)/2,abs(1-4*p_k)/2)
-    first_factor = n*gamma
+    mu = max(abs(p_k)/2.,abs(1-4*p_k)/2.)
+    first_factor = n*gamma/ 2.
     third_factor = t**(p+1)/float(math.factorial(p+1)*r**(p))
     running_sum = 0
     for i in range(1,s+1):
+        if i == 1:
+            running_sum += 2
+        elif i <= floor(n/2):
+            running_sum += i + i+1
+        else:
+            running_sum += 2*floor(n/2)
+    for i in range(1,s):
         if i == 1:
             running_sum += 2
         elif i <= floor(n/2):
