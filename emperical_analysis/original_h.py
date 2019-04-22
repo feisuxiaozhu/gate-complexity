@@ -1,7 +1,13 @@
 from numpy import *
 from scipy.linalg import expm, norm
-n = 10
-h = [0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5]
+import random 
+import timeit
+
+def generate_random_h(n):
+    h = []
+    for i in range(n):
+        h.append(random.uniform(0,1))
+    return h
 
 # define Pauli matrices
 sigma_x = array([[0, 1],[ 1, 0]])
@@ -9,7 +15,7 @@ sigma_y = array([[0, -1j],[1j, 0]])
 sigma_z = array([[1, 0],[0, -1]])
 I = array([[1,0],[0,1]])
 # create dictionary for  X_j, Y_j, and Z_j, note they are tensor products!
-X={};Y={};Z={}
+
 def tensor_product_generator(sigma,dic,length):
     for j in range(length):
         if j == 0:
@@ -22,9 +28,7 @@ def tensor_product_generator(sigma,dic,length):
             else:
                 running_multiple = kron(running_multiple,I)
         dic[j] = running_multiple.astype(complex)
-tensor_product_generator(sigma_x,X,n)
-tensor_product_generator(sigma_y,Y,n)
-tensor_product_generator(sigma_z,Z,n)
+
 
 def construct_expitH(h,n,X,Y,Z):
     t = n
@@ -64,18 +68,58 @@ def construct_S4(h,n,X,Y,Z,t): #r is used for trotter step
     C = matmul(A,A)
     return matmul(matmul(C,B),C)
 
-def findError(h,n,X,Y,Z,r):
+def findError(r,n,h):      
     t = n/r
     A = construct_expitH(h,n,X,Y,Z)
     B = construct_S4(h,n,X,Y,Z,t)
     B_exponent = B 
-    for i in range(r):
+    for i in range(int(r)):
         if i!=0:
             B_exponent = matmul(B_exponent,B)
-    return norm(subtract(A,B_exponent),ord=2)
+    result = norm(subtract(A,B_exponent),ord=2)
+    return result
 
-print(findError(h,n,X,Y,Z,1000))
+def find_r(n,h):
+    error = 10**(-3)
+    r = 1
+    previous_r = 0
+    while (findError(r,n,h) > error):
+        previous_r = r
+        r = 2 * r
+    result = binary_search(previous_r,r,n,error,h,1,10)   
+    return result
 
+def binary_search(low,up,n,error,h,counter,constraint):
+    print(counter)
+    if counter == constraint:
+        return up
+    else:
+        counter += 1
+    if low + 1 >= up:
+        return int(up)
+    mid = ceil((low+up)/2)
+    if findError(mid,n,h)< error:
+        return binary_search(low,mid,n,error,h,counter,constraint)
+    else:
+        return binary_search(mid,up,n,error,h,counter,constraint)
+
+def experiment(n,repetition):
+    output = []
+    for i in range(repetition):
+        print('n = '+str(n))
+        print('repetition: '+ str(i+1))
+        h = generate_random_h(n)
+        result = find_r(n,h)
+        print('approximate r: ' + str(result))
+        output.append(result)
+    filename = str(n) + ".csv" 
+    savetxt(filename, output, delimiter=",")
+n=12
+X={};Y={};Z={}
+tensor_product_generator(sigma_x,X,n)
+tensor_product_generator(sigma_y,Y,n)
+tensor_product_generator(sigma_z,Z,n)
+experiment(n,3)
 
 
 
