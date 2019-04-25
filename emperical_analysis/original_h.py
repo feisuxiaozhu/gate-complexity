@@ -86,7 +86,7 @@ def find_r(n,h):
     while (findError(r,n,h) > error):
         previous_r = r
         r = 2 * r
-    result = binary_search(previous_r,r,n,error,h,1,10)   
+    result = binary_search(previous_r,r,n,error,h,1,5)   
     return result
 
 def binary_search(low,up,n,error,h,counter,constraint):
@@ -114,7 +114,7 @@ def experiment(n,repetition):
         output.append(result)
     filename = str(n) + ".csv" 
     savetxt(filename, output, delimiter=",")
-n=12
+n=11
 X={};Y={};Z={}
 tensor_product_generator(sigma_x,X,n)
 tensor_product_generator(sigma_y,Y,n)
