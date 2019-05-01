@@ -66,4 +66,6 @@ def evolution_error_better_3(r,n):
     total_sum = first_factor*(2*gamma*mu*running_sum)**p * third_factor
     return total_sum
 
-print(evolution_error_better_3(100000,100))
+def evolution_error_better(r,n):
+    return evolution_error_better_1(r,n)+evolution_error_better_2(r,n)+evolution_error_better_3(r,n)
+print(evolution_error_better(1800,10))
