@@ -160,13 +160,11 @@ def binary_search_norm(low,up,n,error):
     else:
         return binary_search_norm(mid,up,n,error)
 
-n=20
-
-
 
 result_r_norm = []
+result_n=[]
 n=5
-while n<=10:
+while n<=100:
     global h 
     h = generate_random_h(n)
     global H_even 
@@ -192,10 +190,11 @@ while n<=10:
     r_norm = find_r_norm(n)
     print(n)
     print(r_norm)
+    result_n.append(n)
     result_r_norm.append(r_norm)
     n += 1
 filename = 'result.csv'
-savetxt(filename,result_r_norm,delimiter=',')
+savetxt(filename,c_[result_n,result_r_norm],delimiter=',')
 
 
 
