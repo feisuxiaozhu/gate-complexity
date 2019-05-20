@@ -46,7 +46,7 @@ def get_relevant_norms(support,H_1_array,H_2_array,j):
     query_support = set()
 
     #round 2
-    if 1 in H_1_array:
+    if 1 in H_2_array:
         coefficient = abs(a_coefficients[j])
     else:
         coefficient = abs(b_coefficients[j])
@@ -84,8 +84,6 @@ def get_relevant_norms(support,H_1_array,H_2_array,j):
     for i in current_support:
         support_result.append(i)
     return (result,support_result)
-
-
 
 
 def A_1(H,r):
@@ -199,7 +197,7 @@ def B_4(H,r):
         running_sum = 0
         current_support = [i]
         for j in range(4,5):
-            result,current_support = get_relevant_norms(current_support,H_odd_array,H_even_array,j)
+            result,current_support = get_relevant_norms(current_support,H_even_array,H_odd_array,j)
             running_sum += result*2
         running_sum = norm(H[i],ord=2)*abs(b_coefficients[3])*running_sum**p
         total_sum += running_sum
@@ -276,7 +274,7 @@ def binary_search(low,up,n,error):
     else:
         return binary_search(mid,up,n,error)
 
-n = 100
+n = 10
 result_n=[]
 result_r = []
 while n<= 100:
@@ -308,9 +306,9 @@ while n<= 100:
 
 filename = 'result.csv'
 savetxt(filename,c_[result_n,result_r],delimiter=',')
-plt.loglog(result_n,result_r,basex=10)
-plt.grid(True)
-plt.show()
+# plt.loglog(result_n,result_r,basex=10)
+# plt.grid(True)
+# plt.show()
 
 # n=20
 # t=n
@@ -327,8 +325,9 @@ plt.show()
 #         H_odd[i] = matmul(sigma_x,sigma_x)+matmul(sigma_y,sigma_y)+matmul(sigma_z,sigma_z)+h[i-1]*sigma_z
 #         H_odd_array.append(i)
 # total = 0
+# print(a_coefficients)
+# print(b_coefficients)
 # a,current_support = get_relevant_norms([1],[1,3,5,7,9],[2,4,6,8,10],1)
-# print(a)
 # total += a*2
 # a,current_support = get_relevant_norms(current_support,[1,3,5,7,9],[2,4,6,8,10],2)
 # total += a*2
