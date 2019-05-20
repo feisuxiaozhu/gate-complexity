@@ -20,7 +20,13 @@ def generate_random_h(n):
 def get_relevant_norms(support,H_1_array,H_2_array,j):
     current_support = set()
     query_support = set() #new additional support from H_1 and H_2
+    result=0
+    j = j-1
     #round 1 
+    if 1 in H_1_array:
+        coefficient = abs(a_coefficients[j])
+    else:
+        coefficient = abs(b_coefficients[j])
     for i in support:
         current_support.add(i)
     for i in support:
@@ -30,7 +36,20 @@ def get_relevant_norms(support,H_1_array,H_2_array,j):
         if i-1 in H_1_array:
             current_support.add(i-1)
             query_support.add(i-1)
+    for i in query_support:
+        if i%2==0:
+            result += norm(H_even[i],ord=2)*coefficient
+            #result += coefficient
+        else:
+            result += norm(H_odd[i],ord=2)*coefficient
+            #result += coefficient
+    query_support = set()
+
     #round 2
+    if 1 in H_1_array:
+        coefficient = abs(a_coefficients[j])
+    else:
+        coefficient = abs(b_coefficients[j])
     for i in current_support:
         if i not in support:
             support.append(i)
@@ -41,18 +60,26 @@ def get_relevant_norms(support,H_1_array,H_2_array,j):
         if i-1 in H_2_array:
             query_support.add(i-1)
             current_support.add(i-1)
-    result=0
-
-    if j% 2 == 0:
-        coefficient = b_coefficients[j-1]
-    else:
-        coefficient = a_coefficients[j-1]
-
     for i in query_support:
         if i%2==0:
             result += norm(H_even[i],ord=2)*coefficient
+            #result += coefficient
         else:
             result += norm(H_odd[i],ord=2)*coefficient
+            #result += coefficient
+
+    # if j% 2 == 0:
+    #     coefficient = b_coefficients[j-1]
+    # else:
+    #     coefficient = a_coefficients[j-1]
+    # print(query_support)
+    # for i in query_support:
+    #     if i%2==0:
+    #         #result += norm(H_even[i],ord=2)*coefficient
+    #         result += coefficient
+    #     else:
+    #         #result += norm(H_odd[i],ord=2)*coefficient
+    #         result += coefficient
     support_result = []
     for i in current_support:
         support_result.append(i)
@@ -249,7 +276,7 @@ def binary_search(low,up,n,error):
     else:
         return binary_search(mid,up,n,error)
 
-n = 10
+n = 100
 result_n=[]
 result_r = []
 while n<= 100:
@@ -284,3 +311,27 @@ savetxt(filename,c_[result_n,result_r],delimiter=',')
 plt.loglog(result_n,result_r,basex=10)
 plt.grid(True)
 plt.show()
+
+# n=20
+# t=n
+# h = generate_random_h(n)
+# H_even = {}
+# H_odd = {}
+# H_even_array = []
+# H_odd_array= []
+# for i in range(1,n+1):
+#     if i%2 == 0:
+#         H_even[i] = matmul(sigma_x,sigma_x)+matmul(sigma_y,sigma_y)+matmul(sigma_z,sigma_z)+h[i-1]*sigma_z
+#         H_even_array.append(i)
+#     else:
+#         H_odd[i] = matmul(sigma_x,sigma_x)+matmul(sigma_y,sigma_y)+matmul(sigma_z,sigma_z)+h[i-1]*sigma_z
+#         H_odd_array.append(i)
+# total = 0
+# a,current_support = get_relevant_norms([1],[1,3,5,7,9],[2,4,6,8,10],1)
+# print(a)
+# total += a*2
+# a,current_support = get_relevant_norms(current_support,[1,3,5,7,9],[2,4,6,8,10],2)
+# total += a*2
+# a,current_support = get_relevant_norms(current_support,[1,3,5,7,9],[2,4,6,8,10],3)
+# total += a*2
+# print(total)
