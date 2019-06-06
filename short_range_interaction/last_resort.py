@@ -106,6 +106,33 @@ def A_1(H,r):
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
     return total_sum
 
+def A_2(H,r):
+    total_sum = 0
+    for i in H:
+        running_sum = 0
+        current_support = [i]
+        second_matrix = zeros((4,4),dtype=complex)
+        if i-1 >0: 
+            current_support.append(i-1)
+            second_matrix += H_even[i-1]
+        if i+1 <=n: 
+            current_support.append(i+1)
+            second_matrix += H_even[i+1]
+        b_2 = b_coefficients[1]
+        a_sup_2 = 0
+        for c in range(2):
+            a_sup_2 += a_coefficients[c]
+        first_matrix = H_odd[i]
+        inner_norm = abs(b_2*a_sup_2)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
+
+        for j in range(3,4):
+            result,current_support = get_relevant_norms(current_support,H_odd_array,H_even_array,j)
+            running_sum += result*2
+        running_sum = inner_norm*running_sum**p
+        total_sum += running_sum   
+    total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
+    return total_sum
+
 print(a_coefficients)
 print(b_coefficients)
 n=10
