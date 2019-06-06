@@ -133,8 +133,117 @@ def A_2(H,r):
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
     return total_sum
 
-print(a_coefficients)
-print(b_coefficients)
+def A_3(H,r):
+    total_sum = 0
+    for i in H:
+        running_sum = 0
+        current_support = [i]
+        second_matrix = zeros((4,4),dtype=complex)
+        if i-1 >0: 
+            current_support.append(i-1)
+            second_matrix += H_even[i-1]
+        if i+1 <=n: 
+            current_support.append(i+1)
+            second_matrix += H_even[i+1]
+        b_3 = b_coefficients[2]
+        a_sup_3 = 0
+        for c in range(3):
+            a_sup_3 += a_coefficients[c]
+        first_matrix = H_odd[i]
+        inner_norm = abs(b_3*a_sup_3)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
+        running_sum = inner_norm
+        total_sum += running_sum
+    total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
+    return total_sum
+
+def A_4(H,r):
+    total_sum = 0
+    for i in H:
+        running_sum = 0
+        current_support = [i]
+        second_matrix = zeros((4,4),dtype=complex)
+        if i-1 >0: 
+            current_support.append(i-1)
+            second_matrix += H_even[i-1]
+        if i+1 <=n: 
+            current_support.append(i+1)
+            second_matrix += H_even[i+1]
+        b_4 = b_coefficients[4]
+        a_sup_4 = 0
+        for c in range(4):
+            a_sup_4 += a_coefficients[c]
+        first_matrix = H_odd[i]
+        inner_norm = abs(b_4*a_sup_4)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
+        result,current_support = get_relevant_norms(current_support,[],H_odd_array,4)
+        running_sum += result*2
+        running_sum = inner_norm*running_sum**p
+        total_sum += running_sum 
+    total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
+    return total_sum
+
+def A_5(H,r):
+    total_sum = 0
+    for i in H:
+        running_sum = 0
+        current_support = [i]
+        second_matrix = zeros((4,4),dtype=complex)
+        if i-1 >0: 
+            current_support.append(i-1)
+            second_matrix += H_even[i-1]
+        if i+1 <=n: 
+            current_support.append(i+1)
+            second_matrix += H_even[i+1]
+        b_5 = b_coefficients[1]
+        a_sup_5 = 0
+        for c in range(5):
+            a_sup_5 += a_coefficients[c]
+        first_matrix = H_odd[i]
+        inner_norm = abs(b_5*a_sup_5)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
+
+        result,current_support = get_relevant_norms(current_support,H_odd_array,[],5)
+        running_sum += result*2
+        result,current_support = get_relevant_norms(current_support,H_even_array,H_odd_array,4)
+        running_sum += result*2
+
+        running_sum = inner_norm*running_sum**p
+        total_sum += running_sum 
+    total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
+    return total_sum
+
+
+def B_1(H,r):
+    total_sum = 0
+    for i in H:
+        running_sum = 0
+        current_support = [i]
+        second_matrix = zeros((4,4),dtype=complex)
+        if i-1 >0: 
+            current_support.append(i-1)
+            second_matrix += H_odd[i-1]
+        if i+1 <=n: 
+            current_support.append(i+1)
+            second_matrix += H_odd[i+1]
+        a_2 = a_coefficients[1]
+        b_sup_1 = b_coefficients[0]
+        first_matrix = H_even[i]
+        inner_norm = abs(a_2*b_sup_1)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
+
+        result,current_support = get_relevant_norms(current_support,[H_even_array],[],2)
+        running_sum += result*2
+        result,current_support = get_relevant_norms(current_support,H_odd_array,H_even_array,3)
+        running_sum += result*2
+
+        running_sum = inner_norm*running_sum**p
+        total_sum += running_sum 
+    total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
+    return total_sum
+
+
+
+
+
+
+
 n=10
 t=n
 h = generate_random_h(n)
@@ -150,5 +259,5 @@ for i in range(1,n+1):
         H_odd[i] = matmul(kron(sigma_x,I),kron(I,sigma_x))+matmul(kron(sigma_y,I),kron(I,sigma_y))+matmul(kron(sigma_z,I),kron(I,sigma_z))+h[i-1]*kron(sigma_z,I)
         H_odd_array.append(i)
 
-print(A_1(H_odd,100))
+print(B_1(H_even,100))
 
