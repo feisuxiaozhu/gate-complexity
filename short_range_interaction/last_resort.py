@@ -98,10 +98,12 @@ def A_1(H,r):
         first_matrix = H_odd[i]
         inner_norm = abs(b_1*a_sup_1)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
 
+        result,current_support = get_relevant_norms(current_support,H_even_array,[],1)
+        running_sum += result*2
         for j in range(2,4):
             result,current_support = get_relevant_norms(current_support,H_odd_array,H_even_array,j)
             running_sum += result*2
-        running_sum = inner_norm*running_sum**p
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
     return total_sum
@@ -125,10 +127,12 @@ def A_2(H,r):
         first_matrix = H_odd[i]
         inner_norm = abs(b_2*a_sup_2)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
 
+        result,current_support = get_relevant_norms(current_support,H_even_array,[],2)
+        running_sum += result*2
         for j in range(3,4):
             result,current_support = get_relevant_norms(current_support,H_odd_array,H_even_array,j)
             running_sum += result*2
-        running_sum = inner_norm*running_sum**p
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum   
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
     return total_sum
@@ -151,7 +155,10 @@ def A_3(H,r):
             a_sup_3 += a_coefficients[c]
         first_matrix = H_odd[i]
         inner_norm = abs(b_3*a_sup_3)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
-        running_sum = inner_norm
+
+        result,current_support = get_relevant_norms(current_support,H_even_array,[],3)
+        running_sum += result*2
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
     return total_sum
@@ -174,9 +181,11 @@ def A_4(H,r):
             a_sup_4 += a_coefficients[c]
         first_matrix = H_odd[i]
         inner_norm = abs(b_4*a_sup_4)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
-        result,current_support = get_relevant_norms(current_support,[],H_odd_array,4)
+
+
+        result,current_support = get_relevant_norms(current_support,H_even_array,H_odd_array,4)
         running_sum += result*2
-        running_sum = inner_norm*running_sum**p
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum 
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
     return total_sum
@@ -200,12 +209,12 @@ def A_5(H,r):
         first_matrix = H_odd[i]
         inner_norm = abs(b_5*a_sup_5)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
 
-        result,current_support = get_relevant_norms(current_support,H_odd_array,[],5)
+        result,current_support = get_relevant_norms(current_support,H_even_array,H_odd_array,5)
         running_sum += result*2
         result,current_support = get_relevant_norms(current_support,H_even_array,H_odd_array,4)
         running_sum += result*2
 
-        running_sum = inner_norm*running_sum**p
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum 
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
     return total_sum
@@ -228,12 +237,12 @@ def B_1(H,r):
         first_matrix = H_even[i]
         inner_norm = abs(a_2*b_sup_1)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
 
-        result,current_support = get_relevant_norms(current_support,H_even_array,[],2)
+        result,current_support = get_relevant_norms(current_support,H_odd_array,H_even_array,2)
         running_sum += result*2
         result,current_support = get_relevant_norms(current_support,H_odd_array,H_even_array,3)
         running_sum += result*2
 
-        running_sum = inner_norm*running_sum**p
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum 
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
     return total_sum
@@ -257,9 +266,10 @@ def B_2(H,r):
         first_matrix = H_even[i]
         inner_norm = abs(a_3*b_sup_2)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
 
-        result,current_support = get_relevant_norms(current_support,H_even_array,[],3)
+
+        result,current_support = get_relevant_norms(current_support,H_odd_array,H_even_array,3)
         running_sum += result*2
-        running_sum = inner_norm*running_sum**p
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum
         
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
@@ -284,7 +294,9 @@ def B_3(H,r):
         first_matrix = H_even[i]
         inner_norm = abs(a_4*b_sup_3)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
 
-        running_sum = inner_norm
+        result,current_support = get_relevant_norms(current_support,[],H_odd_array,4)
+        running_sum += result*2
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
     return total_sum
@@ -308,9 +320,11 @@ def B_4(H,r):
         first_matrix = H_even[i]
         inner_norm = abs(a_5*b_sup_4)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
 
+        result,current_support = get_relevant_norms(current_support,[],H_odd_array,5)
+        running_sum += result*2
         result,current_support = get_relevant_norms(current_support,H_even_array,H_odd_array,4)
         running_sum += result*2
-        running_sum = inner_norm*running_sum**p
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum
 
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
@@ -335,12 +349,15 @@ def B_5(H,r):
         first_matrix = H_even[i]
         inner_norm = abs(a_6*b_sup_5)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
 
+        result,current_support = get_relevant_norms(current_support,[],H_odd_array,6)
+        running_sum += result*2
+        running_sum = inner_norm*running_sum**(p-1)
         result,current_support = get_relevant_norms(current_support,H_even_array,H_odd_array,5)
         running_sum += result*2
         result,current_support = get_relevant_norms(current_support,H_even_array,H_odd_array,4)
         running_sum += result*2
 
-        running_sum = inner_norm*running_sum**p
+        running_sum = inner_norm*running_sum**(p-1)
         total_sum += running_sum 
     
     total_sum = total_sum*t**(p+1)/float(math.factorial(p+1)*r**(p))
@@ -404,3 +421,4 @@ while n<= 100:
 
 filename = 'last_resort_result.csv'
 savetxt(filename,c_[result_n,result_r],delimiter=',')
+
