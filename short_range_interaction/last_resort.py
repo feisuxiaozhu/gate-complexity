@@ -349,7 +349,7 @@ def B_5(H,r):
         first_matrix = H_even[i]
         inner_norm = abs(a_6*b_sup_5)*norm(matmul(second_matrix,first_matrix)-matmul(first_matrix,second_matrix),ord=2)
 
-        result,current_support = get_relevant_norms(current_support,[]2,H_odd_array,6)
+        result,current_support = get_relevant_norms(current_support,[],H_odd_array,6)
         running_sum += result*2
         running_sum = inner_norm*running_sum**(p-1)
         result,current_support = get_relevant_norms(current_support,H_even_array,H_odd_array,5)
@@ -387,7 +387,7 @@ def binary_search(low,up,n,error):
     else:
         return binary_search(mid,up,n,error)
 
-
+print(a_coefficients)
 n = 10
 result_n=[]
 result_r = []
