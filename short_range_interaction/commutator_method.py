@@ -48,14 +48,11 @@ def find_numerical_coefficient(combinatorics_coefficients):
             counter_set[combinatorics_coefficients[i]] += 1
         else:
             counter_set[combinatorics_coefficients[i]] = 1
-    print(counter_set)
     for i,j in counter_set.items():
         result *= 1./math.factorial(int(j))
     for i in combinatorics_coefficients:
-        print(i)
-        print(grab_value_for_coefficient(i))
         result *= grab_value_for_coefficient(i)
-    print(result)
+    return abs(result)
 
 def helper(conjugators,commutators):
     n = len(conjugators)
@@ -72,25 +69,41 @@ def helper(conjugators,commutators):
         temp.append(commutators[0])
         temp.append(commutators[1])
         combinatorics_coefficients.append(temp)
-    print(combinatorics_coefficients)
+    for combo in combinatorics_coefficients:
+        nest_commutator = find_nest_commutator(combo)
+        numerical_contribution = find_numerical_coefficient(combo)
+        if nest_commutator in final_result.keys():
+            final_result[nest_commutator] += numerical_contribution
+        else:
+            final_result[nest_commutator] = numerical_contribution
 
 
 k = 2
 p=4
 p_k = 1./(4-4**(1./(2*k-1)))
-print(p_k)
 global a_coefficients 
 a_coefficients = [1/2.*p_k,p_k,1/2.*(1-3.*p_k),1/2.*(1.-3.*p_k),p_k,1/2.*p_k]
 global b_coefficients 
 b_coefficients = [p_k,p_k,1-4.*p_k,p_k,p_k,0]
+global final_result 
+final_result = {}
 
+conjugators_list_1 = [['a4','b4','a5','b5','a6'],['a4','b4','a5','b5'],['a4','b4','a5'],['a4','b4'],['a4']]
+commutators_list_1 = [['a6','d5'],['b5','c5'],['a5','d4'],['b4','c4'],['a4','d3']]
+conjugators_list_2 = [['b3'],['b3','a3'],['b3','a3','b2'],['b3','a3','b2','a2'],['b3','a3','b2','a2','b1']]
+commutators_list_2 = [['b3','c3'],['a3','d2'],['b2','c2'],['a2','d1'],['b1','c1']]
 
-# conjugators = ['a4','b4']
-# commutators = ['b4','c4']
+for i in range(len(conjugators_list_1)):
+    conjugators = conjugators_list_1[i]
+    commutators = commutators_list_1[i]
+    helper(conjugators,commutators)
 
-# helper(conjugators,commutators)
-print(a_coefficients)
-print(b_coefficients)
-find_numerical_coefficient(['b4', 'b4', 'b4', 'b4', 'c4'])
+for i in range(len(conjugators_list_2)):
+    conjugators = conjugators_list_2[i]
+    commutators = commutators_list_2[i]
+    helper(conjugators,commutators)
+
+print(final_result)
+
 
 
