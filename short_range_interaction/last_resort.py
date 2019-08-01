@@ -12,7 +12,7 @@ I = array([[1,0],[0,1]])
 
 k = 2
 p=4
-p_k = 1/float(4-4**(1/(2*k-1)))
+p_k = 1/float(4-4**(1./(2*k-1)))
 a_coefficients = [1/2.*p_k,p_k,1/2.*(1-3.*p_k),1/2.*(1.-3.*p_k),p_k,1/2.*p_k]
 b_coefficients = [p_k,p_k,1-4.*p_k,p_k,p_k,0]
 
