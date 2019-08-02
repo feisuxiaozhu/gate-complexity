@@ -103,7 +103,14 @@ for i in range(len(conjugators_list_2)):
     commutators = commutators_list_2[i]
     helper(conjugators,commutators)
 
-print(final_result)
+combined_result = {}
+for i,j in final_result.items():
+    prefix = i[0:3]
+    if prefix in combined_result.keys():
+        combined_result[prefix] += j
+    else:
+        combined_result[prefix] = j
+print(combined_result)
 
 
 
