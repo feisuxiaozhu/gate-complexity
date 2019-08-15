@@ -8,7 +8,7 @@ def f(array,n,S,res):
     if n == 1:
         res.append(array + [S-s])
     else:
-        for i in xrange(0,S+1-s):
+        for i in range(0,S+1-s):
             f(array + [i],n-1,S,res)
 
 def find_nest_commutator(combinatorics_coefficients):
