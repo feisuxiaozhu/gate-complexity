@@ -49,7 +49,7 @@ def kron_helper(n,i,local_term):
 def AAA(n,r):
     total_result = 0
     i = 2
-    t=n/r
+    t=n
     while (i<n):
         Hp1 = kron_helper(3,3,local_terms[i+1])
         H = kron_helper(3,2,local_terms[i])
@@ -61,13 +61,13 @@ def AAA(n,r):
         temp = MN(LP(fourth_level_matrix,LP(third_level_matrix,LP(second_level_matrix,LP(first_level_matrix,H)))))
         total_result+= abs(temp)
         i+=2
-    total_result = total_result*commutator_coefficients['AAA']*t**5
+    total_result = total_result*commutator_coefficients['AAA']*t**5/(r**4)
     return total_result
 
 def BAB(n,r):
     total_result = 0
     i = 2
-    t = n/r
+    t = n
 
     while i<n:
         H = kron_helper(9,5,local_terms[i])
@@ -86,13 +86,13 @@ def BAB(n,r):
         temp = MN(LP(fourth_level_matrix,LP(third_level_matrix,LP(second_level_matrix,LP(first_level_matrix,H)))))
         total_result+= abs(temp)
         i+=2
-    total_result = total_result * commutator_coefficients['BAB']*t**5
+    total_result = total_result * commutator_coefficients['BAB']*t**5/(r**4)
     return total_result
 
 def AAB(n,r):
     total_result = 0
     i = 2
-    t = n/r
+    t = n
     while i<n:
         H = kron_helper(7,4,local_terms[i])
         Hm1 = kron_helper(7,3,local_terms[i-1])
@@ -108,13 +108,13 @@ def AAB(n,r):
         temp = MN(LP(fourth_level_matrix,LP(third_level_matrix,LP(second_level_matrix,LP(first_level_matrix,H)))))
         total_result+= abs(temp)
         i+=2
-    total_result = total_result * commutator_coefficients['AAB']*t**5
+    total_result = total_result * commutator_coefficients['AAB']*t**5/(r**4)
     return total_result
 
 def ABA(n,r):
     total_result = 0
     i = 2
-    t = n/r
+    t = n
     while i<n:
         H = kron_helper(7,4,local_terms[i])
         Hm1 = kron_helper(7,3,local_terms[i-1])
@@ -130,13 +130,13 @@ def ABA(n,r):
         temp = MN(LP(fourth_level_matrix,LP(third_level_matrix,LP(second_level_matrix,LP(first_level_matrix,H)))))
         total_result+= abs(temp)
         i+=2
-    total_result = total_result * commutator_coefficients['ABA']*t**5
+    total_result = total_result * commutator_coefficients['ABA']*t**5/(r**4)
     return total_result
 
 def ABB(n,r):
     total_result = 0
     i = 2
-    t = n/r
+    t = n
     while i<n:
         H = kron_helper(7,4,local_terms[i])
         Hm1 = kron_helper(7,3,local_terms[i-1])
@@ -152,13 +152,13 @@ def ABB(n,r):
         temp = MN(LP(fourth_level_matrix,LP(third_level_matrix,LP(second_level_matrix,LP(first_level_matrix,H)))))
         total_result+= abs(temp)
         i+=2
-    total_result = total_result * commutator_coefficients['ABB']*t**5
+    total_result = total_result * commutator_coefficients['ABB']*t**5/(r**4)
     return total_result
 
 def BBB(n,r):
     total_result = 0
     i = 2
-    t = n/r
+    t = n
     while i<n:
         H = kron_helper(5,3,local_terms[i])
         Hm1 = kron_helper(5,2,local_terms[i-1])
@@ -172,13 +172,13 @@ def BBB(n,r):
         temp = MN(LP(fourth_level_matrix,LP(third_level_matrix,LP(second_level_matrix,LP(first_level_matrix,H)))))
         total_result+= abs(temp)
         i+=2
-    total_result = total_result * commutator_coefficients['BBB']*t**5
+    total_result = total_result * commutator_coefficients['BBB']*t**5/(r**4)
     return total_result
 
 def BBA(n,r):
     total_result = 0
     i = 2
-    t = n/r
+    t = n
     while i<n:
         H = kron_helper(5,3,local_terms[i])
         Hm1 = kron_helper(5,2,local_terms[i-1])
@@ -192,14 +192,14 @@ def BBA(n,r):
         temp = MN(LP(fourth_level_matrix,LP(third_level_matrix,LP(second_level_matrix,LP(first_level_matrix,H)))))
         total_result+= abs(temp)
         i+=2
-    total_result = total_result * commutator_coefficients['BBA']*t**5
+    total_result = total_result * commutator_coefficients['BBA']*t**5/(r**4)
     return total_result
 
 
 def BAA(n,r):
     total_result = 0
     i = 2
-    t = n/r
+    t = n
     while i<n:
         H = kron_helper(5,3,local_terms[i])
         Hm1 = kron_helper(5,2,local_terms[i-1])
@@ -213,7 +213,7 @@ def BAA(n,r):
         temp = MN(LP(fourth_level_matrix,LP(third_level_matrix,LP(second_level_matrix,LP(first_level_matrix,H)))))
         total_result+= abs(temp)
         i+=2
-    total_result = total_result * commutator_coefficients['BAA']*t**5
+    total_result = total_result * commutator_coefficients['BAA']*t**5/(r**4)
     return total_result
 
 def total_error(n,r):
@@ -232,17 +232,21 @@ def find_r(n):
     while (total_error(n,r) > error):
         previous_r = r
         r = 2 * r
-    result = binary_search(previous_r,r,n,error)   
+    result = binary_search(previous_r,r,n,error,1,5)   
     return result
 
-def binary_search(low,up,n,error):
+def binary_search(low,up,n,error,counter,constraint):
+    if counter == constraint:
+        return up
+    else:
+        counter += 1
     if low + 1 >= up:
         return int(up)
     mid = ceil((low+up)/2)
     if total_error(n,mid)< error:
-        return binary_search(low,mid,n,error)
+        return binary_search(low,mid,n,error,counter,constraint)
     else:
-        return binary_search(mid,up,n,error)
+        return binary_search(mid,up,n,error,counter,constraint)
 
 n = 10
 while n<= 100:
