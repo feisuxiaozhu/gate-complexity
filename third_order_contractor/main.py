@@ -1,3 +1,5 @@
+import sympy as sym
+
 # This function takes input delta_{i,j}*delta_{jk} and outputs delta_{i,k}
 def tiny_contractor(delta):
     res=[]
@@ -37,7 +39,6 @@ def contractor(A,B):
     for i in range(1,len_B):
         if i not in checked_B_index:
             res.append(B[i])
-
     return res
 
 # It takes input as E= C*delta*delta+ ... and F= C*delta*delta+... 
@@ -76,6 +77,35 @@ def u_contractor(U,D):
     else:
         return res_dict[0]
 
+# It takes input as U=u*u*u^dagger and D=delta*delta*delta
+# Outputs contraced multiple of u as trace.
+def u_dagger_contractor(U,D):
+    res_dict=['(Tr(u))^2Tr(u^*)','Tr(u^2)Tr(u^*)','Tr(uu^*)Tr(u)','Tr(u^2u^*)']
+    D_used_index=[]
+    res=[]
+    for item_U in U:
+        added=False
+        for item in item_U:
+            for j in range(len(D)):
+                if item in D[j]:
+                    if j not in D_used_index and not added:
+                        D_used_index.append(j)
+                        new_item=item_U + D[j]
+                        res.append(tiny_contractor(new_item))
+                        added=True
+    counter = 0
+    for i in res:
+        if len(i)==0:
+            counter+=1
+    if counter == 0:
+        return res_dict[3]
+    elif counter == 1:
+        if res[2]==[]:
+            return res_dict[1]
+        else:
+            return res_dict[2]
+    else:
+        return res_dict[0]
 
 # U=[['1','2'],['6','7'],['beta','gamma']]
 # D=[['2', '1'], ['7', '6'], ['gamma', 'beta']]
@@ -105,7 +135,51 @@ for item in temp3:
     else:
         A_res[u]=[C]
     
-print(A_res)
-# contractor(A,B)
-# C = [1,'alpha','alpha',2]
-# print(tiny_contractor(C))
+V_3 = sym.Symbol('V_3')
+V_21 = sym.Symbol('V_21')
+V_111 = sym.Symbol('V_111')
+c_dict = {'1': V_3+2*V_21+V_111, '2':V_3-V_111, '3':V_3-V_111, '4':V_3-V_111, '5':V_3-V_21+V_111, '6':V_3-V_21+V_111}
+
+A_res_final = {}
+for i,j in A_res.items():
+    temp1=0
+    for k in j:
+        temp = 1
+        for l in k:
+            temp *= c_dict[l]
+        temp1 += temp
+    A_res_final[i] = sym.expand(temp1)
+
+
+B_res={}
+for item in temp3:
+    D=[]
+    D.append(item[1])
+    D.append(item[2])
+    D.append(item[3])
+    u = u_dagger_contractor(U,D)
+    C = item[0]
+    if u in B_res.keys():
+        B_res[u].append(C)
+    else:
+        B_res[u]=[C]
+V_1 = sym.Symbol('V_1')
+V_2_1 = sym.Symbol('V_2-1')
+V_11_1 = sym.Symbol('V_11-1')
+N = sym.Symbol('N')
+c_dagger_dict={'1':V_2_1+V_11_1,'2':V_2_1-V_11_1,'3':N*V_1-V_2_1-V_11_1,'4':N*V_1-V_2_1-V_11_1,'5':-V_1-V_2_1+V_11_1,'6':-V_1-V_2_1+V_11_1}
+
+B_res_final = {}
+for i,j in B_res.items():
+    temp1=0
+    for k in j:
+        temp = 1
+        for l in k:
+            temp *= c_dagger_dict[l]
+        temp1 += temp
+    B_res_final[i] = sym.expand(temp1)
+
+print(A_res_final)
+print(B_res_final)
+
+
