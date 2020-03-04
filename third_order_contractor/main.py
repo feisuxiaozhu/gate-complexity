@@ -112,6 +112,16 @@ def u_contractor(U,D):
 # Outputs contraced multiple of u as trace.
 # Need to consider the case that D inlcudes [], or delta_ii
 def u_dagger_contractor(U,D):
+    #first count the number of delta_ii's ([]) in D.
+    counter2=0
+    for i in D:
+        if i== []:
+            counter2 += 1
+    if counter2 == 0:
+        prefactor = 1
+    else:
+        prefactor = 3*counter2
+
     res_dict=['(Tr(u))^2Tr(u^*)','Tr(u^2)Tr(u^*)','Tr(uu^*)Tr(u)','Tr(u^2u^*)']
     D_used_index=[]
     res=[]
@@ -130,14 +140,14 @@ def u_dagger_contractor(U,D):
         if len(i)==0:
             counter+=1
     if counter == 0:
-        return res_dict[3]
+        return res_dict[3], prefactor
     elif counter == 1:
         if res[2]==[]:
-            return res_dict[1]
+            return res_dict[1], prefactor
         else:
-            return res_dict[2]
+            return res_dict[2], prefactor
     else:
-        return res_dict[0]
+        return res_dict[0], prefactor
 
 # U=[['1','2'],['6','7'],['beta','gamma']]
 # D=[['2', '1'], ['7', '6'], ['gamma', 'beta']]
@@ -196,8 +206,9 @@ for item in temp6:
     for i in range(1,len(item)):
         D.append(item[i])
 
-    u = u_dagger_contractor(V,D)
+    u, prefactor = u_dagger_contractor(V,D)
     C = item[0]
+    C.append(prefactor) #append the frefactor to the end of multple of C's
     if u in B_res.keys():
         B_res[u].append(C)
     else:
@@ -215,11 +226,16 @@ for i,j in B_res.items():
     for k in j:
         temp = 1
         for l in k:
-            temp *= c_dagger_dict[l]
-        temp1 += temp
+            if type(l) is str:
+                temp *= c_dagger_dict[l]
+        temp1 += temp*k[-1]
     B_res_final[i] = sym.expand(temp1)
 
 print(A_res_final)
 print(B_res_final)
+# But notice that Tr(uu^\dagger)*Tr(u) = 3Tr(u) and Tr(uuu^\dagger)= Tr(u), so B_res_final can be simplified.
+
+print(3*B_res_final['Tr(uu^*)Tr(u)']+B_res_final['Tr(u^2u^*)'])
+
 
 
