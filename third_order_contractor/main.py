@@ -15,10 +15,33 @@ def tiny_contractor(delta):
 
     return res
 
+#takes input [delta_ij, delta_jk, delta_mn] and outputs [delta_ik, delta_mn]
+def purifier(delta):
+    used_index=[]
+    delta_len = len(delta)
+    res = []
+    for index in range(delta_len):
+        found=False
+        items = delta[index]
+        for item in items:
+            for index2 in range(index+1, delta_len):
+                items_2 = delta[index2]
+                if item in items_2:
+                    if not found and index2 not in used_index:
+                        temp = items+items_2
+                        res.append(tiny_contractor(temp))
+                        found=True
+                        used_index.append(index2)
+        if not found and index not in used_index:
+            res.append(items)
+    return res
+
+
 # Input of this function looks like (C_1*delta*delta, C_2*delta*delta)
 # It outputs C_1*C_2*delta*delta with all delta's contracted
 def contractor(A,B):
     res = []
+    res_temp = []
     res.append(A[0]+B[0])
     len_A = len(A)
     len_B = len(B)
@@ -28,18 +51,20 @@ def contractor(A,B):
         for item in A[i]:
             for j in range(1,len_B):
                 if item in B[j]:
-                    checked_B_index.append(j)
-                    new_item = A[i] + B[j]
-                    temp = True
+                    if j not in checked_B_index:
+                        checked_B_index.append(j)
+                        new_item = A[i] + B[j]
+                        temp = True
         if temp:
-            res.append(tiny_contractor(new_item))
+            res_temp.append(tiny_contractor(new_item))
         else:
-            res.append(A[i])
+            res_temp.append(A[i])
 
     for i in range(1,len_B):
         if i not in checked_B_index:
-            res.append(B[i])
-    return res
+            res_temp.append(B[i])
+
+    return res+purifier(res_temp)
 
 # It takes input as E= C*delta*delta+ ... and F= C*delta*delta+... 
 # Outputs contracted multiple between E and F
@@ -52,6 +77,7 @@ def Multiply(E,F):
 
 # It takes input as U=u*u*u and D=delta*delta*delta
 # Outputs contracted u as trace.
+# For this case we do not need to consider the case receiving delta_ii, or [].
 def u_contractor(U,D):
     res_dict=['(Tr(u))^3','Tr(u^2)Tr(u)','Tr(u^3)']
     D_used_index=[]
@@ -77,8 +103,14 @@ def u_contractor(U,D):
     else:
         return res_dict[0]
 
+# T1= [['6'],['2','8'],['7','gamma'],['3','eta']] 
+# T2= [['6'],['3','9'],['8','eta'],['4','mu']] 
+# print(contractor(T1,T2))
+
+
 # It takes input as U=u*u*u^dagger and D=delta*delta*delta
 # Outputs contraced multiple of u as trace.
+# Need to consider the case that D inlcudes [], or delta_ii
 def u_dagger_contractor(U,D):
     res_dict=['(Tr(u))^2Tr(u^*)','Tr(u^2)Tr(u^*)','Tr(uu^*)Tr(u)','Tr(u^2u^*)']
     D_used_index=[]
@@ -125,9 +157,8 @@ U=[['1','2'],['6','7'],['beta','gamma']]
 A_res={}
 for item in temp3:
     D=[]
-    D.append(item[1])
-    D.append(item[2])
-    D.append(item[3])
+    for i in range(1,len(item)):
+        D.append(item[i])
     u = u_contractor(U,D)
     C = item[0]
     if u in A_res.keys():
@@ -151,18 +182,27 @@ for i,j in A_res.items():
     A_res_final[i] = sym.expand(temp1)
 
 
+E=[  [['1'],['2','3'],['7','8'],['eta','gamma']], [['2'],['2','8'],['3','7'],['eta','gamma']], [['3'],['2','gamma'],['3','eta'],['7','8']], [['4'],['2','3'],['7','gamma'],['8','eta']], [['5'],['2','gamma'],['3','7'],['8','eta']], [['6'],['2','8'],['7','gamma'],['3','eta']]  ]
+F=[  [['1'],['3','4'],['8','9'],['mu','eta']], [['2'],['3','9'],['4','8'],['mu','eta']], [['3'],['3','eta'],['4','mu'],['8','9']], [['4'],['3','4'],['8','eta'],['9','mu']], [['5'],['3','eta'],['4','8'],['9','mu']], [['6'],['3','9'],['8','eta'],['4','mu']]   ]
+G=[  [['1'],['4','5'],['9','alpha'],['nu','mu']], [['2'],['4','alpha'],['5','9'],['nu','mu']], [['3'],['4','mu'],['5','nu'],['9','alpha']], [['4'],['4','5'],['9','mu'],['alpha','nu']], [['5'],['4','mu'],['5','9'],['alpha','nu']], [['6'],['4','alpha'],['9','mu'],['5','nu']]  ] 
+H=[  [['1'],['5','1'],['alpha','6'],['beta','nu']], [['2'],['5','6'],['1','alpha'],['beta','nu']], [['3'],['5','nu'],['1','beta'],['alpha','6']], [['4'],['5','1'],['alpha','nu'],['6','beta']], [['5'],['5','nu'],['1','alpha'],['6','beta']], [['6'],['5','6'],['alpha','nu'],['1','beta']]    ]
+temp4 = Multiply(E,F)
+temp5 = Multiply(G,H)
+temp6 = Multiply(temp4,temp5)
+V = [['1','2'],['6','7'],['gamma','beta']]
 B_res={}
-for item in temp3:
+for item in temp6:
     D=[]
-    D.append(item[1])
-    D.append(item[2])
-    D.append(item[3])
-    u = u_dagger_contractor(U,D)
+    for i in range(1,len(item)):
+        D.append(item[i])
+
+    u = u_dagger_contractor(V,D)
     C = item[0]
     if u in B_res.keys():
         B_res[u].append(C)
     else:
         B_res[u]=[C]
+
 V_1 = sym.Symbol('V_1')
 V_2_1 = sym.Symbol('V_2-1')
 V_11_1 = sym.Symbol('V_11-1')
