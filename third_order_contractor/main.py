@@ -111,7 +111,7 @@ def u_contractor(U,D):
 # It takes input as U=u*u*u^dagger and D=delta*delta*delta
 # Outputs contraced multiple of u as trace.
 # Need to consider the case that D inlcudes [], or delta_ii
-def u_dagger_contractor(U,D):
+def u_dagger_contractor(U,D,N):
     #first count the number of delta_ii's ([]) in D.
     counter2=0
     for i in D:
@@ -120,7 +120,7 @@ def u_dagger_contractor(U,D):
     if counter2 == 0:
         prefactor = 1
     else:
-        prefactor = 3*counter2
+        prefactor = N*counter2
 
     res_dict=['(Tr(u))^2Tr(u^*)','Tr(u^2)Tr(u^*)','Tr(uu^*)Tr(u)','Tr(u^2u^*)']
     D_used_index=[]
@@ -200,13 +200,18 @@ temp4 = Multiply(E,F)
 temp5 = Multiply(G,H)
 temp6 = Multiply(temp4,temp5)
 V = [['1','2'],['6','7'],['gamma','beta']]
+V_1 = sym.Symbol('V_1')
+V_2_1 = sym.Symbol('V_2-1')
+V_11_1 = sym.Symbol('V_11-1')
+N = sym.Symbol('N')
+c_dagger_dict={'1':V_2_1+V_11_1,'2':V_2_1-V_11_1,'3':N/(N-1)/(N+1)*V_1-V_2_1-V_11_1,'4':N/(N-1)/(N+1)*V_1-V_2_1-V_11_1,'5':-V_1/(N-1)/(N+1)-V_2_1+V_11_1,'6':-V_1/(N-1)/(N+1)-V_2_1+V_11_1}
 B_res={}
 for item in temp6:
     D=[]
     for i in range(1,len(item)):
         D.append(item[i])
 
-    u, prefactor = u_dagger_contractor(V,D)
+    u, prefactor = u_dagger_contractor(V,D,N)
     C = item[0]
     C.append(prefactor) #append the frefactor to the end of multple of C's
     if u in B_res.keys():
@@ -214,11 +219,7 @@ for item in temp6:
     else:
         B_res[u]=[C]
 
-V_1 = sym.Symbol('V_1')
-V_2_1 = sym.Symbol('V_2-1')
-V_11_1 = sym.Symbol('V_11-1')
-N = sym.Symbol('N')
-c_dagger_dict={'1':V_2_1+V_11_1,'2':V_2_1-V_11_1,'3':N*V_1-V_2_1-V_11_1,'4':N*V_1-V_2_1-V_11_1,'5':-V_1-V_2_1+V_11_1,'6':-V_1-V_2_1+V_11_1}
+
 
 B_res_final = {}
 for i,j in B_res.items():
@@ -234,8 +235,8 @@ for i,j in B_res.items():
 print(A_res_final)
 print(B_res_final)
 # But notice that Tr(uu^\dagger)*Tr(u) = 3Tr(u) and Tr(uuu^\dagger)= Tr(u), so B_res_final can be simplified.
-
-print(3*B_res_final['Tr(uu^*)Tr(u)']+B_res_final['Tr(u^2u^*)'])
+print('-------------------')
+print(sym.expand(N*B_res_final['Tr(uu^*)Tr(u)']+B_res_final['Tr(u^2u^*)']))
 
 
 
