@@ -1,4 +1,5 @@
 from sympy import *
+from math import *
 
 V1 = Symbol('V1')
 V2 = Symbol('V2')
@@ -37,5 +38,14 @@ print('beta2i: '+ str(beta2i.subs(dictSU2)))
 print('beta2t: '+ str(beta2t.subs(dictSU2)))
 print('beta2u: '+ str(beta2u.subs(dictSU2)))
 
-
+dictU1 = {V1:0.900316, V2:0.63662, V11:0, V1_1:0, V3:0.300105, N:1}
+print('U(1):')
+print('beta2r: '+ str(beta2r.subs(dictU1)))
+print('beta2i: '+ str(beta2i.subs(dictU1)))
+print('beta2t: '+ str(beta2t.subs(dictU1)))
+print('beta2u: '+ str(beta2u.subs(dictU1)))
+print('beta0: '+ str(beta0.subs(dictU1)))
+print('beta1: '+ str(beta1.subs(dictU1)))
+print('beta2: '+ str(beta2.subs(dictU1)))
+print('beta3: '+ str(beta3.subs(dictU1)))
 
