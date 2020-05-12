@@ -232,7 +232,7 @@ def find_r(n):
     while (total_error(n,r) > error):
         previous_r = r
         r = 2 * r
-    result = binary_search(previous_r,r,n,error,1,5)   
+    result = binary_search(previous_r,r,n,error,1,10)   
     return result
 
 def binary_search(low,up,n,error,counter,constraint):
