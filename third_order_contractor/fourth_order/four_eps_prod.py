@@ -22,19 +22,20 @@ def purifier(delta):
     delta_len = len(delta)
     res = []
     for index in range(delta_len):
-        found=False
-        items = delta[index]
-        for item in items:
-            for index2 in range(index+1, delta_len):
-                items_2 = delta[index2]
-                if item in items_2:
-                    if not found and index2 not in used_index:
-                        temp = items+items_2
-                        res.append(tiny_contractor(temp))
-                        found=True
-                        used_index.append(index2)
-        if not found and index not in used_index:
-            res.append(items)
+        if index not in used_index:
+            found=False
+            items = delta[index]
+            for item in items:
+                for index2 in range(index+1, delta_len):
+                    items_2 = delta[index2]
+                    if item in items_2:
+                        if not found and index2 not in used_index:
+                            temp = items+items_2
+                            res.append(tiny_contractor(temp))
+                            found=True
+                            used_index.append(index2)
+            if not found and index not in used_index:
+                res.append(items)
     return res
 
 
@@ -62,7 +63,7 @@ def contractor(A,B):
     for i in range(len_B):
         if i not in checked_B_index:
             res_temp.append(B[i])
-    return purifier(res_temp)
+    return purifier(purifier(res_temp))
 
 N = sym.Symbol('N')
 #take input like [[],[],[]] and return N**3 where the exponent depends on the number of []'s 
@@ -78,6 +79,7 @@ N = sym.Symbol('N')
 rhs = [ [['1','2'],['3','4'],['5','6'],['7','8']], [['1','2'],['3','4'],['5','8'],['7','6']], [['1','2'],['3','6'],['5','4'],['7','8']], [['1','2'],['3','6'],['5','8'],['7','4']], [['1','2'],['3','8'],['5','4'],['7','6']], [['1','2'],['3','8'],['5','6'],['7','4']] ]
 rhs+= [ [['1','4'],['3','2'],['5','6'],['7','8']], [['1','4'],['3','2'],['5','8'],['7','6']], [['1','4'],['3','6'],['5','2'],['7','8']], [['1','4'],['3','6'],['5','8'],['7','2']], [['1','4'],['3','8'],['5','2'],['7','6']], [['1','4'],['3','8'],['5','6'],['7','2']] ]
 rhs+= [ [['1','6'],['3','2'],['5','4'],['7','8']], [['1','6'],['3','2'],['5','8'],['7','4']], [['1','6'],['3','4'],['5','2'],['7','8']], [['1','6'],['3','4'],['5','8'],['7','2']], [['1','6'],['3','8'],['5','2'],['7','4']], [['1','6'],['3','8'],['5','4'],['7','2']] ]
+rhs+= [ [['1','8'],['3','2'],['5','4'],['7','6']], [['1','8'],['3','2'],['5','6'],['7','4']], [['1','8'],['3','4'],['5','2'],['7','6']], [['1','8'],['3','4'],['5','6'],['7','2']], [['1','8'],['3','6'],['5','2'],['7','4']], [['1','8'],['3','6'],['5','4'],['7','2']]]
 #obtain the rows of the matrix N in temp.
 temp = []
 for tiny in rhs:
@@ -86,3 +88,6 @@ for tiny in rhs:
         temp1.append(getNs(contractor(tiny, piece)))
     temp.append(temp1)
 print(temp)
+# A = [['1', '8'], ['3', '6'], ['5', '4'], ['7', '2']]
+# B = [['1', '4'], ['3', '8'], ['5', '2'], ['7', '6']]
+# contractor(A,B)
