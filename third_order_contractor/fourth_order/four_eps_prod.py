@@ -1,6 +1,7 @@
 import sympy as sym
 from sympy import *
 
+
 # This function takes input delta_{i,j}*delta_{jk} and outputs delta_{i,k}
 def tiny_contractor(delta):
     res=[]
@@ -65,6 +66,79 @@ def contractor(A,B):
             res_temp.append(B[i])
     return purifier(purifier(res_temp))
 
+def u_contractor(U,D):
+    D_used_index=[]
+    res=[]
+    for item_U in U:
+        added=False
+        for item in item_U:
+            for j in range(len(D)):
+                if item in D[j]:
+                    if j not in D_used_index and not added:
+                        D_used_index.append(j)
+                        new_item=item_U + D[j]
+                        res.append(tiny_contractor(new_item))
+                        added=True
+    counter = 0
+    for i in res:
+        if len(i)==0:
+            counter+=1
+    if counter == 0:
+        return 'Tr(u^4)'
+    elif counter == 1:
+        return 'Tr(u)Tr(u^3)'
+    elif counter == 2:
+        return 'Tr^2(u)Tr(u^2)'
+    elif counter == 3:
+        return 'fuck you'
+    elif counter == 4:
+        return 'Tr^4(u)'
+
+def u_dagger_contractor(U,D):
+    #first count the number of delta_ii's ([]) in D.
+    counter2=0
+    for i in D:
+        if i== []:
+            counter2 += 1
+    if counter2 == 0:
+        prefactor = 1
+    else:
+        prefactor = N**counter2
+
+    D_used_index=[]
+    res=[]
+    for item_U in U:
+        added=False
+        for item in item_U:
+            for j in range(len(D)):
+                if item in D[j]:
+                    if j not in D_used_index and not added:
+                        D_used_index.append(j)
+                        new_item=item_U + D[j]
+                        res.append(tiny_contractor(new_item))
+                        added=True
+    counter = 0
+    for i in res:
+        if len(i)==0:
+            counter+=1
+    if counter == 0:
+        return 'Tr(u^3u^*)'
+    elif counter == 1:
+        if res[3]==[]:
+            return 'Tr(u^3)Tr(u^*)'
+        else:
+            return 'Tr(uuu^*)Tr(u)'
+    elif counter == 2:
+        if res[3]==[]:
+            return 'Tr(u^2)Tr(u)Tr(u^*)'
+        else:
+            return 'Tr^2(u)Tr(uu^*)'
+    elif counter == 3:
+        return 'fuck you'
+    else:
+        return 'Tr^3(u)Tr(u^*)'
+
+
 N = sym.Symbol('N')
 #take input like [[],[],[]] and return N**3 where the exponent depends on the number of []'s 
 def getNs(A):
@@ -81,13 +155,23 @@ rhs+= [ [['1','4'],['3','2'],['5','6'],['7','8']], [['1','4'],['3','2'],['5','8'
 rhs+= [ [['1','6'],['3','2'],['5','4'],['7','8']], [['1','6'],['3','2'],['5','8'],['7','4']], [['1','6'],['3','4'],['5','2'],['7','8']], [['1','6'],['3','4'],['5','8'],['7','2']], [['1','6'],['3','8'],['5','2'],['7','4']], [['1','6'],['3','8'],['5','4'],['7','2']] ]
 rhs+= [ [['1','8'],['3','2'],['5','4'],['7','6']], [['1','8'],['3','2'],['5','6'],['7','4']], [['1','8'],['3','4'],['5','2'],['7','6']], [['1','8'],['3','4'],['5','6'],['7','2']], [['1','8'],['3','6'],['5','2'],['7','4']], [['1','8'],['3','6'],['5','4'],['7','2']]]
 #obtain the rows of the matrix N in temp.
-temp = []
+# temp = []
+# for tiny in rhs:
+#     temp1 = []
+#     for piece in rhs:
+#         temp1.append(getNs(contractor(tiny, piece)))
+#     temp.append(temp1)
+# print(temp)
+
+#now obtain the rows in the vector of trU for uuuu
+U = [['1','2'],['3','4'],['5','6'],['7','8']]
+temp_u = []
 for tiny in rhs:
-    temp1 = []
-    for piece in rhs:
-        temp1.append(getNs(contractor(tiny, piece)))
-    temp.append(temp1)
-print(temp)
-# A = [['1', '8'], ['3', '6'], ['5', '4'], ['7', '2']]
-# B = [['1', '4'], ['3', '8'], ['5', '2'], ['7', '6']]
-# contractor(A,B)
+    temp_u.append(u_contractor(U,tiny))
+print(temp_u)
+
+#obtain the rows in the vector of tru for uuuu^dag
+temp_u_dag = []
+for tiny in rhs:
+    temp_u_dag.append(u_dagger_contractor(U,tiny))
+print(temp_u_dag)
