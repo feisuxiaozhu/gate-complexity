@@ -1,5 +1,5 @@
 import sympy as sym
-from sympy import *
+
 
 
 # This function takes input delta_{i,j}*delta_{jk} and outputs delta_{i,k}
@@ -95,16 +95,6 @@ def u_contractor(U,D):
         return 'Tr^4(u)'
 
 def u_dagger_contractor(U,D):
-    #first count the number of delta_ii's ([]) in D.
-    counter2=0
-    for i in D:
-        if i== []:
-            counter2 += 1
-    if counter2 == 0:
-        prefactor = 1
-    else:
-        prefactor = N**counter2
-
     D_used_index=[]
     res=[]
     for item_U in U:
@@ -137,6 +127,45 @@ def u_dagger_contractor(U,D):
         return 'fuck you'
     else:
         return 'Tr^3(u)Tr(u^*)'
+
+def u_dagger_dagger_contractor(U,D):
+    D_used_index=[]
+    res=[]
+    for item_U in U:
+        added=False
+        for item in item_U:
+            for j in range(len(D)):
+                if item in D[j]:
+                    if j not in D_used_index and not added:
+                        D_used_index.append(j)
+                        new_item=item_U + D[j]
+                        res.append(tiny_contractor(new_item))
+                        added=True
+    counter = 0
+    for i in res:
+        if len(i)==0:
+            counter+=1
+    if counter == 0:
+        return 'Tr(u^2u^*u^*)'
+    elif counter == 1:
+        if res[3]==[] or res[2]==[]:
+            return 'Tr(u^2u*)Tr(u^*)'
+        else:
+            return 'Tr(uu^*u^*)Tr(u)'
+    elif counter == 2:
+        if res[3]==[] and res[2]==[]:
+            return 'Tr(u^2)Tr^2(u^*)'
+        elif res[3]==[] or res[2]==[]:
+            return 'Tr(u)Tr(u^*)Tr(uu^*)'
+        else:
+            return 'Tr^2(u)Tr(u^*u^*)'
+    elif counter ==3:
+        return 'fuck you'
+    else:
+        return 'Tr^2(u)Tr^2(u^*)'
+
+
+
 
 
 N = sym.Symbol('N')
@@ -175,3 +204,9 @@ temp_u_dag = []
 for tiny in rhs:
     temp_u_dag.append(u_dagger_contractor(U,tiny))
 print(temp_u_dag)
+
+#obtain the rows in the vector of tru for uuu^dagu^dag
+temp_u_dag_dag = []
+for tiny in rhs:
+    temp_u_dag_dag.append(u_dagger_dagger_contractor(U,tiny))
+print(temp_u_dag_dag)
