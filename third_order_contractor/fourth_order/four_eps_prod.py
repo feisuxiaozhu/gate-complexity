@@ -80,10 +80,14 @@ def u_contractor(U,D):
                         res.append(tiny_contractor(new_item))
                         added=True
     counter = 0
+
     for i in res:
         if len(i)==0:
             counter+=1
     if counter == 0:
+        for i in range(1,len(res)):
+            if sorted(res[0]) == sorted(res[i]):
+                return 'Tr^2(u^2)'    
         return 'Tr(u^4)'
     elif counter == 1:
         return 'Tr(u)Tr(u^3)'
@@ -108,6 +112,7 @@ def u_dagger_contractor(U,D):
                         res.append(tiny_contractor(new_item))
                         added=True
     counter = 0
+
     for i in res:
         if len(i)==0:
             counter+=1
@@ -142,6 +147,7 @@ def u_dagger_dagger_contractor(U,D):
                         res.append(tiny_contractor(new_item))
                         added=True
     counter = 0
+
     for i in res:
         if len(i)==0:
             counter+=1
@@ -192,21 +198,22 @@ rhs+= [ [['1','8'],['3','2'],['5','4'],['7','6']], [['1','8'],['3','2'],['5','6'
 #     temp.append(temp1)
 # print(temp)
 
-#now obtain the rows in the vector of trU for uuuu
+# #now obtain the rows in the vector of trU for uuuu
 U = [['1','2'],['3','4'],['5','6'],['7','8']]
 temp_u = []
 for tiny in rhs:
     temp_u.append(u_contractor(U,tiny))
 print(temp_u)
 
-#obtain the rows in the vector of tru for uuuu^dag
-temp_u_dag = []
-for tiny in rhs:
-    temp_u_dag.append(u_dagger_contractor(U,tiny))
-print(temp_u_dag)
+# #obtain the rows in the vector of tru for uuuu^dag
+# temp_u_dag = []
+# for tiny in rhs:
+#     temp_u_dag.append(u_dagger_contractor(U,tiny))
+# print(temp_u_dag)
 
-#obtain the rows in the vector of tru for uuu^dagu^dag
-temp_u_dag_dag = []
-for tiny in rhs:
-    temp_u_dag_dag.append(u_dagger_dagger_contractor(U,tiny))
-print(temp_u_dag_dag)
+# #obtain the rows in the vector of tru for uuu^dagu^dag
+# temp_u_dag_dag = []
+# for tiny in rhs:
+#     temp_u_dag_dag.append(u_dagger_dagger_contractor(U,tiny))
+# print(temp_u_dag_dag)
+
