@@ -1,0 +1,1168 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     38446,       1160]
+NotebookOptionsPosition[     36495,       1121]
+NotebookOutlinePosition[     36889,       1137]
+CellTagsIndexPosition[     36846,       1134]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Chi]", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", 
+      RowBox[{"-", "1"}]}], "}"}]], "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"1", "/", "6"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"tru", "^", "3"}], "+", 
+       RowBox[{"2", "truuu"}], "+", " ", 
+       RowBox[{"3", " ", "truu", " ", "tru"}]}], " ", ")"}], "trud"}], " ", 
+    "-", " ", 
+    RowBox[{
+     RowBox[{"1", "/", "2"}], 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"tru", "^", "2"}], "+", "truu"}], ")"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Chi]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "1", ",", 
+      RowBox[{"-", "1"}]}], "}"}]], "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"1", "/", "3"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"tru", "^", "3"}], "-", "truuu"}], " ", ")"}], "trud"}], " ", 
+    "-", " ", 
+    RowBox[{"tru", "^", "2"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Chi]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1", ",", "1", ",", 
+      RowBox[{"-", "1"}]}], "}"}]], "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"1", "/", "6"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"tru", "^", "3"}], "+", 
+       RowBox[{"2", "truuu"}], "-", 
+       RowBox[{"3", "truu", " ", "tru"}]}], ")"}], "trud"}], "-", 
+    RowBox[{
+     RowBox[{"1", "/", "2"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"tru", "^", "2"}], "-", "truu"}], ")"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Chi]", 
+    RowBox[{"{", "2", "}"}]], "=", " ", 
+   RowBox[{
+    RowBox[{"1", "/", "2"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"tru", "^", "2"}], "+", "truu"}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Chi]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1"}], "}"}]], "=", " ", 
+   RowBox[{
+    RowBox[{"1", "/", "2"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"tru", "^", "2"}], " ", "-", " ", "truu"}], ")"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq1", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", " ", "trud", " ", "truu"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq2", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", " ", "trud", " ", "truu"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "0"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.803220454199905*^9, 3.8032204562229433`*^9}, {
+  3.803220535031962*^9, 3.803220627217291*^9}},
+ CellLabel->"In[33]:=",ExpressionUUID->"b6068904-c902-4af1-b7c2-01d46a8246e4"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"eq3", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", " ", "trud", " ", "truu"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "0"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq4", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", " ", "trud", " ", "truu"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "0"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq5", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", " ", "trud", " ", "truu"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "0"}]}], "}"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.803220633529591*^9, 3.8032206555447206`*^9}},
+ CellLabel->"In[40]:=",ExpressionUUID->"df084830-6323-46af-bcd0-950c7af21a6e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"eq1", ",", "eq2", ",", "eq3", ",", "eq4", ",", "eq5"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "d", ",", "e"}], "}"}], ",", 
+   "Reals"}], "]"}]], "Input",
+ CellLabel->"In[43]:=",ExpressionUUID->"c07d337e-96a1-43fd-a437-4e8970620fa8"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "\[Rule]", "1"}], ",", 
+    RowBox[{"b", "\[Rule]", "0"}], ",", 
+    RowBox[{"c", "\[Rule]", 
+     RowBox[{"-", "1"}]}], ",", 
+    RowBox[{"d", "\[Rule]", "1"}], ",", 
+    RowBox[{"e", "\[Rule]", 
+     RowBox[{"-", "1"}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{{3.80322067351611*^9, 3.803220690638578*^9}},
+ CellLabel->"Out[43]=",ExpressionUUID->"43d456ac-e2a2-4947-ae6c-37df28d9994f"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"eq1", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", "^", "2"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq2", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", "^", "2"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "0"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"eq3", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", "^", "2"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "0"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq4", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", "^", "2"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "0"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq5", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"tru", "^", "2"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "0"}]}], "}"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.803220723030777*^9, {3.803220764107231*^9, 3.803220773818063*^9}},
+ CellLabel->"In[44]:=",ExpressionUUID->"4ede73a6-7794-4d5a-ab80-03b3651c3136"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"eq1", ",", "eq2", ",", "eq3", ",", "eq4", ",", "eq5"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "d", ",", "e"}], "}"}], ",", 
+   "Reals"}], "]"}]], "Input",
+ CellLabel->"In[49]:=",ExpressionUUID->"163c4d23-d8ad-468c-a689-779dad9b8a81"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "\[Rule]", "0"}], ",", 
+    RowBox[{"b", "\[Rule]", "0"}], ",", 
+    RowBox[{"c", "\[Rule]", "0"}], ",", 
+    RowBox[{"d", "\[Rule]", "1"}], ",", 
+    RowBox[{"e", "\[Rule]", "1"}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.803220781981448*^9},
+ CellLabel->"Out[49]=",ExpressionUUID->"6b4c785d-da76-4c00-9895-e0b35882c90f"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"eq1", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"truu", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq2", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"truu", " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "0"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"eq3", "=", " ", 
+   RowBox[{
+    RowBox[{"truu", " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "0"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq4", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"truu", " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "0"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq5", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"truu", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "0"}]}], "}"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8032208360379763`*^9, 3.8032208441409807`*^9}},
+ CellLabel->"In[50]:=",ExpressionUUID->"00be37bf-9930-41d0-8dae-f97112a995dd"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"eq1", ",", "eq2", ",", "eq3", ",", "eq4", ",", "eq5"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "d", ",", "e"}], "}"}], ",", 
+   "Reals"}], "]"}]], "Input",
+ CellLabel->"In[55]:=",ExpressionUUID->"0fa00a8f-3b15-4802-a8ea-093485c3f16e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "\[Rule]", "0"}], ",", 
+    RowBox[{"b", "\[Rule]", "0"}], ",", 
+    RowBox[{"c", "\[Rule]", "0"}], ",", 
+    RowBox[{"d", "\[Rule]", "1"}], ",", 
+    RowBox[{"e", "\[Rule]", 
+     RowBox[{"-", "1"}]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.803220849811558*^9},
+ CellLabel->"Out[55]=",ExpressionUUID->"67617bd0-9459-41da-b67b-cb62aa104e8b"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"eq1", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"tru", "^", "3"}], " ", "trud"}], "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq2", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"tru", "^", "3"}], " ", "trud"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "0"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"eq3", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"tru", "^", "3"}], " ", "trud"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "0"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq4", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"tru", "^", "3"}], " ", "trud"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "0"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq5", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{"tru", "^", "3"}], " ", "trud"}], "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "0"}]}], "}"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.8032209047936497`*^9, 3.803220912361703*^9}},
+ CellLabel->"In[56]:=",ExpressionUUID->"ae2567a6-ff76-4126-ac74-8eff5d28dc7b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"eq1", ",", "eq2", ",", "eq3", ",", "eq4", ",", "eq5"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "d", ",", "e"}], "}"}], ",", 
+   "Reals"}], "]"}]], "Input",
+ CellLabel->"In[61]:=",ExpressionUUID->"3574c27f-ce05-42ff-bb19-a582f788da41"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "\[Rule]", "1"}], ",", 
+    RowBox[{"b", "\[Rule]", "2"}], ",", 
+    RowBox[{"c", "\[Rule]", "1"}], ",", 
+    RowBox[{"d", "\[Rule]", "3"}], ",", 
+    RowBox[{"e", "\[Rule]", "3"}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.803220931467745*^9},
+ CellLabel->"Out[61]=",ExpressionUUID->"2453af9b-d1b9-4841-90ab-59461c49d565"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"eq1", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"trud", " ", "truuu"}], "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq2", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"trud", " ", "truuu"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "0"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"eq3", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"trud", " ", "truuu"}], "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "0"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq4", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"trud", " ", "truuu"}], " ", "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "0"}], ",", 
+      RowBox[{"trud", "\[Rule]", "1"}]}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq5", " ", "=", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"trud", " ", "truuu"}], "\[Equal]", " ", 
+     RowBox[{
+      RowBox[{"a", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], "+", " ", 
+      RowBox[{"b", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"2", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"c", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]]}], " ", "+", " ", 
+      RowBox[{"d", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", "2", "}"}]]}], " ", "+", " ", 
+      RowBox[{"e", " ", 
+       SubscriptBox["\[Chi]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1"}], "}"}]]}]}]}], "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"tru", "\[Rule]", "1"}], ",", 
+      RowBox[{"truu", "\[Rule]", "1"}], ",", 
+      RowBox[{"truuu", "\[Rule]", "1"}], ",", 
+      RowBox[{"trud", "\[Rule]", "0"}]}], "}"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.803220955737306*^9, 3.803220965872695*^9}},
+ CellLabel->"In[62]:=",ExpressionUUID->"4b9141f7-f807-497d-bfd3-f6ccf5f8d357"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"eq1", ",", "eq2", ",", "eq3", ",", "eq4", ",", "eq5"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "d", ",", "e"}], "}"}], ",", 
+   "Reals"}], "]"}]], "Input",
+ CellLabel->"In[67]:=",ExpressionUUID->"903274bc-96d7-48f5-bba6-39e9b8bf4c25"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"a", "\[Rule]", "1"}], ",", 
+    RowBox[{"b", "\[Rule]", 
+     RowBox[{"-", "1"}]}], ",", 
+    RowBox[{"c", "\[Rule]", "1"}], ",", 
+    RowBox[{"d", "\[Rule]", "0"}], ",", 
+    RowBox[{"e", "\[Rule]", "0"}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.803220971605404*^9},
+ CellLabel->"Out[67]=",ExpressionUUID->"614a9cd4-5a9e-47db-841d-0d609c6b2daf"]
+}, Open  ]]
+},
+WindowSize->{679, 618},
+WindowMargins->{{32, Automatic}, {Automatic, 49}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"adbd5f2a-4c99-474d-a915-1c9122bdbf04"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4644, 148, 212, "Input",ExpressionUUID->"b6068904-c902-4af1-b7c2-01d46a8246e4"],
+Cell[5205, 170, 3644, 106, 142, "Input",ExpressionUUID->"df084830-6323-46af-bcd0-950c7af21a6e"],
+Cell[CellGroupData[{
+Cell[8874, 280, 350, 9, 30, "Input",ExpressionUUID->"c07d337e-96a1-43fd-a437-4e8970620fa8"],
+Cell[9227, 291, 468, 12, 34, "Output",ExpressionUUID->"43d456ac-e2a2-4947-ae6c-37df28d9994f"]
+}, Open  ]],
+Cell[9710, 306, 5903, 176, 230, "Input",ExpressionUUID->"4ede73a6-7794-4d5a-ab80-03b3651c3136"],
+Cell[CellGroupData[{
+Cell[15638, 486, 350, 9, 30, "Input",ExpressionUUID->"163c4d23-d8ad-468c-a689-779dad9b8a81"],
+Cell[15991, 497, 403, 10, 34, "Output",ExpressionUUID->"6b4c785d-da76-4c00-9895-e0b35882c90f"]
+}, Open  ]],
+Cell[16409, 510, 5747, 170, 230, "Input",ExpressionUUID->"00be37bf-9930-41d0-8dae-f97112a995dd"],
+Cell[CellGroupData[{
+Cell[22181, 684, 350, 9, 30, "Input",ExpressionUUID->"0fa00a8f-3b15-4802-a8ea-093485c3f16e"],
+Cell[22534, 695, 424, 11, 34, "Output",ExpressionUUID->"67617bd0-9459-41da-b67b-cb62aa104e8b"]
+}, Open  ]],
+Cell[22973, 709, 6020, 180, 230, "Input",ExpressionUUID->"ae2567a6-ff76-4126-ac74-8eff5d28dc7b"],
+Cell[CellGroupData[{
+Cell[29018, 893, 350, 9, 30, "Input",ExpressionUUID->"3574c27f-ce05-42ff-bb19-a582f788da41"],
+Cell[29371, 904, 403, 10, 34, "Output",ExpressionUUID->"2453af9b-d1b9-4841-90ab-59461c49d565"]
+}, Open  ]],
+Cell[29789, 917, 5888, 175, 230, "Input",ExpressionUUID->"4b9141f7-f807-497d-bfd3-f6ccf5f8d357"],
+Cell[CellGroupData[{
+Cell[35702, 1096, 350, 9, 30, "Input",ExpressionUUID->"903274bc-96d7-48f5-bba6-39e9b8bf4c25"],
+Cell[36055, 1107, 424, 11, 82, "Output",ExpressionUUID->"614a9cd4-5a9e-47db-841d-0d609c6b2daf"]
+}, Open  ]]
+}
+]
+*)
+
