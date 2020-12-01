@@ -29,14 +29,14 @@ def generate_matrix_A(n):
         for vector in vector_set:
             matrix.append(vector)
         result.append(matrix)
-    with open('matrix_A'+'_'+str(n), 'wb') as fp:
+    with open('./one_way_function/matrix_A'+'_'+str(n), 'wb') as fp:
         pickle.dump(result, fp)
     return result
 
 # Do NOT SET n >= 6 !
-generate_matrix_A(6)
+# generate_matrix_A(5)
 
 # the following commented code is for reading the file. 
-# with open ('matrix_A', 'rb') as fp:
-#     itemlist = pickle.load(fp)
-# print(len(itemlist))
+with open ('./one_way_function/matrix_A_5', 'rb') as fp:
+    itemlist = pickle.load(fp)
+print(len(itemlist))
