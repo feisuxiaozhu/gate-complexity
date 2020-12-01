@@ -28,7 +28,9 @@ def generate_matrix_A(n):
         matrix = []
         for vector in vector_set:
             matrix.append(vector)
-        result.append(matrix)
+        matrix = np.array(matrix)
+        if (np.abs(np.linalg.det(matrix))==1): # Only include invertible matrices that has determinant 1
+            result.append(matrix)
     with open('./one_way_function/matrix_A'+'_'+str(n), 'wb') as fp:
         pickle.dump(result, fp)
     return result
@@ -39,4 +41,6 @@ def generate_matrix_A(n):
 # the following commented code is for reading the file. 
 with open ('./one_way_function/matrix_A_5', 'rb') as fp:
     itemlist = pickle.load(fp)
-print(len(itemlist))
+    print(len(itemlist))
+
+
