@@ -35,12 +35,63 @@ def generate_matrix_A(n):
         pickle.dump(result, fp)
     return result
 
+# Generate all n-by-n rank <= r matrices
+def generate_matrix_L(n,r):
+    result = []
+    indices_pool = [] # First generate all r-by-n indices
+    for i in range(n):
+        for j in range(r):
+            index = [j,i]
+            indices_pool.append(index)
+    if r==n: # If rank is the same as dimension, return all possible zero-one matrices
+        for i in range(1,r*r+1):
+            chosen_non_one_indices_pool = itertools.combinations(indices_pool, i)
+            for chosen_non_one_indices in chosen_non_one_indices_pool:
+                temp_matrix = np.zeros((n,n),dtype=int)
+                for chosen_non_one_index in chosen_non_one_indices:
+                    temp_matrix[chosen_non_one_index[0]][chosen_non_one_index[1]] = 1
+                result.append(temp_matrix)
+        result.append(np.zeros((n,n),dtype=int))
+        return result
+    
+    # If rank < n, then return all possible non-repetitive zero-one matrices of rank <= r
+    temp_result = []
+    candidate_r_by_n_matrices = []
+    for i in range(1, r*n+1):
+        chosen_non_one_indices_pool = itertools.combinations(indices_pool, i)
+        for chosen_non_one_indices in chosen_non_one_indices_pool:
+            temp_matrix = np.zeros((r,n),dtype=int)
+            for chosen_non_one_index in chosen_non_one_indices:
+                    temp_matrix[chosen_non_one_index[0]][chosen_non_one_index[1]] = 1
+            candidate_r_by_n_matrices.append(temp_matrix)
+    for r_by_n in candidate_r_by_n_matrices:
+        for temp in candidate_r_by_n_matrices:
+            n_by_r = np.transpose(temp)
+            matrix = np.matmul(n_by_r,r_by_n)
+            matrix = tuple(map(tuple, matrix))
+            temp_result.append(matrix) 
+    temp_result = set(temp_result) # remove duplicated matrices represented as tuple (only tuple is hashable so we have to conver array/list into tuple)
+    for temp in temp_result:
+        result.append(np.asarray(temp))
+    
+    with open('./one_way_function/matrix_L'+'_n'+str(n)+'_r'+str(r), 'wb') as fp:
+        pickle.dump(result, fp)
+    return result
+
+
+
+
+
+
 # Do NOT SET n >= 6 !
-# generate_matrix_A(5)
+generate_matrix_A(5)
+generate_matrix_L(3,1)
 
 # the following commented code is for reading the file. 
-with open ('./one_way_function/matrix_A_5', 'rb') as fp:
-    itemlist = pickle.load(fp)
-    print(len(itemlist))
+# with open ('./one_way_function/matrix_L_n3_r1', 'rb') as fp:
+#     itemlist = pickle.load(fp)
+#     print(len(itemlist))
+#     for item in itemlist:
+#         print(item.tolist())
 
 
