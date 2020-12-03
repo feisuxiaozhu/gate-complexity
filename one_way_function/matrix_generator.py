@@ -29,7 +29,7 @@ def generate_matrix_A(n):
         for vector in vector_set:
             matrix.append(vector)
         matrix = np.array(matrix)
-        if (np.abs(np.linalg.det(matrix))==1): # Only include invertible matrices that has determinant 1
+        if (np.linalg.det(matrix) % 2 ==1): # Only include invertible matrix that has odd determinant 
             result.append(matrix)
     with open('./one_way_function/matrix_A'+'_'+str(n), 'wb') as fp:
         pickle.dump(result, fp)
@@ -52,6 +52,8 @@ def generate_matrix_L(n,r):
                     temp_matrix[chosen_non_one_index[0]][chosen_non_one_index[1]] = 1
                 result.append(temp_matrix)
         result.append(np.zeros((n,n),dtype=int))
+        with open('./one_way_function/matrix_L'+'_n'+str(n)+'_r'+str(r), 'wb') as fp:
+            pickle.dump(result, fp)
         return result
     
     # If rank < n, then return all possible non-repetitive zero-one matrices of rank <= r
@@ -72,7 +74,7 @@ def generate_matrix_L(n,r):
             temp_result.append(matrix) 
     temp_result = set(temp_result) # remove duplicated matrices represented as tuple (only tuple is hashable so we have to conver array/list into tuple)
     for temp in temp_result:
-        result.append(np.asarray(temp))
+        result.append(np.asarray(temp))    
     
     with open('./one_way_function/matrix_L'+'_n'+str(n)+'_r'+str(r), 'wb') as fp:
         pickle.dump(result, fp)
@@ -84,9 +86,9 @@ def generate_matrix_L(n,r):
 
 
 # Do NOT SET n >= 6 !
-generate_matrix_A(5)
-generate_matrix_L(3,1)
-
+# generate_matrix_A(3)
+generate_matrix_L(4,3)
+# print(-2 %2)
 # the following commented code is for reading the file. 
 # with open ('./one_way_function/matrix_L_n3_r1', 'rb') as fp:
 #     itemlist = pickle.load(fp)
