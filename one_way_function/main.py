@@ -18,24 +18,22 @@ def main(n,r,s,t):
     print('There are '+str(len(A_candidates)) + ' number of matrices A, and '+str(len(L_candidates)) + ' number of matrices L')
     number_of_operation = len(A_candidates)*len(L_candidates)
     print('There are '+str(number_of_operation)+ ' number of operations to check' )
-    temp_result = []
+    result = []
     counter = 0
     for A in A_candidates:
+        counter += 1
+        print('matrix number '+ str(counter))
+        trigger = False
         for L in L_candidates:
-            counter += 1
-            if counter % 10000 == 0:
-                print('operation number '+ str(counter))
-                print(str('{:02.2f}'.format(counter/number_of_operation)) +' completed')
             S = A^L
             s_t_result = check_S(S,s,t)
-            if not s_t_result:
-                temp_result.append(tuple(map(tuple, A)))
-                print('--------------------------------')
-                print(A,L,S)
-                
-    temp_result = set(temp_result)  
-    for temp in temp_result:
-        result.append(np.asarray(temp)) 
+            if s_t_result:
+                trigger = True
+                break
+        if not trigger:
+            print(A)
+            result.append(A)
+
     return result
 
 def check_S(matrix,s,t):
@@ -50,9 +48,10 @@ def check_S(matrix,s,t):
         return False # matrix is not (s,t)-sparse
 n=4
 t = 3
-s = 3
-r = 1
+s = 0
+r = 3
 result = main(n,r,s,t)   
+print(result)
 print(len(result))
 
 
