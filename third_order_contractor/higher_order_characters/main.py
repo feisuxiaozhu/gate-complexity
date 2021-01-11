@@ -1,6 +1,7 @@
 # This file contain functions that check all chi's are correct
 import numpy as np
 import math as math
+import _pickle as pickle
 
 # Check whether matrix A equals matrix B
 def check_equal(A,B):
@@ -140,7 +141,7 @@ for matrix in result:
 # This part tries to divide class 8 and class 9 into two 120=element groups
 # Pick any x\in c_8\cup c_9, check the size of the set S={uxu^{-1} | u\in s1080} is 120 
 
-print(len(result))
+
 repeated_set = []
 for i in range(17):
     index = str(i+1)
@@ -148,14 +149,22 @@ for i in range(17):
         repeated_set += category_2_result[index]
 # print(len(repeated_set))
 new_set = []
+new_set_2 = []
 x = category_2_result['8'][1]
 for u in result:
     y = mult(u,mult(x,dag(u)))
     if not check_whether_in_list(y, repeated_set) and not check_whether_in_list(y,new_set):
         new_set.append(y)
-print(len(new_set))
+    elif  not check_whether_in_list(y, repeated_set) and not check_whether_in_list(y,new_set_2):
+        new_set_2.append(y)
 
 
+category_2_result['8'] = new_set
+category_2_result['9'] = new_set_2
 
+
+with open('c:/Users/feisu/Desktop/gate-complexity/third_order_contractor/higher_order_characters/result_class_element.npy', 'wb') as f:
+    np.save(f, category_2_result)
+   
 
 
