@@ -1,6 +1,7 @@
 import numpy as np
 import math as math
 from numpy import linalg
+import _pickle as pickle
 
 read_dictionary = np.load('c:/Users/feisu/Desktop/gate-complexity/third_order_contractor/higher_order_characters/result_class_element.npy',allow_pickle='TRUE').item()
 
@@ -182,14 +183,30 @@ def create_matrix():
             row.append(chi_prime(key_2,u))
         matrix.append(row)
     return matrix
-i='1'
-j='1'
-A = np.matrix(create_matrix())
-x = np.matrix(create_vector(i,j))
+
+# calculate c_1,...,c_17 for given i,j pair
+# i,j are string choosen from set {'1','2',...,'17'}
+def compute_c(i,j):
+    result = []
+    A = np.array(create_matrix())
+    x = np.array(create_vector(i,j))
+    answer = linalg.solve(A, x) 
+    real_part = answer.real
+    for i in real_part:
+        number = i[0]
+        if number < 0.0000000001:
+            result.append(0.0)
+        else:
+            result.append(round(number,2))
+    return result
 
 
-linalg.solve(A, x) 
-
-
-
-
+result_dict = {}
+for i in range(17):
+    for j in range(17):
+        index_1 = str(i+1)
+        index_2 = str(j+1)
+        key = index_1+'_'+index_2
+        result_dict[key] = compute_c(index_1,index_2)
+with open('c:/Users/feisu/Desktop/gate-complexity/third_order_contractor/higher_order_characters /match_exponential_to_expansion/c_for_i_j_result.npy', 'wb') as f:
+    np.save(f, result_dict)
