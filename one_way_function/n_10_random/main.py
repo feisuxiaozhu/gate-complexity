@@ -33,9 +33,13 @@ row_number_set = list(itertools.combinations(row_number,3))
 with open('./one_way_function/n_10_random/matrix_S', 'rb') as fp:
     S_matrices = pickle.load(fp)
 
+survivor_set = set()
+
 def check_rigidity(matrix):
+    survivor_count = 0
     for i,j,k in row_number_set:
-        print(i,j,k)
+        survivor_count += 1
+        survivor_set.add(survivor_count)
         for s in S_matrices:
             s_matrix = np.asmatrix(s)
             row_1 = matrix[i].tolist()
@@ -45,22 +49,25 @@ def check_rigidity(matrix):
             new_matrix = np.asmatrix(new_matrix)
             substracted_matrix = (new_matrix + s_matrix) % 2
             if not rank_checker(substracted_matrix):
+                # print(new_matrix)
+                # print(s_matrix)
+                # print(substracted_matrix)
                 return False
     return True
-
 
 counter = 0
 result = []
 found_rigid = False
+
 while not found_rigid:
     counter += 1
     print(counter, ' number of random matrices generated')
+    print(survivor_set)
     matrix = np.random.randint(2, size=(10, 10))
     if check_rigidity(matrix):
         print(matrix)
         result.append(np.array(matrix.tolist()))
-        found_rigid =  True
-        
+        found_rigid =  True    
 
 with open('./one_way_function/n_10_random/rigid_matrix', 'wb') as fp:
     pickle.dump(result, fp)      
