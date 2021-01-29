@@ -23,7 +23,7 @@ for i in range(cutoff):
         if key == key_2:
             coefficient_dict[combo_key] = -1/2* coefficient_dict[key]**2
         else:
-            coefficient_dict[combo_key] = -coefficient_dict[key]*coefficient_dict[key_2]
+            coefficient_dict[combo_key] = -1/2*coefficient_dict[key]*coefficient_dict[key_2]
 
 # Find each chi_i*chi_j's coefficients, and add them to corresponding chi_i's.
 for i in range(cutoff):
@@ -36,7 +36,8 @@ for i in range(cutoff):
         for k in range(cutoff):
             key_3 = str(k+1)
             coefficient_dict[key_3] += simplification_vector[k]*constant
-# print result
+        
+# print result 
 for i in range(cutoff):
     key = str(i+1)
     coefficient = sym.simplify(sym.expand(coefficient_dict[key]))
