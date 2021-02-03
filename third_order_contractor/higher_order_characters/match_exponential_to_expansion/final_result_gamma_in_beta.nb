@@ -1,0 +1,246 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7779,        238]
+NotebookOptionsPosition[      6776,        214]
+NotebookOutlinePosition[      7195,        230]
+CellTagsIndexPosition[      7152,        227]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}]], "=", 
+   RowBox[{"1", "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "2"], "36"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "4"], "2592"], "-", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "6"]}], "3359232"], "+", 
+    FractionBox[
+     RowBox[{"91", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "4837294080"], "-", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "217678233600"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}]], "=", 
+   RowBox[{
+    FractionBox["\[Beta]", "6"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "2"], "72"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "3"], "216"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "4"], "3456"], "+", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "5"]}], "186624"], "+", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "6"]}], "3732480"], "-", 
+    FractionBox[
+     RowBox[{"91", " ", 
+      SuperscriptBox["\[Beta]", "7"]}], "201553920"], "-", 
+    FractionBox[
+     RowBox[{"91", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "4837294080"], "+", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "7255941120"], "+", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "203166351360"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"6", ",", "0"}], "}"}]], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", "6"], "33592320"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "7"], "67184640"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "8"], "806215680"], "-", 
+    FractionBox[
+     RowBox[{"23", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "130606940160"], "-", 
+    FractionBox[
+     RowBox[{"7", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "348285173760"]}]}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.821297951665104*^9, 3.821297997537298*^9}, {
+   3.8212981169906483`*^9, 3.821298175388315*^9}, {3.821298510272502*^9, 
+   3.8212985185098352`*^9}, 
+   3.821298548564883*^9},ExpressionUUID->"c6a03c19-e40a-4890-b301-\
+b4ce7a9172d9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"betaPrime1", "=", 
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}]], "+", 
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"6", ",", "0"}], "}"}]]}]}]], "Input",
+ CellChangeTimes->{{3.821298192612846*^9, 3.821298319390169*^9}},
+ CellLabel->
+  "In[135]:=",ExpressionUUID->"e8bdb933-176e-41f7-af0e-30edb721bc9b"],
+
+Cell[BoxData[
+ RowBox[{"1", "-", 
+  FractionBox[
+   SuperscriptBox["\[Beta]", "2"], "36"], "+", 
+  FractionBox[
+   SuperscriptBox["\[Beta]", "4"], "2592"], "-", 
+  FractionBox[
+   RowBox[{"109", " ", 
+    SuperscriptBox["\[Beta]", "6"]}], "33592320"], "+", 
+  FractionBox[
+   SuperscriptBox["\[Beta]", "7"], "67184640"], "+", 
+  FractionBox[
+   RowBox[{"97", " ", 
+    SuperscriptBox["\[Beta]", "8"]}], "4837294080"], "-", 
+  FractionBox[
+   RowBox[{"23", " ", 
+    SuperscriptBox["\[Beta]", "9"]}], "130606940160"], "-", 
+  FractionBox[
+   RowBox[{"19", " ", 
+    SuperscriptBox["\[Beta]", "10"]}], "193491763200"]}]], "Output",
+ CellChangeTimes->{{3.8212983046363287`*^9, 3.8212983230459876`*^9}},
+ CellLabel->
+  "Out[135]=",ExpressionUUID->"36bfc287-0b39-4154-a4d7-d68307ed5f71"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["\[Gamma]", "1"], "=", 
+  RowBox[{"Expand", "[", 
+   RowBox[{"betaPrime1", "^", "2"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.821298368399562*^9, 3.8212983936592984`*^9}},
+ CellLabel->
+  "In[137]:=",ExpressionUUID->"4839e72f-763f-4bf5-aab6-9a613632bddd"],
+
+Cell[BoxData[
+ RowBox[{"1", "-", 
+  FractionBox[
+   SuperscriptBox["\[Beta]", "2"], "18"], "+", 
+  FractionBox[
+   SuperscriptBox["\[Beta]", "4"], "648"], "-", 
+  FractionBox[
+   RowBox[{"469", " ", 
+    SuperscriptBox["\[Beta]", "6"]}], "16796160"], "+", 
+  FractionBox[
+   SuperscriptBox["\[Beta]", "7"], "33592320"], "+", 
+  FractionBox[
+   RowBox[{"893", " ", 
+    SuperscriptBox["\[Beta]", "8"]}], "2418647040"], "-", 
+  FractionBox[
+   RowBox[{"77", " ", 
+    SuperscriptBox["\[Beta]", "9"]}], "65303470080"], "-", 
+  FractionBox[
+   RowBox[{"41", " ", 
+    SuperscriptBox["\[Beta]", "10"]}], "10749542400"], "+", 
+  FractionBox[
+   RowBox[{"5", " ", 
+    SuperscriptBox["\[Beta]", "11"]}], "235092492288"], "+", 
+  FractionBox[
+   RowBox[{"35497", " ", 
+    SuperscriptBox["\[Beta]", "12"]}], "1128443962982400"], "-", 
+  FractionBox[
+   RowBox[{"787", " ", 
+    SuperscriptBox["\[Beta]", "13"]}], "3385331888947200"], "-", 
+  FractionBox[
+   RowBox[{"16711", " ", 
+    SuperscriptBox["\[Beta]", "14"]}], "81247965334732800"], "+", 
+  FractionBox[
+   RowBox[{"7633", " ", 
+    SuperscriptBox["\[Beta]", "15"]}], "4387390128075571200"], "+", 
+  FractionBox[
+   RowBox[{"362963", " ", 
+    SuperscriptBox["\[Beta]", "16"]}], "350991210246045696000"], "-", 
+  FractionBox[
+   RowBox[{"3943", " ", 
+    SuperscriptBox["\[Beta]", "17"]}], "394865111526801408000"], "-", 
+  FractionBox[
+   RowBox[{"1332967", " ", 
+    SuperscriptBox["\[Beta]", "18"]}], "341163456359156416512000"], "+", 
+  FractionBox[
+   RowBox[{"437", " ", 
+    SuperscriptBox["\[Beta]", "19"]}], "12635683568857645056000"], "+", 
+  FractionBox[
+   RowBox[{"361", " ", 
+    SuperscriptBox["\[Beta]", "20"]}], "37439062426244874240000"]}]], "Output",
+ CellChangeTimes->{{3.8212983803162346`*^9, 3.8212983942878623`*^9}},
+ CellLabel->
+  "Out[137]=",ExpressionUUID->"9fb7a81e-02e1-4dd6-b4aa-f449ecba10aa"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.82129814370794*^9, 
+  3.8212981444793963`*^9}},ExpressionUUID->"ef4599cc-0d04-4841-851c-\
+236b0fd36437"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.821298138792951*^9, 
+  3.821298139431343*^9}},ExpressionUUID->"b92bd787-0ba3-45be-a832-\
+c5c5c32b6031"]
+},
+WindowSize->{574.8, 579.6},
+WindowMargins->{{Automatic, -4.7999999999999545`}, {Automatic, 0}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"5e496844-7c2f-4ae5-a28d-e869703c0488"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2483, 76, 236, "Input",ExpressionUUID->"c6a03c19-e40a-4890-b301-b4ce7a9172d9"],
+Cell[CellGroupData[{
+Cell[3066, 100, 390, 11, 30, "Input",ExpressionUUID->"e8bdb933-176e-41f7-af0e-30edb721bc9b"],
+Cell[3459, 113, 782, 22, 90, "Output",ExpressionUUID->"36bfc287-0b39-4154-a4d7-d68307ed5f71"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4278, 140, 295, 7, 28, "Input",ExpressionUUID->"4839e72f-763f-4bf5-aab6-9a613632bddd"],
+Cell[4576, 149, 1873, 52, 250, "Output",ExpressionUUID->"9fb7a81e-02e1-4dd6-b4aa-f449ecba10aa"]
+}, Open  ]],
+Cell[6464, 204, 153, 3, 28, "Input",ExpressionUUID->"ef4599cc-0d04-4841-851c-236b0fd36437"],
+Cell[6620, 209, 152, 3, 28, "Input",ExpressionUUID->"b92bd787-0ba3-45be-a832-c5c5c32b6031"]
+}
+]
+*)
+
