@@ -41,12 +41,12 @@ for i in range(len(row_pools)):
 
 result = []
 # generate all possible S matrices
-for i,j,k in itertools.product(possible_row_indices, repeat=3):
-    matrix = [row_pools[i],row_pools[j],row_pools[k]]
+for i,j in itertools.product(possible_row_indices, repeat=2):
+    matrix = [row_pools[i],row_pools[j]]
     matrix = np.array(matrix)
     result.append(matrix)
 
-with open('./one_way_function/n_10_random/matrix_S', 'wb') as fp:
+with open('./matrix_S_new', 'wb') as fp:
         pickle.dump(result, fp)
 
 

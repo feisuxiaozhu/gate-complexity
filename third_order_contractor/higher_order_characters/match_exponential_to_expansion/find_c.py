@@ -208,5 +208,7 @@ for i in range(17):
         index_2 = str(j+1)
         key = index_1+'_'+index_2
         result_dict[key] = compute_c(index_1,index_2)
+
+print(result_dict)
 with open('c:/Users/feisu/Desktop/gate-complexity/third_order_contractor/higher_order_characters/match_exponential_to_expansion/c_for_i_j_result.npy', 'wb') as f:
     np.save(f, result_dict)
