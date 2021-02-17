@@ -44,6 +44,8 @@ def purifier(number):
     epsilon = 0.00000001
     if abs(number) < epsilon:
         return 0
+    elif abs(number-1)<epsilon:
+        return 1
     else:
         return number
 
@@ -107,10 +109,7 @@ Y120_result.append(B)
 Y120_result.append(C)
 Y120_result.append(dag(A))
 Y120_result.append(dag(C))
-# Y120_result.append(D)
-# Y120_result.append(dag(D))
-# Y120_result.append(E)
-# Y120_result.append(dag(E))
+
 
 counter = 1
 while counter <4:
@@ -125,49 +124,20 @@ while counter <4:
                 new_Y120_result.append(product)          
     Y120_result = new_Y120_result
 
-with open('./Y120_element.npy', 'wb') as f:
-    np.save(f, Y120_result)
+# with open('./Y120_element.npy', 'wb') as f:
+#     np.save(f, Y120_result)
 
-# result = ''
-# for matrix in Y120_result:
-#     det = np.linalg.det(matrix)
-#     # print(det)
-#     result += python_matrix_to_mathematica(matrix) + '\n'
+result = ''
+for matrix in Y120_result:
+    det = np.linalg.det(matrix)
+    # print(det)
+    result += python_matrix_to_mathematica(matrix) + '\n'
 
-# print(result)
-
-
-
-# counter = 0
-# for i in Y120_result:
-#     counter += 1
-#     print(counter)
-#     find_inverse = False
-#     for j in Y120_result:
-#         product = mult(i,j)
-#         if check_equal(product, identity_matrix):
-#             find_inverse = True
-#             print(product)
-#     if not find_inverse:
-#         print('cannot find inverse')
-#         break
+print(result)
 
 
-# while True:
-#     new_Y120_result = []
-#     for element in Y120_result:
-#         new_Y120_result.append(element) 
-#         right_product_1 = mult(element,A)
-#         right_product_2 = mult(element,B)
-#         right_product_3 = mult(element,C)
-#         if not check_whether_in_list(right_product_1, Y120_result) and not check_whether_in_list(right_product_1, new_Y120_result):
-#             new_Y120_result.append(right_product_1)
-#         if not check_whether_in_list(right_product_2, Y120_result) and not check_whether_in_list(right_product_2, new_Y120_result):
-#             new_Y120_result.append(right_product_2)
-#         if not check_whether_in_list(right_product_3, Y120_result) and not check_whether_in_list(right_product_3, new_Y120_result):
-#             new_Y120_result.append(right_product_3)
-#     Y120_result = new_Y120_result
-#     print(len(Y120_result))
+
+
 
 
 
