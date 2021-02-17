@@ -1,6 +1,7 @@
 # We want to generate all Y120 group elements
 import numpy as np
 import math as math
+import _pickle as pickle
 
 
 zero_matrix = np.array([[0,0],[0,0]])
@@ -31,6 +32,9 @@ def mult(a,b):
 
 def dag(u):
     return np.transpose(u.conjugate())
+
+def det(u):
+    return np.linalg.det(u)
 
 def epsilon(k):
     return  math.cos(2*math.pi*k/5) + 1j*math.sin(2*math.pi*k/5)
@@ -83,13 +87,14 @@ generators = []
 # generators of Y120
 k = 1
 B = np.array([[0,1],[-1,0]])
-A =  np.array([[epsilon(k)**2,0],[0,epsilon(k)**2]])
+A =  np.array([[epsilon(k)**3,0],[0,epsilon(k)**2]])
 C = 1/math.sqrt(5)*np.array([[-epsilon(k)+epsilon(k)**4, epsilon(k)**2-epsilon(k)**3],[epsilon(k)**2-epsilon(k)**3,epsilon(k)-epsilon(k)**4]])
 generators.append(B)
 generators.append(C)
 generators.append(A)
 generators.append(dag(A))
 generators.append(dag(C))
+
 
 k=2
 D = np.array([[epsilon(k)**2,0],[0,epsilon(k)**2]])
@@ -117,29 +122,19 @@ while counter <4:
 
             product = mult(left, right)
             if not check_whether_in_list(product, Y120_result) and not check_whether_in_list(product, new_Y120_result):
-                new_Y120_result.append(product)
-
-            # product = mult(left, dag(right))
-            # if not check_whether_in_list(product, Y120_result) and not check_whether_in_list(product, new_Y120_result):
-            #     new_Y120_result.append(product)
-
-            # product = mult(right, left)
-            # if not check_whether_in_list(product, Y120_result) and not check_whether_in_list(product, new_Y120_result):
-            #     new_Y120_result.append(product)
-
-            # product = mult(right, dag(left))
-            # if not check_whether_in_list(product, Y120_result) and not check_whether_in_list(product, new_Y120_result):
-            #     new_Y120_result.append(product)
-            
-            
+                new_Y120_result.append(product)          
     Y120_result = new_Y120_result
 
-result = ''
-for matrix in Y120_result:
-    result += python_matrix_to_mathematica(matrix) + '\n'
+with open('./Y120_element.npy', 'wb') as f:
+    np.save(f, Y120_result)
 
+# result = ''
+# for matrix in Y120_result:
+#     det = np.linalg.det(matrix)
+#     # print(det)
+#     result += python_matrix_to_mathematica(matrix) + '\n'
 
-print(result)
+# print(result)
 
 
 
