@@ -54,7 +54,7 @@ def python_matrix_to_mathematica(matrix):
     first_real = purifier(a[0][0].real)
     first_img  = purifier(a[0][0].imag)
     if first_img < 0:
-        first = str(first_real) + str(first_img)
+        first = str(first_real) + str(first_img)+'*I'
     else:
         first =  str(first_real) + '+' + str(first_img)+'*I'
 
@@ -124,8 +124,8 @@ while counter <4:
                 new_Y120_result.append(product)          
     Y120_result = new_Y120_result
 
-# with open('./Y120_element.npy', 'wb') as f:
-#     np.save(f, Y120_result)
+with open('./Y120_element.npy', 'wb') as f:
+    np.save(f, Y120_result)
 
 result = ''
 for matrix in Y120_result:
