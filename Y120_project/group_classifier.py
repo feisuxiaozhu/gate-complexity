@@ -28,11 +28,11 @@ def tr(u):
 def mult(a,b):
     return np.matmul(a,b)
 
-def det(u):
-    return np.linalg.det(u)
+# def det(u):
+#     return np.linalg.det(u)
 
 def purifier(number):
-    epsilon = 0.00000001
+    epsilon = 0.000001
     if abs(number) < epsilon:
         return 0
     elif abs(number-1)<epsilon:
@@ -42,47 +42,38 @@ def purifier(number):
     else:
         return number
 
+# We follow the parametrization in the following paper
+# https://www.tamagawa.jp/research/quantum/bulletin/pdf/Tamagawa.Vol.5-5.pdf
+def get_beta_eta_zeta(matrix):
+
+    # eta=Symbol('eta',real=True)
+    # beta =Symbol('beta', real=True)
+    # zeta=Symbol('zeta',real=True)
+
+    beta =purifier(acos(2*(matrix[0][0]*matrix[1][1]).real-1))
+    eta = arg(matrix[1][1]/cos(beta/2)).evalf(15)
+    zeta = arg(-matrix[0][1]/sin(beta/2)).evalf(15)
+    return beta, eta, zeta
+
 Y_120 = np.load('./Y120_element.npy',allow_pickle='TRUE')
 
-# # Find the distribution of traces
-# set_trace = []
-# for u in Y_120:
-#     trace_real = round(purifier(tr(u).real),4)
-#     trace_img =  round(purifier(tr(u).imag),4)
-#     trace = trace_real + 1j*trace_img
-#     set_trace.append(trace)
-# print(Counter(set_trace))
 
-# # Find the distribution of products
-# set_product = []
-# for u in Y_120:
-#     for v in Y_120:
-#         product = mult(u,v)
-#         index = find_index_in_list(product,Y_120)
-#         set_product.append(index)
-# print(Counter(set_product))
 
-# Find the parametrizaiton of each group element
 
-alpha=Symbol('alpha',real=True)
-beta =Symbol('beta', real=True)
-theta=Symbol('theta',real=True)
+for i in range(20):
+    get_beta_eta_zeta(Y_120[i])
+    
 
-matrix = Y_120[1]
 
-print(matrix[0][1])
-print(matrix[1][0])
+# print(matrix[0][1])
+# print(matrix[1][0])
 
-eq1 = Eq(exp(I*alpha)*cos(theta), matrix[0][0])
-eq2 = Eq(exp(I*beta)*sin(theta), matrix[0][1])
-eq3 = Eq(-exp(I*beta)*sin(theta),matrix[1][0])
-eq4 = Eq(exp(-I*alpha)*cos(theta), matrix[1][1])
-result_1=solve([eq1],alpha,beta,theta)
-result_2=solve([eq2],alpha,beta,theta)
-result_3=solve([eq3],alpha,beta,theta)
-result_4=solve([eq4],alpha,beta,theta)
+# eq1 = Eq(exp(I*alpha)*cos(theta), matrix[0][0])
+# eq2 = Eq(exp(I*beta)*sin(theta), matrix[0][1])
+# eq3 = Eq(-exp(I*beta)*sin(theta),matrix[1][0])
+# eq4 = Eq(exp(-I*alpha)*cos(theta), matrix[1][1])
+# result_1=solve([eq1],alpha,beta,theta)
+# result_2=solve([eq2],alpha,beta,theta)
+# result_3=solve([eq3],alpha,beta,theta)
+# result_4=solve([eq4],alpha,beta,theta)
 
-print(result_1)
-print(result_2)
-print(result_3)
-print(result_4)
