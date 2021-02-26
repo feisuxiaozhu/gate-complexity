@@ -53,6 +53,7 @@ def get_beta_eta_zeta(matrix):
     beta =purifier(acos(2*(matrix[0][0]*matrix[1][1]).real-1))
     eta = arg(matrix[1][1]/cos(beta/2)).evalf(15)
     zeta = arg(-matrix[0][1]/sin(beta/2)).evalf(15)
+    
     return beta, eta, zeta
 
 Y_120 = np.load('./Y120_element.npy',allow_pickle='TRUE')
@@ -60,10 +61,12 @@ Y_120 = np.load('./Y120_element.npy',allow_pickle='TRUE')
 
 
 
-for i in range(20):
-    get_beta_eta_zeta(Y_120[i])
+A = Y_120[20]
+B = Y_120[2]
+print(get_beta_eta_zeta(A))
+print(get_beta_eta_zeta(B))
+print(get_beta_eta_zeta(mult(A,B)))
     
-
 
 # print(matrix[0][1])
 # print(matrix[1][0])
