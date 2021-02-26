@@ -2,7 +2,7 @@ import numpy as np
 import itertools
 import pickle
 # Set n=10, r=2, s=4, t=7
-# a helper function checks whether rank = 3
+# a helper function checks whether rank = 2
 def rank_checker(matrix):
     row_1 = matrix[0]
     row_2 = matrix[1]

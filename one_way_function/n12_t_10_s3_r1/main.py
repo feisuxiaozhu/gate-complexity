@@ -4,6 +4,18 @@ import pickle
 import random
 from sympy import Matrix
 
+# a helper function checks whether rank = 2
+def rank_checker(matrix):
+    row_1 = matrix[0]
+    row_2 = matrix[1]
+    first_sum = ((row_1+row_2)%2).tolist()[0]
+    sum_1=sum(first_sum)
+    rank2 = True
+    if sum_1 == 0:
+        rank2 = False
+
+    return rank2
+
 def create_candidate_vectors(n,s):
     indices = [x for x in range(n)]
     candidate_vectors = []
@@ -42,6 +54,26 @@ def pairwise_vector_set(n,s):
             result.append(candidate)
     return result
 
+def check_rigidity(matrix):
+    survivor_count = 0
+    for i,j in row_number_set:
+        print(i,j)
+        survivor_count += 1
+        survivor_set.add(survivor_count)
+        for s in S_matrices:
+            s_matrix = np.asmatrix(s)
+            row_1 = matrix[i].tolist()
+            row_2 = matrix[j].tolist()
+            new_matrix = [row_1,row_2]
+            new_matrix = np.asmatrix(new_matrix)
+            substracted_matrix = (new_matrix + s_matrix) % 2
+            if not rank_checker(substracted_matrix):
+                # print(new_matrix)
+                # print(s_matrix)
+                # print(substracted_matrix)
+                return False
+    return True
+
 # load all S matrices
 with open('./matrix_S', 'rb') as fp:
     S_matrices = pickle.load(fp)
@@ -57,5 +89,9 @@ matrix = np.array(matrix)
 
 print(matrix)
 
+# pick all possible 2 rows from 12 rows
+row_number = [0,1,2,3,4,5,6,7,8,9,10,11]
+row_number_set = list(itertools.combinations(row_number,2))
 
-
+survivor_set = set()
+check_rigidity(matrix)
