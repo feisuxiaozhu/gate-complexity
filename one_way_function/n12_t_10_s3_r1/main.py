@@ -2,7 +2,7 @@ import numpy as np
 import itertools
 import pickle
 import random
-from sympy import Matrix
+from sympy import Matrix, latex
 
 # a helper function checks whether rank = 2
 def rank_checker(matrix):
@@ -57,7 +57,6 @@ def pairwise_vector_set(n,s):
 def check_rigidity(matrix):
     survivor_count = 0
     for i,j in row_number_set:
-        print(i,j)
         survivor_count += 1
         survivor_set.add(survivor_count)
         for s in S_matrices:
@@ -78,6 +77,15 @@ def check_rigidity(matrix):
 with open('./matrix_S', 'rb') as fp:
     S_matrices = pickle.load(fp)
 
+# pick all possible 2 rows from 12 rows
+row_number = [0,1,2,3,4,5,6,7,8,9,10,11]
+row_number_set = list(itertools.combinations(row_number,2))
+survivor_set = set()
+
+'''
+--------------------------------------------------------------- 
+'''
+
 s = 3
 n = 12
 vector_set = pairwise_vector_set(n,s)
@@ -87,11 +95,25 @@ for i in range(n):
     matrix.append(vector_set[i].tolist())
 matrix = np.array(matrix)
 
-print(matrix)
+new_matrix=[]
+for i in range(n):
+    row = []
+    for j in range(n):
+        if matrix[i][j]==0.:
+            row.append(0)
+        else:
+            row.append(1)
+    new_matrix.append(row)
 
-# pick all possible 2 rows from 12 rows
-row_number = [0,1,2,3,4,5,6,7,8,9,10,11]
-row_number_set = list(itertools.combinations(row_number,2))
 
-survivor_set = set()
-check_rigidity(matrix)
+
+
+if int(np.linalg.det(new_matrix)) %2 == 1:
+    new_matrix = Matrix(new_matrix)
+    print(latex(new_matrix))
+    new_matrix_inverse = new_matrix.inv_mod(2)
+    print(latex(new_matrix_inverse))
+    new_matrix_inverse= np.array(new_matrix_inverse)
+    print(check_rigidity(new_matrix_inverse))
+else:
+    print('the matrix chosen in this run is not invertible')
