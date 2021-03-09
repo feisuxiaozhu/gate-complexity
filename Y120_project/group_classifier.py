@@ -2,6 +2,7 @@ import numpy as np
 from collections import Counter
 from sympy import *
 from sympy.functions import exp
+import math
 
 def check_equal(A,B):
     C = np.subtract(A,B)
@@ -28,6 +29,9 @@ def tr(u):
 def mult(a,b):
     return np.matmul(a,b)
 
+def inv(a):
+    return np.linalg.inv(a) 
+
 # def det(u):
 #     return np.linalg.det(u)
 
@@ -42,31 +46,53 @@ def purifier(number):
     else:
         return number
 
+def radian_to_deg(r):
+    return r/3.14159265358979*180.0
+
 # We follow the parametrization in the following paper
 # https://www.tamagawa.jp/research/quantum/bulletin/pdf/Tamagawa.Vol.5-5.pdf
 def get_beta_eta_zeta(matrix):
-
-    # eta=Symbol('eta',real=True)
-    # beta =Symbol('beta', real=True)
-    # zeta=Symbol('zeta',real=True)
-
-    beta =purifier(acos(2*(matrix[0][0]*matrix[1][1]).real-1))
-    eta = arg(matrix[1][1]/cos(beta/2)).evalf(15)
-    zeta = arg(-matrix[0][1]/sin(beta/2)).evalf(15)
-    
+    beta =round(purifier(acos(2*(matrix[0][0]*matrix[1][1]).real-1)) / np.pi * 180,4)
+    eta = round(arg(matrix[1][1]/cos(beta/2)).evalf(15) / np.pi * 180,4)
+    zeta = round(arg(-matrix[0][1]/sin(beta/2)).evalf(15) / np.pi * 180,4)
     return beta, eta, zeta
+
+def get_beta_eta_zeta_integer(matrix):
+    beta,eta,zeta = get_beta_eta_zeta(matrix)
+    if not math.isnan(eta):
+        eta = int(eta/18)
+    if not math.isnan(zeta):
+        zeta = int(zeta/18)
+    epsilon = 0.0001
+    if beta-0<epsilon:
+        beta = 0
+    elif beta- 63.4349 < epsilon:
+        beta = 1
+    elif beta-116.5651< epsilon:
+        beta = 2
+    elif beta-180<epsilon:
+        beta = 3
+    return beta,eta,zeta
 
 Y_120 = np.load('./Y120_element.npy',allow_pickle='TRUE')
 
 
 
 
-A = Y_120[20]
-B = Y_120[2]
-print(get_beta_eta_zeta(A))
-print(get_beta_eta_zeta(B))
-print(get_beta_eta_zeta(mult(A,B)))
-    
+
+beta_set=set()
+eta_set=set()
+zeta_set=set()
+for i in range(120):
+    A = Y_120[i]
+    beta,eta,zeta = get_beta_eta_zeta_integer(A)
+    beta_set.add(beta)
+    eta_set.add(eta)
+    zeta_set.add(zeta)
+print(beta_set)
+print(eta_set)
+print(zeta_set)
+
 
 # print(matrix[0][1])
 # print(matrix[1][0])
