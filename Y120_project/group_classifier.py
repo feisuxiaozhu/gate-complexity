@@ -3,10 +3,11 @@ from collections import Counter
 from sympy import *
 from sympy.functions import exp
 import math
+from collections import Counter
 
 def check_equal(A,B):
     C = np.subtract(A,B)
-    epsilon = 0.000000001
+    epsilon = 0.0001
     sum = 0
     for i in range(2):
         for j in range(2):
@@ -32,9 +33,6 @@ def mult(a,b):
 def inv(a):
     return np.linalg.inv(a) 
 
-# def det(u):
-#     return np.linalg.det(u)
-
 def purifier(number):
     epsilon = 0.000001
     if abs(number) < epsilon:
@@ -47,15 +45,25 @@ def purifier(number):
         return number
 
 def radian_to_deg(r):
-    return r/3.14159265358979*180.0
+    return r/np.pi*180.0
+
+def deg_to_radian(deg):
+    return deg/180.0 * np.pi
 
 # We follow the parametrization in the following paper
 # https://www.tamagawa.jp/research/quantum/bulletin/pdf/Tamagawa.Vol.5-5.pdf
-def get_beta_eta_zeta(matrix):
-    beta =round(purifier(acos(2*(matrix[0][0]*matrix[1][1]).real-1)) / np.pi * 180,4)
-    eta = round(arg(matrix[1][1]/cos(beta/2)).evalf(15) / np.pi * 180,4)
-    zeta = round(arg(-matrix[0][1]/sin(beta/2)).evalf(15) / np.pi * 180,4)
+def get_beta_eta_zeta_radian(matrix): #return in radian
+    beta =purifier(acos(2*(matrix[0][0]*matrix[1][1]).real-1)) 
+    eta = arg(matrix[1][1]/cos(beta/2)).evalf(15)
+    zeta = arg(-matrix[0][1]/sin(beta/2)).evalf(15) 
     return beta, eta, zeta
+
+def get_beta_eta_zeta(matrix): # return in degree
+    beta,eta,zeta = get_beta_eta_zeta_radian(matrix)
+    beta = round(beta/np.pi*180,4)
+    eta = round(eta/np.pi*180,4)
+    zeta = round(zeta/np.pi*180,4)
+    return beta,eta,zeta
 
 def get_beta_eta_zeta_integer(matrix):
     beta,eta,zeta = get_beta_eta_zeta(matrix)
@@ -74,35 +82,56 @@ def get_beta_eta_zeta_integer(matrix):
         beta = 3
     return beta,eta,zeta
 
+def construct_Y120_matrix(beta_int, eta_int, zeta_int):
+    if math.isnan(eta_int): # assign 0 as value of eta if eta is NaN
+        eta = 0
+    else:
+        eta = int(18*eta_int)
+
+    if math.isnan(zeta_int): # assign 0 as value of zeta if zeta is NaN
+        zeta = 0
+    else:
+        zeta = int(18*zeta_int)
+    if beta_int == 0:
+        beta = 0
+    elif beta_int == 1:
+        beta = 63.4349
+    elif beta_int ==2:
+        beta = 116.5651
+    elif beta_int ==3:
+        beta = 180
+    beta = deg_to_radian(beta)
+    eta = deg_to_radian(eta)
+    zeta = deg_to_radian(zeta)
+    M_11 = purifier(np.exp(-1j*eta)*np.cos(beta/2))
+    M_12 = purifier(-np.exp(1j*zeta)*np.sin(beta/2))
+    M_21 = purifier(np.exp(-1j*zeta)*np.sin(beta/2))
+    M_22 = purifier(np.exp(1j*eta)*np.cos(beta/2))
+    matrix = np.array( [[M_11,M_12],[M_21,M_22]])
+    return matrix
+
+
+
 Y_120 = np.load('./Y120_element.npy',allow_pickle='TRUE')
+beta_pool = [0,1,2,3]
+eta_pool = [-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10]
+zeta_pool=[-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10]
+
+
+for left_beta in beta_pool:
+    for right_beta in beta_pool:
+        print('-----------------------------------')
+        print(left_beta,right_beta)
+        experiment = []
+        for matrix_left in Y_120:
+            for matrix_right in Y_120:
+                if get_beta_eta_zeta_integer(matrix_left)[0]==left_beta and get_beta_eta_zeta_integer(matrix_right)[0]==right_beta:
+                    prod = mult(matrix_left,matrix_right)
+                    new_beta,new_eta,new_zeta = get_beta_eta_zeta_integer(prod)
+                    experiment.append(new_beta)
+        print(Counter(experiment))
 
 
 
 
-
-beta_set=set()
-eta_set=set()
-zeta_set=set()
-for i in range(120):
-    A = Y_120[i]
-    beta,eta,zeta = get_beta_eta_zeta_integer(A)
-    beta_set.add(beta)
-    eta_set.add(eta)
-    zeta_set.add(zeta)
-print(beta_set)
-print(eta_set)
-print(zeta_set)
-
-
-# print(matrix[0][1])
-# print(matrix[1][0])
-
-# eq1 = Eq(exp(I*alpha)*cos(theta), matrix[0][0])
-# eq2 = Eq(exp(I*beta)*sin(theta), matrix[0][1])
-# eq3 = Eq(-exp(I*beta)*sin(theta),matrix[1][0])
-# eq4 = Eq(exp(-I*alpha)*cos(theta), matrix[1][1])
-# result_1=solve([eq1],alpha,beta,theta)
-# result_2=solve([eq2],alpha,beta,theta)
-# result_3=solve([eq3],alpha,beta,theta)
-# result_4=solve([eq4],alpha,beta,theta)
 
