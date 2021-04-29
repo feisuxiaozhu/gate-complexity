@@ -64,7 +64,8 @@ for i in range(len(candidate_vectors)):
     initilized_vector = candidate_vectors[i]
     pairwise_set = pairwise_vector_set_for_initial_vector(
         n, s, initilized_vector, candidate_vectors[i:])
-    result = result + createAllPossibleRigidMatrices(pairwise_set, n, i)
+    if len(pairwise_set)>= n:
+        result = result + createAllPossibleRigidMatrices(pairwise_set, n, i)
 
 with open('./sparse_inverses', 'wb') as fp:
         pickle.dump(result, fp)
