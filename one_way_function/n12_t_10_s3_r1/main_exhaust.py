@@ -48,6 +48,9 @@ def createAllPossibleRigidMatrices(pairwise_set, n, number):
         counter += 1
         print('Working on candidate vector number: ' + str(number+1))
         print('Number of rigid matrices checked: ' + str(counter))
+        print('Number of sparse inverse found: '+ str(len(result)))
+        if len(result)!= 0:
+            print(result)
         
     return result
 
