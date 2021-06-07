@@ -54,6 +54,19 @@ def pairwise_vector_set(n,s):
             result.append(candidate)
     return result
 
+def pairwise_vector_set_for_initial_vector(n,s,initial_vector,candidate_vectors):
+    result = [] 
+    result.append(initial_vector)
+    for candidate in candidate_vectors:
+        outside_ball = True
+        for found_vector in result:
+            if check_hamming_distance(candidate, found_vector) <= 2*(s-1):
+                outside_ball = False
+                break
+        if outside_ball:
+            result.append(candidate)
+    return result    
+
 def check_rigidity(matrix):
     survivor_count = 0
     for i,j in row_number_set:
@@ -86,34 +99,34 @@ survivor_set = set()
 --------------------------------------------------------------- 
 '''
 
-s = 3
-n = 12
-vector_set = pairwise_vector_set(n,s)
-# create a matrix from the first 10 vectors
-matrix = []
-for i in range(n):
-    matrix.append(vector_set[i].tolist())
-matrix = np.array(matrix)
+# s = 3
+# n = 12
+# vector_set = pairwise_vector_set(n,s)
+# # create a matrix from the first 10 vectors
+# matrix = []
+# for i in range(n):
+#     matrix.append(vector_set[i].tolist())
+# matrix = np.array(matrix)
 
-new_matrix=[]
-for i in range(n):
-    row = []
-    for j in range(n):
-        if matrix[i][j]==0.:
-            row.append(0)
-        else:
-            row.append(1)
-    new_matrix.append(row)
-
-
+# new_matrix=[]
+# for i in range(n):
+#     row = []
+#     for j in range(n):
+#         if matrix[i][j]==0.:
+#             row.append(0)
+#         else:
+#             row.append(1)
+#     new_matrix.append(row)
 
 
-if int(np.linalg.det(new_matrix)) %2 == 1:
-    new_matrix = Matrix(new_matrix)
-    print(latex(new_matrix))
-    new_matrix_inverse = new_matrix.inv_mod(2)
-    print(latex(new_matrix_inverse))
-    new_matrix_inverse= np.array(new_matrix_inverse)
-    print(check_rigidity(new_matrix_inverse))
-else:
-    print('the matrix chosen in this run is not invertible')
+
+
+# if int(np.linalg.det(new_matrix)) %2 == 1:
+#     new_matrix = Matrix(new_matrix)
+#     print(latex(new_matrix))
+#     new_matrix_inverse = new_matrix.inv_mod(2)
+#     print(latex(new_matrix_inverse))
+#     new_matrix_inverse= np.array(new_matrix_inverse)
+#     print(check_rigidity(new_matrix_inverse))
+# else:
+#     print('the matrix chosen in this run is not invertible')
