@@ -3,7 +3,7 @@ import math as math
 from numpy import linalg
 import _pickle as pickle
 
-read_dictionary = np.load('c:/Users/feisu/Desktop/gate-complexity/third_order_contractor/higher_order_characters/result_class_element.npy',allow_pickle='TRUE').item()
+read_dictionary = np.load('../result_class_element.npy',allow_pickle='TRUE').item()
 
 # Check whether matrix A equals matrix B
 def check_equal(A,B):
@@ -210,5 +210,5 @@ for i in range(17):
         result_dict[key] = compute_c(index_1,index_2)
 
 print(result_dict)
-with open('c:/Users/feisu/Desktop/gate-complexity/third_order_contractor/higher_order_characters/match_exponential_to_expansion/c_for_i_j_result.npy', 'wb') as f:
+with open('./c_for_i_j_result.npy', 'wb') as f:
     np.save(f, result_dict)
