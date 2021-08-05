@@ -1,0 +1,2766 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     78175,       2756]
+NotebookOptionsPosition[     73784,       2672]
+NotebookOutlinePosition[     74181,       2688]
+CellTagsIndexPosition[     74138,       2685]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}]], "=", 
+   RowBox[{"1", "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "2"], "36"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "4"], "2592"], "-", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "6"]}], "3359232"], "+", 
+    FractionBox[
+     RowBox[{"91", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "4837294080"], "-", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "217678233600"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0"}], "}"}]], "=", 
+   RowBox[{
+    FractionBox["\[Beta]", "6"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "2"], "72"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "3"], "216"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "4"], "3456"], "+", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "5"]}], "186624"], "+", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "6"]}], "3732480"], "-", 
+    FractionBox[
+     RowBox[{"91", " ", 
+      SuperscriptBox["\[Beta]", "7"]}], "201553920"], "-", 
+    FractionBox[
+     RowBox[{"91", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "4837294080"], "+", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "7255941120"], "+", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "203166351360"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "1"}]}], "}"}]], "=", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", "2"], "36"]}], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "4"], "1296"], "-", 
+    FractionBox[
+     RowBox[{"77", " ", 
+      SuperscriptBox["\[Beta]", "6"]}], "8398080"], "+", 
+    FractionBox[
+     RowBox[{"13", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "201553920"], "-", 
+    FractionBox[
+     RowBox[{"187", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "609499054080"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "0"}], "}"}]], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", "2"], "72"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "3"], "432"], "-", 
+    FractionBox[
+     RowBox[{"5", " ", 
+      SuperscriptBox["\[Beta]", "4"]}], "15552"], "-", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "5"]}], "233280"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "6"], "279936"], "+", 
+    FractionBox[
+     RowBox[{"91", " ", 
+      SuperscriptBox["\[Beta]", "7"]}], "201553920"], "-", 
+    FractionBox[
+     RowBox[{"59", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "2418647040"], "-", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "6348948480"], "+", 
+    FractionBox[
+     RowBox[{"697", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "6094990540800"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", 
+      RowBox[{"-", "1"}]}], "}"}]], "=", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", "3"], "432"]}], "-", 
+    FractionBox[
+     RowBox[{"5", " ", 
+      SuperscriptBox["\[Beta]", "4"]}], "31104"], "+", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "5"]}], "186624"], "+", 
+    FractionBox[
+     RowBox[{"7", " ", 
+      SuperscriptBox["\[Beta]", "6"]}], "2239488"], "-", 
+    FractionBox[
+     RowBox[{"13", " ", 
+      SuperscriptBox["\[Beta]", "7"]}], "20155392"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "8"], "35831808"], "+", 
+    FractionBox[
+     RowBox[{"85", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "20316635136"], "+", 
+    FractionBox[
+     RowBox[{"187", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "1218998108160"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", "0"}], "}"}]], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", "3"], "1296"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "4"], "5184"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "5"], "93312"], "-", 
+    FractionBox[
+     RowBox[{"25", " ", 
+      SuperscriptBox["\[Beta]", "6"]}], "6718464"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "7"], "13436928"], "+", 
+    FractionBox[
+     RowBox[{"113", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "3386105856"], "-", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "50791587840"], "-", 
+    FractionBox[
+     RowBox[{"901", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "4875992432640"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", 
+      RowBox[{"-", "2"}]}], "}"}]], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", "4"], "5184"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "6"], "207360"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "8"], "19906560"], "-", 
+    FractionBox[
+     RowBox[{"187", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "609499054080"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", 
+      RowBox[{"-", "1"}]}], "}"}]], "=", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", "4"], "7776"]}], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "5"], "58320"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "6"], "373248"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "7"], "3149280"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "8"], "39191040"], "-", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "6348948480"], "+", 
+    FractionBox[
+     RowBox[{"5423", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "36569943244800"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"4", ",", "0"}], "}"}]], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", "4"], "31104"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "5"], "93312"], "-", 
+    FractionBox[
+     RowBox[{"53", " ", 
+      SuperscriptBox["\[Beta]", "7"]}], "282175488"], "-", 
+    FractionBox[
+     RowBox[{"19", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "4837294080"], "+", 
+    FractionBox[
+     RowBox[{"629", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "406332702720"], "+", 
+    FractionBox[
+     RowBox[{"79", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "2089711042560"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", 
+      RowBox[{"-", "2"}]}], "}"}]], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", "5"], "93312"], "+", 
+    FractionBox[
+     RowBox[{"7", " ", 
+      SuperscriptBox["\[Beta]", "6"]}], "11197440"], "-", 
+    FractionBox[
+     RowBox[{"49", " ", 
+      SuperscriptBox["\[Beta]", "7"]}], "201553920"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "8"], "89579520"], "+", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "7255941120"], "+", 
+    FractionBox[
+     RowBox[{"187", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "2089711042560"], "-", 
+    FractionBox[
+     RowBox[{"209", " ", 
+      SuperscriptBox["\[Beta]", "11"]}], "15672832819200"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"4", ",", 
+      RowBox[{"-", "1"}]}], "}"}]], "=", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", "5"], "186624"]}], "-", 
+    FractionBox[
+     RowBox[{"7", " ", 
+      SuperscriptBox["\[Beta]", "6"]}], "6718464"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "7"], "13436928"], "+", 
+    FractionBox[
+     RowBox[{"29", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "1612431360"], "-", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "34828517376"], "-", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "77396705280"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"5", ",", "0"}], "}"}]], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", "5"], "933120"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "6"], "2239488"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "7"], "50388480"], "-", 
+    FractionBox[
+     RowBox[{"13", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "1934917632"], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "9"], "2418647040"], "+", 
+    FractionBox[
+     RowBox[{"763", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "15672832819200"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", 
+      RowBox[{"-", "3"}]}], "}"}]], "=", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", "6"], "1679616"]}], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "8"], "75582720"], "-", 
+    FractionBox[
+     RowBox[{"187", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "1523747635200"], "+", 
+    FractionBox[
+     RowBox[{"247", " ", 
+      SuperscriptBox["\[Beta]", "12"]}], "370270675353600"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"4", ",", 
+      RowBox[{"-", "2"}]}], "}"}]], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", "6"], "2239488"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "7"], "20155392"], "-", 
+    FractionBox[
+     RowBox[{"71", " ", 
+      SuperscriptBox["\[Beta]", "8"]}], "8465264640"], "-", 
+    FractionBox[
+     RowBox[{"17", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "20316635136"], "+", 
+    FractionBox[
+     RowBox[{"517", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "7313988648960"], "+", 
+    FractionBox[
+     RowBox[{"209", " ", 
+      SuperscriptBox["\[Beta]", "11"]}], "32912948920320"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"5", ",", 
+      RowBox[{"-", "1"}]}], "}"}]], "=", 
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", "6"], "5598720"]}], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "7"], "22044960"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "8"], "1209323520"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "9"], "1410877440"], "+", 
+    FractionBox[
+     RowBox[{"11", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "1567283281920"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Beta]", 
+    RowBox[{"{", 
+     RowBox[{"6", ",", "0"}], "}"}]], "=", 
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", "6"], "33592320"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "7"], "67184640"], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", "8"], "806215680"], "-", 
+    FractionBox[
+     RowBox[{"23", " ", 
+      SuperscriptBox["\[Beta]", "9"]}], "130606940160"], "-", 
+    FractionBox[
+     RowBox[{"7", " ", 
+      SuperscriptBox["\[Beta]", "10"]}], "348285173760"]}]}], ";"}]}], "Input",\
+
+ CellLabel->"In[1]:=",ExpressionUUID->"048fe515-3589-4227-9194-fab2f92a65d0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"betaP1", "=", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "0"}], "}"}]]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP2", "=", " ", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0"}], "}"}]], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "0"}], "}"}]], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", 
+       RowBox[{"-", "1"}]}], "}"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP3", " ", "=", " ", "betaP2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP4", "=", " ", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", 
+       RowBox[{"-", "1"}]}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", 
+        RowBox[{"-", "1"}]}], "}"}]]}], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", 
+       RowBox[{"-", "3"}]}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "0"}], "}"}]]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP5", "=", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "0"}], "}"}]], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "0"}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", 
+        RowBox[{"-", "2"}]}], "}"}]]}], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", 
+       RowBox[{"-", "1"}]}], "}"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP6", "=", "betaP5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP7", "=", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", 
+       RowBox[{"-", "1"}]}], "}"}]], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", 
+       RowBox[{"-", "1"}]}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", 
+        RowBox[{"-", "2"}]}], "}"}]]}], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "0"}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", 
+        RowBox[{"-", "2"}]}], "}"}]]}], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", 
+        RowBox[{"-", "1"}]}], "}"}]]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP8", "=", "betaP7"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP9", "=", 
+   RowBox[{
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "0"}], "}"}]]}], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", 
+        RowBox[{"-", "1"}]}], "}"}]]}], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", 
+        RowBox[{"-", "3"}]}], "}"}]]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP10", "=", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", 
+       RowBox[{"-", "2"}]}], "}"}]], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", 
+       RowBox[{"-", "3"}]}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "0"}], "}"}]]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP11", "=", "betaP10"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP12", "=", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", 
+       RowBox[{"-", "2"}]}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", 
+        RowBox[{"-", "1"}]}], "}"}]]}], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", 
+       RowBox[{"-", "3"}]}], "}"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP13", "=", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", 
+       RowBox[{"-", "2"}]}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", 
+        RowBox[{"-", "1"}]}], "}"}]]}], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", 
+        RowBox[{"-", "3"}]}], "}"}]]}], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "0"}], "}"}]]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP14", "=", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", 
+       RowBox[{"-", "1"}]}], "}"}]], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "0"}], "}"}]], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", 
+       RowBox[{"-", "2"}]}], "}"}]], "+", 
+    RowBox[{"2", 
+     SubscriptBox["\[Beta]", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", 
+        RowBox[{"-", "2"}]}], "}"}]]}], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", 
+       RowBox[{"-", "1"}]}], "}"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP15", "=", "betaP14"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP16", "=", 
+   RowBox[{
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", 
+       RowBox[{"-", "2"}]}], "}"}]], "+", 
+    SubscriptBox["\[Beta]", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "0"}], "}"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"betaP17", "=", "betaP16"}], ";"}]}], "Input",
+ CellLabel->"In[17]:=",ExpressionUUID->"435b5894-98d5-4985-8364-2a8c3822ad36"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "1"], "=", 
+   RowBox[{"betaP1", "-", "1"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "2"], "=", "betaP2"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "3"], "=", "betaP3"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "4"], "=", "betaP4"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "5"], "=", "betaP5"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "6"], "=", "betaP6"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "7"], "=", "betaP7"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "8"], "=", "betaP8"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "9"], "=", "betaP9"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "10"], "=", "betaP10"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "11"], "=", "betaP11"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "12"], "=", "betaP12"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "13"], "=", "betaP13"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "14"], "=", "betaP14"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "15"], "=", "betaP15"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["\[Gamma]", "16"], "=", "betaP16"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[Gamma]", "17"], "=", "betaP17"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.8371861055566463`*^9, 3.83718628930538*^9}},
+ CellLabel->"In[34]:=",ExpressionUUID->"09fac4d1-fb3d-4ccb-a161-7898fb2b2113"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "1"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellChangeTimes->{{3.837186326889497*^9, 3.837186329876842*^9}},
+ CellLabel->"In[52]:=",ExpressionUUID->"e1e7cfe2-3cf4-46bd-b2ff-c89b5b6a7167"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"2\"\>",
+        2,
+        Editable->False]], 
+      InterpretationBox["\<\"36\"\>",
+       36,
+       Editable->False]]}], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"2592\"\>",
+      2592,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"311040\"\>",
+      311040,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"33592320\"\>",
+      33592320,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"103\"\>",
+       103,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"4837294080\"\>",
+      4837294080,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"23\"\>",
+       23,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"65303470080\"\>",
+      65303470080,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"103\"\>",
+       103,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"870712934400\"\>",
+      870712934400,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 2, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[-1, 36], 0, 
+     Rational[1, 2592], 0, 
+     Rational[-1, 311040], 
+     Rational[1, 33592320], 
+     Rational[103, 4837294080], 
+     Rational[-23, 65303470080], 
+     Rational[-103, 870712934400]}, 2, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{{3.837186317873063*^9, 3.8371863307147017`*^9}},
+ CellLabel->
+  "Out[52]//DecimalForm=",ExpressionUUID->"8df17ada-823a-4d4c-89ea-\
+274dbb85b48d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "2"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[53]:=",ExpressionUUID->"7e0b1ed2-3f48-4828-b9f1-caa05c9b81ec"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox["\[Beta]", 
+     InterpretationBox["\<\"6\"\>",
+      6,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"2\"\>",
+       2,
+       Editable->False]], 
+     InterpretationBox["\<\"72\"\>",
+      72,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"3\"\>",
+       3,
+       Editable->False]], 
+     InterpretationBox["\<\"216\"\>",
+      216,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"3456\"\>",
+      3456,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"5\"\>",
+        5,
+        Editable->False]]}], 
+     InterpretationBox["\<\"116640\"\>",
+      116640,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"311040\"\>",
+      311040,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"673\"\>",
+       673,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"7\"\>",
+        7,
+        Editable->False]]}], 
+     InterpretationBox["\<\"1410877440\"\>",
+      1410877440,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"239\"\>",
+       239,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"9674588160\"\>",
+      9674588160,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"67\"\>",
+       67,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"25395793920\"\>",
+      25395793920,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"1699\"\>",
+       1699,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"12189981081600\"\>",
+      12189981081600,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 1, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[1, 6], 
+     Rational[1, 72], 
+     Rational[-1, 216], 
+     Rational[-1, 3456], 
+     Rational[7, 116640], 
+     Rational[1, 311040], 
+     Rational[-673, 1410877440], 
+     Rational[-239, 9674588160], 
+     Rational[67, 25395793920], 
+     Rational[1699, 12189981081600]}, 1, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.8371863498823137`*^9},
+ CellLabel->
+  "Out[53]//DecimalForm=",ExpressionUUID->"a824e0cc-34a3-4832-a23a-\
+5d193888ca00"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "3"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[54]:=",ExpressionUUID->"854f6a0d-2058-4eaa-91f4-bb52c0602929"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox["\[Beta]", 
+     InterpretationBox["\<\"6\"\>",
+      6,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"2\"\>",
+       2,
+       Editable->False]], 
+     InterpretationBox["\<\"72\"\>",
+      72,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"3\"\>",
+       3,
+       Editable->False]], 
+     InterpretationBox["\<\"216\"\>",
+      216,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"3456\"\>",
+      3456,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"5\"\>",
+        5,
+        Editable->False]]}], 
+     InterpretationBox["\<\"116640\"\>",
+      116640,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"311040\"\>",
+      311040,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"673\"\>",
+       673,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"7\"\>",
+        7,
+        Editable->False]]}], 
+     InterpretationBox["\<\"1410877440\"\>",
+      1410877440,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"239\"\>",
+       239,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"9674588160\"\>",
+      9674588160,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"67\"\>",
+       67,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"25395793920\"\>",
+      25395793920,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"1699\"\>",
+       1699,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"12189981081600\"\>",
+      12189981081600,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 1, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[1, 6], 
+     Rational[1, 72], 
+     Rational[-1, 216], 
+     Rational[-1, 3456], 
+     Rational[7, 116640], 
+     Rational[1, 311040], 
+     Rational[-673, 1410877440], 
+     Rational[-239, 9674588160], 
+     Rational[67, 25395793920], 
+     Rational[1699, 12189981081600]}, 1, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.8371863617736692`*^9},
+ CellLabel->
+  "Out[54]//DecimalForm=",ExpressionUUID->"960a72e4-ae33-4919-a01f-\
+15a54a5d2c3f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "4"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[55]:=",ExpressionUUID->"08f1fe47-c4dd-43ef-9e70-f4c03c7997b3"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"2\"\>",
+        2,
+        Editable->False]], 
+      InterpretationBox["\<\"36\"\>",
+       36,
+       Editable->False]]}], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"1296\"\>",
+      1296,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False]], 
+     InterpretationBox["\<\"93312\"\>",
+      93312,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"6\"\>",
+        6,
+        Editable->False]]}], 
+     InterpretationBox["\<\"933120\"\>",
+      933120,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"5598720\"\>",
+      5598720,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"281\"\>",
+       281,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"2418647040\"\>",
+      2418647040,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"347\"\>",
+       347,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"261213880320\"\>",
+      261213880320,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"1313\"\>",
+       1313,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"1741425868800\"\>",
+      1741425868800,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 2, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[-1, 36], 0, 
+     Rational[1, 1296], 
+     Rational[-1, 93312], 
+     Rational[-11, 933120], 
+     Rational[1, 5598720], 
+     Rational[281, 2418647040], 
+     Rational[-347, 261213880320], 
+     Rational[-1313, 1741425868800]}, 2, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.837186388494739*^9},
+ CellLabel->
+  "Out[55]//DecimalForm=",ExpressionUUID->"dbfde49a-fd16-4d30-95d1-\
+38fa713dee06"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "5"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[56]:=",ExpressionUUID->"72f280cc-0d12-486d-836e-4581501fe659"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"2\"\>",
+       2,
+       Editable->False]], 
+     InterpretationBox["\<\"72\"\>",
+      72,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"3\"\>",
+       3,
+       Editable->False]], 
+     InterpretationBox["\<\"432\"\>",
+      432,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"3456\"\>",
+      3456,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"17\"\>",
+       17,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"5\"\>",
+        5,
+        Editable->False]]}], 
+     InterpretationBox["\<\"466560\"\>",
+      466560,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"233280\"\>",
+      233280,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"3149280\"\>",
+      3149280,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"1499\"\>",
+       1499,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"33861058560\"\>",
+      33861058560,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"851\"\>",
+       851,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"406332702720\"\>",
+      406332702720,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"9421\"\>",
+       9421,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"31345665638400\"\>",
+      31345665638400,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 2, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[1, 72], 
+     Rational[1, 432], 
+     Rational[-1, 3456], 
+     Rational[-17, 466560], 
+     Rational[1, 233280], 
+     Rational[1, 3149280], 
+     Rational[-1499, 33861058560], 
+     Rational[-851, 406332702720], 
+     Rational[9421, 31345665638400]}, 2, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.8371864092067947`*^9},
+ CellLabel->
+  "Out[56]//DecimalForm=",ExpressionUUID->"20421eee-aeb7-47e8-abb4-\
+9df703278b89"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "6"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[57]:=",ExpressionUUID->"158e4f04-86de-4d43-9f96-586ff9533e31"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"2\"\>",
+       2,
+       Editable->False]], 
+     InterpretationBox["\<\"72\"\>",
+      72,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"3\"\>",
+       3,
+       Editable->False]], 
+     InterpretationBox["\<\"432\"\>",
+      432,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"3456\"\>",
+      3456,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"17\"\>",
+       17,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"5\"\>",
+        5,
+        Editable->False]]}], 
+     InterpretationBox["\<\"466560\"\>",
+      466560,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"233280\"\>",
+      233280,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"3149280\"\>",
+      3149280,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"1499\"\>",
+       1499,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"33861058560\"\>",
+      33861058560,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"851\"\>",
+       851,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"406332702720\"\>",
+      406332702720,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"9421\"\>",
+       9421,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"31345665638400\"\>",
+      31345665638400,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 2, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[1, 72], 
+     Rational[1, 432], 
+     Rational[-1, 3456], 
+     Rational[-17, 466560], 
+     Rational[1, 233280], 
+     Rational[1, 3149280], 
+     Rational[-1499, 33861058560], 
+     Rational[-851, 406332702720], 
+     Rational[9421, 31345665638400]}, 2, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.837186419134885*^9},
+ CellLabel->
+  "Out[57]//DecimalForm=",ExpressionUUID->"9e48231a-b29a-4c8c-b5c1-\
+6946e9228591"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "7"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[58]:=",ExpressionUUID->"e3354aba-7275-488e-bc3c-fb814f9fcdaf"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"3\"\>",
+        3,
+        Editable->False]], 
+      InterpretationBox["\<\"432\"\>",
+       432,
+       Editable->False]]}], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"3456\"\>",
+      3456,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False]], 
+     InterpretationBox["\<\"15552\"\>",
+      15552,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"124416\"\>",
+      124416,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"277\"\>",
+       277,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"7\"\>",
+        7,
+        Editable->False]]}], 
+     InterpretationBox["\<\"352719360\"\>",
+      352719360,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"2203\"\>",
+       2203,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"22574039040\"\>",
+      22574039040,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"187\"\>",
+       187,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"33861058560\"\>",
+      33861058560,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"3005\"\>",
+       3005,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"4388393189376\"\>",
+      4388393189376,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 3, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[-1, 432], 
+     Rational[-1, 3456], 
+     Rational[1, 15552], 
+     Rational[1, 124416], 
+     Rational[-277, 352719360], 
+     Rational[-2203, 22574039040], 
+     Rational[187, 33861058560], 
+     Rational[3005, 4388393189376]}, 3, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.837186428594737*^9},
+ CellLabel->
+  "Out[58]//DecimalForm=",ExpressionUUID->"885656e7-2d16-4a4e-bc8c-\
+e41a2b263224"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "8"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[59]:=",ExpressionUUID->"7899a7dd-2596-49b8-9ba0-873c09049942"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"3\"\>",
+        3,
+        Editable->False]], 
+      InterpretationBox["\<\"432\"\>",
+       432,
+       Editable->False]]}], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"3456\"\>",
+      3456,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False]], 
+     InterpretationBox["\<\"15552\"\>",
+      15552,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"124416\"\>",
+      124416,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"277\"\>",
+       277,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"7\"\>",
+        7,
+        Editable->False]]}], 
+     InterpretationBox["\<\"352719360\"\>",
+      352719360,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"2203\"\>",
+       2203,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"22574039040\"\>",
+      22574039040,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"187\"\>",
+       187,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"33861058560\"\>",
+      33861058560,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"3005\"\>",
+       3005,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"4388393189376\"\>",
+      4388393189376,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 3, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[-1, 432], 
+     Rational[-1, 3456], 
+     Rational[1, 15552], 
+     Rational[1, 124416], 
+     Rational[-277, 352719360], 
+     Rational[-2203, 22574039040], 
+     Rational[187, 33861058560], 
+     Rational[3005, 4388393189376]}, 3, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.837186438965909*^9},
+ CellLabel->
+  "Out[59]//DecimalForm=",ExpressionUUID->"30c1925d-940c-4894-82d9-\
+03b5e9998a44"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "9"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[60]:=",ExpressionUUID->"8ec0ed10-fdea-43ae-86d9-a1086aad3781"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"3\"\>",
+       3,
+       Editable->False]], 
+     InterpretationBox["\<\"648\"\>",
+      648,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"2592\"\>",
+      2592,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False]], 
+     InterpretationBox["\<\"31104\"\>",
+      31104,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"93312\"\>",
+      93312,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"3359232\"\>",
+      3359232,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"8\"\>",
+       8,
+       Editable->False]], 
+     InterpretationBox["\<\"7741440\"\>",
+      7741440,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"1003\"\>",
+       1003,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"609499054080\"\>",
+      609499054080,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"29\"\>",
+       29,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"32248627200\"\>",
+      32248627200,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 3, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[1, 648], 
+     Rational[1, 2592], 
+     Rational[-1, 31104], 
+     Rational[-1, 93312], 
+     Rational[1, 3359232], 
+     Rational[1, 7741440], 
+     Rational[-1003, 609499054080], 
+     Rational[-29, 32248627200]}, 3, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.837186447572785*^9},
+ CellLabel->
+  "Out[60]//DecimalForm=",ExpressionUUID->"02ef15f9-d9ab-47f4-afe2-\
+d02367953c4c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "10"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[61]:=",ExpressionUUID->"f2e983f3-3449-41e8-9098-734b02603466"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"5184\"\>",
+      5184,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"186624\"\>",
+      186624,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"33592320\"\>",
+      33592320,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"319\"\>",
+       319,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"4837294080\"\>",
+      4837294080,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"23\"\>",
+       23,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"65303470080\"\>",
+      65303470080,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"409\"\>",
+       409,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"870712934400\"\>",
+      870712934400,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 4, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[1, 5184], 0, 
+     Rational[-1, 186624], 
+     Rational[1, 33592320], 
+     Rational[319, 4837294080], 
+     Rational[-23, 65303470080], 
+     Rational[-409, 870712934400]}, 4, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.8371864552881937`*^9},
+ CellLabel->
+  "Out[61]//DecimalForm=",ExpressionUUID->"f0f93eb1-fc65-4374-bc96-\
+3942882f3334"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "11"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[62]:=",ExpressionUUID->"3e271ae8-1ad0-4f21-8457-6288a747d95a"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"5184\"\>",
+      5184,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"186624\"\>",
+      186624,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"33592320\"\>",
+      33592320,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"319\"\>",
+       319,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"4837294080\"\>",
+      4837294080,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"23\"\>",
+       23,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"65303470080\"\>",
+      65303470080,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"409\"\>",
+       409,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"870712934400\"\>",
+      870712934400,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 4, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[1, 5184], 0, 
+     Rational[-1, 186624], 
+     Rational[1, 33592320], 
+     Rational[319, 4837294080], 
+     Rational[-23, 65303470080], 
+     Rational[-409, 870712934400]}, 4, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.8371864636031227`*^9},
+ CellLabel->
+  "Out[62]//DecimalForm=",ExpressionUUID->"94922f8d-466d-479c-b068-\
+afd6921bd8df"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "12"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[63]:=",ExpressionUUID->"8d3ba3e1-53ff-46bf-a0b5-93f444a2a031"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"5184\"\>",
+      5184,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False]], 
+     InterpretationBox["\<\"93312\"\>",
+      93312,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"6\"\>",
+        6,
+        Editable->False]]}], 
+     InterpretationBox["\<\"933120\"\>",
+      933120,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"6718464\"\>",
+      6718464,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"481\"\>",
+       481,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"4837294080\"\>",
+      4837294080,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"17\"\>",
+       17,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"17414258688\"\>",
+      17414258688,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"1243\"\>",
+       1243,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"1741425868800\"\>",
+      1741425868800,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 4, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[1, 5184], 
+     Rational[-1, 93312], 
+     Rational[-7, 933120], 
+     Rational[1, 6718464], 
+     Rational[481, 4837294080], 
+     Rational[-17, 17414258688], 
+     Rational[-1243, 1741425868800]}, 4, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.837186471262418*^9},
+ CellLabel->
+  "Out[63]//DecimalForm=",ExpressionUUID->"e0a05db4-d46b-4961-905c-\
+6a2e615f926e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "13"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[64]:=",ExpressionUUID->"6b262e07-06ae-4c87-9552-b545cbbee18f"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"4\"\>",
+       4,
+       Editable->False]], 
+     InterpretationBox["\<\"5184\"\>",
+      5184,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False]], 
+     InterpretationBox["\<\"93312\"\>",
+      93312,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"124416\"\>",
+      124416,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"5598720\"\>",
+      5598720,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"557\"\>",
+       557,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"4837294080\"\>",
+      4837294080,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"347\"\>",
+       347,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"261213880320\"\>",
+      261213880320,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"10687\"\>",
+       10687,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"12189981081600\"\>",
+      12189981081600,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 4, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[1, 5184], 
+     Rational[-1, 93312], 
+     Rational[-1, 124416], 
+     Rational[1, 5598720], 
+     Rational[557, 4837294080], 
+     Rational[-347, 261213880320], 
+     Rational[-10687, 12189981081600]}, 4, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.837186477350457*^9},
+ CellLabel->
+  "Out[64]//DecimalForm=",ExpressionUUID->"4dfcb478-36a5-4e88-93d4-\
+bf5cc855813e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "14"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[65]:=",ExpressionUUID->"f368db1f-ee36-4cda-8118-17e65b0535cc"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"4\"\>",
+        4,
+        Editable->False]], 
+      InterpretationBox["\<\"10368\"\>",
+       10368,
+       Editable->False]]}], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False]], 
+     InterpretationBox["\<\"233280\"\>",
+      233280,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"248832\"\>",
+      248832,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"16796160\"\>",
+      16796160,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"383\"\>",
+       383,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"6772211712\"\>",
+      6772211712,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"101\"\>",
+       101,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"406332702720\"\>",
+      406332702720,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"23257\"\>",
+       23257,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"54854914867200\"\>",
+      54854914867200,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 4, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[-1, 10368], 
+     Rational[1, 233280], 
+     Rational[1, 248832], 
+     Rational[-1, 16796160], 
+     Rational[-383, 6772211712], 
+     Rational[101, 406332702720], 
+     Rational[23257, 54854914867200]}, 4, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.837186485129822*^9},
+ CellLabel->
+  "Out[65]//DecimalForm=",ExpressionUUID->"e7cbe058-4712-4ed0-858f-\
+3991ccda1605"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "15"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[66]:=",ExpressionUUID->"0992dddc-e675-4228-a95a-c5ceaa84f627"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"4\"\>",
+        4,
+        Editable->False]], 
+      InterpretationBox["\<\"10368\"\>",
+       10368,
+       Editable->False]]}], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"5\"\>",
+       5,
+       Editable->False]], 
+     InterpretationBox["\<\"233280\"\>",
+      233280,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"248832\"\>",
+      248832,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"16796160\"\>",
+      16796160,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"383\"\>",
+       383,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"6772211712\"\>",
+      6772211712,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"101\"\>",
+       101,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"406332702720\"\>",
+      406332702720,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"23257\"\>",
+       23257,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"54854914867200\"\>",
+      54854914867200,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 4, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[-1, 10368], 
+     Rational[1, 233280], 
+     Rational[1, 248832], 
+     Rational[-1, 16796160], 
+     Rational[-383, 6772211712], 
+     Rational[101, 406332702720], 
+     Rational[23257, 54854914867200]}, 4, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.8371864936545486`*^9},
+ CellLabel->
+  "Out[66]//DecimalForm=",ExpressionUUID->"141a8a5d-8364-4da1-869f-\
+b9d35b80862f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "16"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[67]:=",ExpressionUUID->"4e0c01ea-9a0c-41bd-a934-0a918c3adc86"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"5\"\>",
+        5,
+        Editable->False]]}], 
+     InterpretationBox["\<\"933120\"\>",
+      933120,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"933120\"\>",
+      933120,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"4478976\"\>",
+      4478976,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"173\"\>",
+       173,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"9674588160\"\>",
+      9674588160,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"3627970560\"\>",
+      3627970560,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"4331\"\>",
+       4331,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"31345665638400\"\>",
+      31345665638400,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 5, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[11, 933120], 
+     Rational[1, 933120], 
+     Rational[-1, 4478976], 
+     Rational[-173, 9674588160], 
+     Rational[7, 3627970560], 
+     Rational[4331, 31345665638400]}, 5, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.837186500240683*^9},
+ CellLabel->
+  "Out[67]//DecimalForm=",ExpressionUUID->"6e79dfa2-e55e-4ca5-8431-\
+e8f185dc4d5f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DecimalForm", "[", 
+  RowBox[{"Series", "[", 
+   RowBox[{
+    RowBox[{"Expand", "[", 
+     SubscriptBox["\[Gamma]", "17"], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]", ",", "0", ",", "10"}], "}"}]}], "]"}], "]"}]], "Input",\
+
+ CellLabel->"In[68]:=",ExpressionUUID->"ac0ec8ef-5eaf-47b5-b6c0-dd27264d982d"],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"5\"\>",
+        5,
+        Editable->False]]}], 
+     InterpretationBox["\<\"933120\"\>",
+      933120,
+      Editable->False]], "+", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"6\"\>",
+       6,
+       Editable->False]], 
+     InterpretationBox["\<\"933120\"\>",
+      933120,
+      Editable->False]], "-", 
+    FractionBox[
+     SuperscriptBox["\[Beta]", 
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False]], 
+     InterpretationBox["\<\"4478976\"\>",
+      4478976,
+      Editable->False]], "-", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"173\"\>",
+       173,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"8\"\>",
+        8,
+        Editable->False]]}], 
+     InterpretationBox["\<\"9674588160\"\>",
+      9674588160,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"7\"\>",
+       7,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"9\"\>",
+        9,
+        Editable->False]]}], 
+     InterpretationBox["\<\"3627970560\"\>",
+      3627970560,
+      Editable->False]], "+", 
+    FractionBox[
+     RowBox[{
+      InterpretationBox["\<\"4331\"\>",
+       4331,
+       Editable->False], " ", 
+      SuperscriptBox["\[Beta]", 
+       InterpretationBox["\<\"10\"\>",
+        10,
+        Editable->False]]}], 
+     InterpretationBox["\<\"31345665638400\"\>",
+      31345665638400,
+      Editable->False]], "+", 
+    InterpretationBox[
+     SuperscriptBox[
+      RowBox[{"O", "[", "\[Beta]", "]"}], 
+      InterpretationBox["\<\"11\"\>",
+       11,
+       Editable->False]],
+     SeriesData[$CellContext`\[Beta], 0, {}, 5, 11, 1],
+     Editable->False]}],
+   SeriesData[$CellContext`\[Beta], 0, {
+     Rational[11, 933120], 
+     Rational[1, 933120], 
+     Rational[-1, 4478976], 
+     Rational[-173, 9674588160], 
+     Rational[7, 3627970560], 
+     Rational[4331, 31345665638400]}, 5, 11, 1],
+   Editable->False],
+  DecimalForm]], "Output",
+ CellChangeTimes->{3.83718650854193*^9},
+ CellLabel->
+  "Out[68]//DecimalForm=",ExpressionUUID->"65781d75-7f2d-44ee-b974-\
+670520c606fe"]
+}, Open  ]]
+},
+WindowSize->{1920, 1035},
+WindowMargins->{{1280, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"20f0201a-72c3-4e21-89db-bb53c5c49100"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 11841, 384, 711, "Input",ExpressionUUID->"048fe515-3589-4227-9194-fab2f92a65d0"],
+Cell[12402, 406, 6030, 205, 389, "Input",ExpressionUUID->"435b5894-98d5-4985-8364-2a8c3822ad36"],
+Cell[18435, 613, 2047, 71, 409, "Input",ExpressionUUID->"09fac4d1-fb3d-4ccb-a161-7898fb2b2113"],
+Cell[CellGroupData[{
+Cell[20507, 688, 403, 10, 30, "Input",ExpressionUUID->"e1e7cfe2-3cf4-46bd-b2ff-c89b5b6a7167"],
+Cell[20913, 700, 2597, 94, 65, "Output",ExpressionUUID->"8df17ada-823a-4d4c-89ea-274dbb85b48d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23547, 799, 337, 9, 30, "Input",ExpressionUUID->"7e0b1ed2-3f48-4828-b9f1-caa05c9b81ec"],
+Cell[23887, 810, 3345, 124, 65, "Output",ExpressionUUID->"a824e0cc-34a3-4832-a23a-5d193888ca00"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27269, 939, 337, 9, 30, "Input",ExpressionUUID->"854f6a0d-2058-4eaa-91f4-bb52c0602929"],
+Cell[27609, 950, 3345, 124, 65, "Output",ExpressionUUID->"960a72e4-ae33-4919-a01f-15a54a5d2c3f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30991, 1079, 337, 9, 30, "Input",ExpressionUUID->"08f1fe47-c4dd-43ef-9e70-f4c03c7997b3"],
+Cell[31331, 1090, 2912, 107, 65, "Output",ExpressionUUID->"dbfde49a-fd16-4d30-95d1-38fa713dee06"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34280, 1202, 337, 9, 30, "Input",ExpressionUUID->"72f280cc-0d12-486d-836e-4581501fe659"],
+Cell[34620, 1213, 3121, 115, 65, "Output",ExpressionUUID->"20421eee-aeb7-47e8-abb4-9df703278b89"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37778, 1333, 337, 9, 30, "Input",ExpressionUUID->"158e4f04-86de-4d43-9f96-586ff9533e31"],
+Cell[38118, 1344, 3119, 115, 65, "Output",ExpressionUUID->"9e48231a-b29a-4c8c-b5c1-6946e9228591"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41274, 1464, 337, 9, 30, "Input",ExpressionUUID->"e3354aba-7275-488e-bc3c-fb814f9fcdaf"],
+Cell[41614, 1475, 2923, 107, 65, "Output",ExpressionUUID->"885656e7-2d16-4a4e-bc8c-e41a2b263224"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44574, 1587, 337, 9, 30, "Input",ExpressionUUID->"7899a7dd-2596-49b8-9ba0-873c09049942"],
+Cell[44914, 1598, 2923, 107, 65, "Output",ExpressionUUID->"30c1925d-940c-4894-82d9-03b5e9998a44"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47874, 1710, 337, 9, 30, "Input",ExpressionUUID->"8ec0ed10-fdea-43ae-86d9-a1086aad3781"],
+Cell[48214, 1721, 2657, 98, 65, "Output",ExpressionUUID->"02ef15f9-d9ab-47f4-afe2-d02367953c4c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50908, 1824, 338, 9, 30, "Input",ExpressionUUID->"f2e983f3-3449-41e8-9098-734b02603466"],
+Cell[51249, 1835, 2317, 84, 65, "Output",ExpressionUUID->"f0f93eb1-fc65-4374-bc96-3942882f3334"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53603, 1924, 338, 9, 30, "Input",ExpressionUUID->"3e271ae8-1ad0-4f21-8457-6288a747d95a"],
+Cell[53944, 1935, 2317, 84, 65, "Output",ExpressionUUID->"94922f8d-466d-479c-b068-afd6921bd8df"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56298, 2024, 338, 9, 30, "Input",ExpressionUUID->"8d3ba3e1-53ff-46bf-a0b5-93f444a2a031"],
+Cell[56639, 2035, 2647, 97, 65, "Output",ExpressionUUID->"e0a05db4-d46b-4961-905c-6a2e615f926e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59323, 2137, 338, 9, 30, "Input",ExpressionUUID->"6b262e07-06ae-4c87-9552-b545cbbee18f"],
+Cell[59664, 2148, 2561, 93, 65, "Output",ExpressionUUID->"4dfcb478-36a5-4e88-93d4-bf5cc855813e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[62262, 2246, 338, 9, 30, "Input",ExpressionUUID->"f368db1f-ee36-4cda-8118-17e65b0535cc"],
+Cell[62603, 2257, 2597, 94, 65, "Output",ExpressionUUID->"e7cbe058-4712-4ed0-858f-3991ccda1605"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[65237, 2356, 338, 9, 30, "Input",ExpressionUUID->"0992dddc-e675-4228-a95a-c5ceaa84f627"],
+Cell[65578, 2367, 2599, 94, 65, "Output",ExpressionUUID->"141a8a5d-8364-4da1-869f-b9d35b80862f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[68214, 2466, 338, 9, 30, "Input",ExpressionUUID->"4e0c01ea-9a0c-41bd-a934-0a918c3adc86"],
+Cell[68555, 2477, 2418, 88, 65, "Output",ExpressionUUID->"6e79dfa2-e55e-4ca5-8431-e8f185dc4d5f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[71010, 2570, 338, 9, 30, "Input",ExpressionUUID->"ac0ec8ef-5eaf-47b5-b6c0-dd27264d982d"],
+Cell[71351, 2581, 2417, 88, 88, "Output",ExpressionUUID->"65781d75-7f2d-44ee-b974-670520c606fe"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
