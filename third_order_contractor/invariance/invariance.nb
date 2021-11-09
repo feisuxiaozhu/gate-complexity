@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     28085,        854]
-NotebookOptionsPosition[     27129,        832]
-NotebookOutlinePosition[     27522,        848]
-CellTagsIndexPosition[     27479,        845]
+NotebookDataLength[     57639,       1633]
+NotebookOptionsPosition[     56454,       1607]
+NotebookOutlinePosition[     56847,       1623]
+CellTagsIndexPosition[     56804,       1620]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -218,7 +218,7 @@ Cell[BoxData[{
    3.8451305380975447`*^9, 3.845130637584749*^9}, {3.845130734385021*^9, 
    3.845130757576625*^9}, 3.845131779052168*^9, 3.845131819674246*^9, {
    3.8451327302916317`*^9, 3.8451327308175*^9}},
- CellLabel->"In[26]:=",ExpressionUUID->"bdb7948a-cacb-4a8c-aa06-b11a78ac53fa"],
+ CellLabel->"In[1]:=",ExpressionUUID->"bdb7948a-cacb-4a8c-aa06-b11a78ac53fa"],
 
 Cell[BoxData[{
  RowBox[{
@@ -436,7 +436,7 @@ Cell[BoxData[{
  CellChangeTimes->{{3.845123276722913*^9, 3.845123285665*^9}, {
   3.8453743836746187`*^9, 3.845374392215845*^9}, {3.8453744389627447`*^9, 
   3.84537444776616*^9}},
- CellLabel->"In[72]:=",ExpressionUUID->"5e13a233-c798-40dd-9035-a791d4e68e3b"],
+ CellLabel->"In[12]:=",ExpressionUUID->"5e13a233-c798-40dd-9035-a791d4e68e3b"],
 
 Cell[BoxData[
  RowBox[{
@@ -450,7 +450,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.8453743378542643`*^9, 3.845374340382184*^9}, {
   3.845374398510264*^9, 3.845374421870988*^9}, {3.8453744735190477`*^9, 
   3.845374499798616*^9}},
- CellLabel->"In[89]:=",ExpressionUUID->"74bb8ce6-49f6-43a3-8355-f611b7fba52f"],
+ CellLabel->"In[44]:=",ExpressionUUID->"74bb8ce6-49f6-43a3-8355-f611b7fba52f"],
 
 Cell[BoxData[{
  RowBox[{
@@ -583,8 +583,7 @@ Cell[BoxData[{
   3.845375186318502*^9}, {3.845375441391302*^9, 3.845375683820919*^9}, {
   3.845375778028934*^9, 3.845375911540893*^9}, {3.845375979992528*^9, 
   3.845376047372531*^9}},
- CellLabel->
-  "In[200]:=",ExpressionUUID->"e560ade0-0d1a-431e-bf73-c4dab7b89f97"],
+ CellLabel->"In[45]:=",ExpressionUUID->"e560ade0-0d1a-431e-bf73-c4dab7b89f97"],
 
 Cell[CellGroupData[{
 
@@ -828,6 +827,782 @@ Cell[BoxData[
    3.845376940764544*^9, 3.845377177623836*^9, 3.8453772103093224`*^9},
  CellLabel->
   "Out[243]=",ExpressionUUID->"a8c1efff-453b-413b-a432-4b1a75c52d75"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Expand", "[", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[Gamma]", "1"], "*", "chiP1"}], " ", "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "2"], "*", "chiP2"}], " ", "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "3"], "*", "chiP3"}], " ", "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "4"], "*", "chiP4"}], "+", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "5"], "*", "chiP5"}], " ", "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "6"], "*", "chiP6"}], " ", "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "7"], "*", "chiP7"}], " ", "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "8"], "*", "chiP8"}], "+", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "9"], "*", "chiP9"}], " ", "+", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["\[Gamma]", "10"], "+", 
+      SubscriptBox["\[Gamma]", "11"]}], ")"}], "*", "chiP10PlusChiP11"}], " ",
+    "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "12"], "*", "chiP12"}], "+", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "13"], "*", "chiP13"}], " ", "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "14"], "*", "chiP14"}], " ", "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "15"], "*", "chiP15"}], " ", "+", " ", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "16"], "*", "chiP16"}], "+", 
+   RowBox[{
+    SubscriptBox["\[Gamma]", "17"], "*", "chiP17"}]}], " ", "]"}]], "Input",
+ CellChangeTimes->{
+  3.8454572040875673`*^9, {3.845457238787051*^9, 
+   3.8454572673067913`*^9}},ExpressionUUID->"ee6243ae-6f18-4b78-90fd-\
+98cd2c9679e6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"a21", " ", "tru", " ", "\[Beta]"}], "+", 
+  RowBox[{"a21", " ", "trud", " ", "\[Beta]"}], "+", 
+  RowBox[{"a12", " ", 
+   SuperscriptBox["\[Beta]", "2"]}], "-", 
+  RowBox[{"a42", " ", 
+   SuperscriptBox["\[Beta]", "2"]}], "+", 
+  RowBox[{"a42", " ", "tru", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "2"]}], "+", 
+  RowBox[{"a13", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "-", 
+  RowBox[{"a43", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{"a23", " ", "tru", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "-", 
+  RowBox[{"a73", " ", "tru", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a53", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{"a23", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "-", 
+  RowBox[{"a73", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{"a43", " ", "tru", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a73", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a53", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a73", " ", "tru", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a53", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a73", " ", "tru", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a53", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a73", " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "3"]}], "-", 
+  RowBox[{"2", " ", "a104", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{"a134", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{"a14", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{"a44", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{"a144", " ", "tru", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{"a24", " ", "tru", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{"a74", " ", "tru", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a54", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["2", "3"], " ", "a104", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a134", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a94", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{"a144", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{"a24", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{"a74", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{"a124", " ", "tru", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{"a44", " ", "tru", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a74", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a144", " ", 
+   SuperscriptBox["tru", "3"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a104", " ", 
+   SuperscriptBox["tru", "4"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "24"], " ", "a124", " ", 
+   SuperscriptBox["tru", "4"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a54", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", "tru", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a74", " ", "tru", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a104", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a124", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a134", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a144", " ", "tru", " ", 
+   SuperscriptBox["trud", "3"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "36"], " ", "a124", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["trud", "3"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "36"], " ", "a134", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["trud", "3"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a54", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", "tru", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a74", " ", "tru", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a104", " ", 
+   SuperscriptBox["tru", "2"], " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a124", " ", 
+   SuperscriptBox["tru", "2"], " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a134", " ", 
+   SuperscriptBox["tru", "2"], " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", "tru", " ", "trud", " ", "trudud",
+    " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a124", " ", 
+   SuperscriptBox["tru", "3"], " ", "trud", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a134", " ", 
+   SuperscriptBox["tru", "3"], " ", "trud", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a144", " ", "tru", " ", "trududud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "18"], " ", "a124", " ", 
+   SuperscriptBox["tru", "3"], " ", "trududud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "18"], " ", "a134", " ", 
+   SuperscriptBox["tru", "3"], " ", "trududud", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a54", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{"2", " ", "a104", " ", "tru", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{"a134", " ", "tru", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a94", " ", "tru", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a74", " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a144", " ", "tru", " ", "trud", " ", "truu", 
+   " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a104", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a124", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a104", " ", 
+   SuperscriptBox["trud", "2"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a124", " ", 
+   SuperscriptBox["trud", "2"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a134", " ", 
+   SuperscriptBox["trud", "2"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a124", " ", "tru", " ", 
+   SuperscriptBox["trud", "3"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a134", " ", "tru", " ", 
+   SuperscriptBox["trud", "3"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a104", " ", "trudud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a124", " ", "trudud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a134", " ", "trudud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a124", " ", "tru", " ", "trud", " ", "trudud",
+    " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a134", " ", "tru", " ", "trud", " ", "trudud",
+    " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a124", " ", "tru", " ", "trududud", " ", 
+   "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a134", " ", "tru", " ", "trududud", " ", 
+   "truu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a104", " ", "trud", " ", 
+   SuperscriptBox["truu", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "8"], " ", "a124", " ", "trud", " ", 
+   SuperscriptBox["truu", "2"], " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["4", "3"], " ", "a104", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["2", "3"], " ", "a134", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a94", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a144", " ", "trud", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["2", "3"], " ", "a104", " ", "tru", " ", "trud", " ", "truuu", 
+   " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a124", " ", "tru", " ", "trud", " ", "truuu", 
+   " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "18"], " ", "a124", " ", 
+   SuperscriptBox["trud", "3"], " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "18"], " ", "a134", " ", 
+   SuperscriptBox["trud", "3"], " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a124", " ", "trud", " ", "trudud", " ", 
+   "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a134", " ", "trud", " ", "trudud", " ", 
+   "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "9"], " ", "a124", " ", "trududud", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "9"], " ", "a134", " ", "trududud", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a104", " ", "trud", " ", "truuuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a124", " ", "trud", " ", "truuuu", " ", 
+   SuperscriptBox["\[Beta]", "4"]}], "-", 
+  RowBox[{"2", " ", "a105", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"a135", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"a15", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{"a45", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"a145", " ", "tru", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"a165", " ", "tru", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"a25", " ", "tru", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{"a75", " ", "tru", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a165", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a55", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["2", "3"], " ", "a105", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a135", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a95", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"a145", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"a165", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"a25", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{"a75", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{"a125", " ", "tru", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"a45", " ", "tru", " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{"a165", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a75", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a145", " ", 
+   SuperscriptBox["tru", "3"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a165", " ", 
+   SuperscriptBox["tru", "3"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a105", " ", 
+   SuperscriptBox["tru", "4"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "24"], " ", "a125", " ", 
+   SuperscriptBox["tru", "4"], " ", "trud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a165", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a55", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", "tru", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{"a165", " ", "tru", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a75", " ", "tru", " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a105", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a125", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a135", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a165", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["trud", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a145", " ", "tru", " ", 
+   SuperscriptBox["trud", "3"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a165", " ", "tru", " ", 
+   SuperscriptBox["trud", "3"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a165", " ", 
+   SuperscriptBox["tru", "2"], " ", 
+   SuperscriptBox["trud", "3"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "36"], " ", "a125", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["trud", "3"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "36"], " ", "a135", " ", 
+   SuperscriptBox["tru", "3"], " ", 
+   SuperscriptBox["trud", "3"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a165", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a55", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", "tru", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{"a165", " ", "tru", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a75", " ", "tru", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a105", " ", 
+   SuperscriptBox["tru", "2"], " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a125", " ", 
+   SuperscriptBox["tru", "2"], " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a135", " ", 
+   SuperscriptBox["tru", "2"], " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a165", " ", 
+   SuperscriptBox["tru", "3"], " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", "tru", " ", "trud", " ", "trudud",
+    " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a165", " ", "tru", " ", "trud", " ", "trudud",
+    " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a165", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a125", " ", 
+   SuperscriptBox["tru", "3"], " ", "trud", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a135", " ", 
+   SuperscriptBox["tru", "3"], " ", "trud", " ", "trudud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a145", " ", "tru", " ", "trududud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a165", " ", "tru", " ", "trududud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a165", " ", 
+   SuperscriptBox["tru", "2"], " ", "trududud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "18"], " ", "a125", " ", 
+   SuperscriptBox["tru", "3"], " ", "trududud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "18"], " ", "a135", " ", 
+   SuperscriptBox["tru", "3"], " ", "trududud", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a165", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a55", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{"2", " ", "a105", " ", "tru", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{"a135", " ", "tru", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a95", " ", "tru", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{"a165", " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a75", " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a145", " ", "tru", " ", "trud", " ", "truu", 
+   " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a165", " ", "tru", " ", "trud", " ", "truu", 
+   " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a105", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a125", " ", 
+   SuperscriptBox["tru", "2"], " ", "trud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a105", " ", 
+   SuperscriptBox["trud", "2"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a125", " ", 
+   SuperscriptBox["trud", "2"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a135", " ", 
+   SuperscriptBox["trud", "2"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a165", " ", "tru", " ", 
+   SuperscriptBox["trud", "2"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a165", " ", 
+   SuperscriptBox["trud", "3"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a125", " ", "tru", " ", 
+   SuperscriptBox["trud", "3"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "12"], " ", "a135", " ", "tru", " ", 
+   SuperscriptBox["trud", "3"], " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a105", " ", "trudud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a125", " ", "trudud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a135", " ", "trudud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a165", " ", "tru", " ", "trudud", " ", "truu",
+    " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a165", " ", "trud", " ", "trudud", " ", 
+   "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a125", " ", "tru", " ", "trud", " ", "trudud",
+    " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a135", " ", "tru", " ", "trud", " ", "trudud",
+    " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a165", " ", "trududud", " ", "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a125", " ", "tru", " ", "trududud", " ", 
+   "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a135", " ", "tru", " ", "trududud", " ", 
+   "truu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a105", " ", "trud", " ", 
+   SuperscriptBox["truu", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "8"], " ", "a125", " ", "trud", " ", 
+   SuperscriptBox["truu", "2"], " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["4", "3"], " ", "a105", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["2", "3"], " ", "a135", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a95", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a145", " ", "trud", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a165", " ", "trud", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["2", "3"], " ", "a105", " ", "tru", " ", "trud", " ", "truuu", 
+   " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", "a125", " ", "tru", " ", "trud", " ", "truuu", 
+   " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a165", " ", 
+   SuperscriptBox["trud", "2"], " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "18"], " ", "a125", " ", 
+   SuperscriptBox["trud", "3"], " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "18"], " ", "a135", " ", 
+   SuperscriptBox["trud", "3"], " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a165", " ", "trudud", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a125", " ", "trud", " ", "trudud", " ", 
+   "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "6"], " ", "a135", " ", "trud", " ", "trudud", " ", 
+   "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "9"], " ", "a125", " ", "trududud", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "9"], " ", "a135", " ", "trududud", " ", "truuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "-", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "a105", " ", "trud", " ", "truuuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}], "+", 
+  RowBox[{
+   FractionBox["1", "4"], " ", "a125", " ", "trud", " ", "truuuu", " ", 
+   SuperscriptBox["\[Beta]", "5"]}]}]], "Output",
+ CellChangeTimes->{{3.845457223409709*^9, 3.8454572404976273`*^9}},
+ CellLabel->"Out[63]=",ExpressionUUID->"25ab0767-5807-439b-a658-cfd901427c59"]
 }, Open  ]]
 },
 WindowSize->{1880, 1043},
@@ -848,13 +1623,17 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[558, 20, 152, 3, 30, "Input",ExpressionUUID->"33347110-ccc3-4642-a29b-351aa7cd488f"],
-Cell[713, 25, 6048, 195, 296, "Input",ExpressionUUID->"bdb7948a-cacb-4a8c-aa06-b11a78ac53fa"],
-Cell[6764, 222, 6347, 216, 345, "Input",ExpressionUUID->"5e13a233-c798-40dd-9035-a791d4e68e3b"],
-Cell[13114, 440, 508, 12, 32, "Input",ExpressionUUID->"74bb8ce6-49f6-43a3-8355-f611b7fba52f"],
-Cell[13625, 454, 4437, 132, 383, "Input",ExpressionUUID->"e560ade0-0d1a-431e-bf73-c4dab7b89f97"],
+Cell[713, 25, 6047, 195, 296, "Input",ExpressionUUID->"bdb7948a-cacb-4a8c-aa06-b11a78ac53fa"],
+Cell[6763, 222, 6347, 216, 345, "Input",ExpressionUUID->"5e13a233-c798-40dd-9035-a791d4e68e3b"],
+Cell[13113, 440, 508, 12, 32, "Input",ExpressionUUID->"74bb8ce6-49f6-43a3-8355-f611b7fba52f"],
+Cell[13624, 454, 4433, 131, 383, "Input",ExpressionUUID->"e560ade0-0d1a-431e-bf73-c4dab7b89f97"],
 Cell[CellGroupData[{
-Cell[18087, 590, 2764, 68, 57, "Input",ExpressionUUID->"0b0a5962-e238-43e2-afed-b4cf2cce2f34"],
-Cell[20854, 660, 6259, 169, 128, "Output",ExpressionUUID->"a8c1efff-453b-413b-a432-4b1a75c52d75"]
+Cell[18082, 589, 2764, 68, 57, "Input",ExpressionUUID->"0b0a5962-e238-43e2-afed-b4cf2cce2f34"],
+Cell[20849, 659, 6259, 169, 128, "Output",ExpressionUUID->"a8c1efff-453b-413b-a432-4b1a75c52d75"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27145, 833, 1552, 42, 30, "Input",ExpressionUUID->"ee6243ae-6f18-4b78-90fd-98cd2c9679e6"],
+Cell[28700, 877, 27738, 727, 739, "Output",ExpressionUUID->"25ab0767-5807-439b-a658-cfd901427c59"]
 }, Open  ]]
 }
 ]
