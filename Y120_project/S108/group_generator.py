@@ -23,6 +23,9 @@ def check_equal(A, B):
 def mult(a, b):
     return np.matmul(a, b)
 
+def inv(a):
+    return np.linalg.inv(a) 
+
 # Return the key of matrix A in dic
 
 
@@ -56,4 +59,13 @@ for p in range(3):
                     key = str(p)+str(q)+str(r)+str(s)+str(t)
                     S108_dict[key] = matrix
                 
+pattern = set()
+for index, A in S108_dict.items():
+    B = inv(A)
+    new_index = check_dict_key(B, S108_dict)
+    # print(index, new_index)
+    print(index[:4], new_index[:4])
+    p = str(index[:4])+str(new_index[:4])
+    pattern.add(p)
 
+print(pattern)
