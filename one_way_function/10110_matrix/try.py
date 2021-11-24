@@ -3,6 +3,7 @@ from numpy.linalg import matrix_rank
 import numpy as np
 import random
 from random import randrange
+import multiprocessing
 
 
 def flipCoin():
@@ -32,34 +33,50 @@ lower_triangular = np.array(lower_triangular)
 
 #######################################################################
 # Permute the rows and columns of a matrix that has non-zero entries only in its button half.
-counter = 0
 
-counter_set = set()
-iter = 10000
-while counter < iter:
-    temp = lower_triangular.copy()
-    for i in range(len(temp[0])):
-        for j in range(i+1):
-            if flipCoin():
-                temp[i, j] = 0
-    counter += 1
-    counter_2 = 0
-    while counter_2 < iter:
-        i = randrange(len(matrix_110[0]))
-        j = randrange(len(matrix_110[0]))
-        k = randrange(len(matrix_110[0]))
-        l = randrange(len(matrix_110[0]))
-        temp[[i, j], :] = temp[[j, i], :]
-        temp[:, [k, l]] = temp[:, [l, k]]
-        result = (temp + matrix_110) % 2
-        rank = matrix_rank(result)
-        counter_set.add(rank)
-        counter_2 += 1
-        if counter_2 % (iter/100) == 0:
-            print('Checking random L number '+str(counter) +
-                  ' on permutation number ' + str(counter_2))
-print(counter_set)
 
+def permute_for_random_L(procnum, return_dict):
+    counter = 0
+    counter_set = set()
+    iter0 = 500/8
+    iter = 10000
+    while counter < iter0:
+        temp = lower_triangular.copy()
+        for i in range(len(temp[0])):
+            for j in range(i+1):
+                if flipCoin():
+                    temp[i, j] = 0
+        counter += 1
+        counter_2 = 0
+        while counter_2 < iter:
+            i = randrange(len(matrix_110[0]))
+            j = randrange(len(matrix_110[0]))
+            k = randrange(len(matrix_110[0]))
+            l = randrange(len(matrix_110[0]))
+            temp[[i, j], :] = temp[[j, i], :]
+            temp[:, [k, l]] = temp[:, [l, k]]
+            result = (temp + matrix_110) % 2
+            rank = matrix_rank(result)
+            counter_set.add(rank)
+            counter_2 += 1
+            if counter_2 % (iter/10) == 0:
+                print('Checking random L number '+str(counter) +
+                      ' on permutation number ' + str(counter_2))
+    return_dict[procnum] =  counter_set
+
+
+jobs = []
+manager = multiprocessing.Manager()
+return_dict = manager.dict()
+for i in range(8):
+    p = multiprocessing.Process(
+        target=permute_for_random_L, args=(i, return_dict))
+    jobs.append(p)
+    p.start()
+
+for proc in jobs:
+    proc.join()
+print(return_dict.values())
 
 #######################################################################
 # # Permute the rows and columns of a perfect lower triangular matrix.
