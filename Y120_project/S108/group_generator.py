@@ -26,6 +26,9 @@ def mult(a, b):
 def inv(a):
     return np.linalg.inv(a) 
 
+def trace(a):
+     return np.matrix(a).trace()
+
 # Return the key of matrix A in dic
 
 
@@ -58,14 +61,29 @@ for p in range(3):
                     S108 .append(matrix)
                     key = str(p)+str(q)+str(r)+str(s)+str(t)
                     S108_dict[key] = matrix
-                
-pattern = set()
-for index, A in S108_dict.items():
-    B = inv(A)
-    new_index = check_dict_key(B, S108_dict)
-    # print(index, new_index)
-    print(index[:4], new_index[:4])
-    p = str(index[:4])+str(new_index[:4])
-    pattern.add(p)
 
+# Find inverse             
+# pattern = set()
+# for index, A in S108_dict.items():
+#     B = inv(A)
+#     new_index = check_dict_key(B, S108_dict)
+#     # print(index, new_index)
+#     print(index[:4], new_index[:4])
+#     p = str(index[:4])+str(new_index[:4])
+#     pattern.add(p)
+
+
+# Find trace
+pattern = {}
+for index, A in S108_dict.items():
+    t  = trace(A)
+    real = t.real.round(5)
+    img = t.imag.round(5)
+    new_t = complex(real, img)
+    print(index, new_t)
+    if str(new_t) not in pattern.keys():
+        pattern[str(new_t)] = [index]
+    else:
+        pattern[str(new_t)].append(index)
 print(pattern)
+print(len(pattern))
