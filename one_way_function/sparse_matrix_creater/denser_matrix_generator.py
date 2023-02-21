@@ -3,6 +3,10 @@ import random
 import galois
 from typing import List, Any
 import os
+import pickle
+
+with open("./one_way_function/sparse_matrix_creater/A.pickle","wb") as f:
+    pickle.dump([], f)
 
 def weighted_sample(choices: List[Any], probs: List[float]):
     """
@@ -16,6 +20,7 @@ def weighted_sample(choices: List[Any], probs: List[float]):
 
 # creat a random matrix that can be computed at most by m gates on n inputs
 # randomness cuttoff c is between 0 to m
+# random output
 n = 20
 m = 30
 c=1
@@ -24,8 +29,8 @@ def matrix_generator(n,m,c):
     counter = 0
     while True:
         counter += 1
-        if counter % 1000 == 0:
-            os.system('cls')
+        if counter % 10000 == 0:
+            # os.system('cls')
             print(counter)
         candidates = []
 
@@ -61,7 +66,16 @@ def matrix_generator(n,m,c):
             # print(normed)
 
 
-        matrix_indices = random.sample(range(0, m+n), n) # build matrix
+        # matrix_indices = random.sample(range(0, m+n), n) # build matrix
+        # matrix_indices = [i+m for i in range(n)] # use n last gate as output
+        matrix_indices = []
+        for i in range(n): # pick output based on weight distribution
+            index = weighted_sample(all_indices, normed)
+            while index in matrix_indices:
+                index = weighted_sample(all_indices, normed)
+            matrix_indices.append(index)
+        # print(len(matrix_indices))
+        # print(matrix_indices)
         result_matrix = candidates[matrix_indices[0]].T
         for i in range(1,n):
             result_matrix = np.concatenate((result_matrix, candidates[matrix_indices[i]].T), axis=0)
@@ -71,8 +85,16 @@ def matrix_generator(n,m,c):
         
         # break
     
-A, B = matrix_generator(n,m,c)
-print(A,B)
+for j in range(10): 
+    print('finding matrix: ' + str(j+1))   
+    A, B = matrix_generator(n,m,c)
+    print(A,B)
+    with open('./one_way_function/sparse_matrix_creater/A.pickle', 'rb') as handle:
+        b = pickle.load(handle)
+    b.append(A)
+    with open('./one_way_function/sparse_matrix_creater/A.pickle', 'wb') as fp:
+        pickle.dump(b, fp)
+
 
 
 
