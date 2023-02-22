@@ -4,9 +4,9 @@ import galois
 from typing import List, Any
 import os
 import pickle
+import multiprocessing
 
-with open("./one_way_function/sparse_matrix_creater/A.pickle","wb") as f:
-    pickle.dump([], f)
+
 
 def weighted_sample(choices: List[Any], probs: List[float]):
     """
@@ -21,17 +21,15 @@ def weighted_sample(choices: List[Any], probs: List[float]):
 # creat a random matrix that can be computed at most by m gates on n inputs
 # randomness cuttoff c is between 0 to m
 # random output
-n = 20
-m = 30
-c=1
+
 def matrix_generator(n,m,c):
     GF2 = galois.GF(2)
     counter = 0
     while True:
         counter += 1
-        if counter % 10000 == 0:
+        # if counter % 10000 == 0:
             # os.system('cls')
-            print(counter)
+            # print(counter)
         candidates = []
 
         for i in range(n): # creat first n unit vectors of length n + m
@@ -50,9 +48,9 @@ def matrix_generator(n,m,c):
         for i in range(c, m): # add m-c gates using Hamming weight distribution of previous candidates
             Hamming = []
             for candidate in candidates:
-                Hamming.append(np.sum(candidate))
+                Hamming.append((np.sum(candidate))**1) # non-linear distribution
             normed = [float(i)/np.sum(Hamming) for i in Hamming]
-            all_indices = [i for i in range(len(candidates))]
+            all_indices = [j for j in range(len(candidates))]
             index1 = weighted_sample(all_indices, normed)
             index2 = weighted_sample(all_indices, normed)
             while index2 == index1:
@@ -63,19 +61,21 @@ def matrix_generator(n,m,c):
             two = candidates[random_indices[1]]
             sum = (one + two) % 2
             candidates.append(sum)
-            # print(normed)
-
+        all_indices = [j for j in range(len(candidates))]
 
         # matrix_indices = random.sample(range(0, m+n), n) # build matrix
         # matrix_indices = [i+m for i in range(n)] # use n last gate as output
+        
+        Hamming = []
+        for candidate in candidates:
+            Hamming.append(np.sum(candidate))
+        normed = [float(i)/np.sum(Hamming) for i in Hamming] # linear norm distribution for output
         matrix_indices = []
         for i in range(n): # pick output based on weight distribution
             index = weighted_sample(all_indices, normed)
             while index in matrix_indices:
                 index = weighted_sample(all_indices, normed)
             matrix_indices.append(index)
-        # print(len(matrix_indices))
-        # print(matrix_indices)
         result_matrix = candidates[matrix_indices[0]].T
         for i in range(1,n):
             result_matrix = np.concatenate((result_matrix, candidates[matrix_indices[i]].T), axis=0)
@@ -83,20 +83,34 @@ def matrix_generator(n,m,c):
             result_matrix_inv = GF2(result_matrix)
             return result_matrix, result_matrix_inv
         
-        # break
-    
-for j in range(10): 
-    print('finding matrix: ' + str(j+1))   
-    A, B = matrix_generator(n,m,c)
-    print(A,B)
-    with open('./one_way_function/sparse_matrix_creater/A.pickle', 'rb') as handle:
-        b = pickle.load(handle)
-    b.append(A)
-    with open('./one_way_function/sparse_matrix_creater/A.pickle', 'wb') as fp:
-        pickle.dump(b, fp)
+def worker(n,m,c,i):
+    with open('./one_way_function/sparse_matrix_creater/B'+str(i)+'.pickle',"wb") as f:
+        pickle.dump([], f)
+    for j in range(5): 
+        print('Thread '+str(i)+' finding matrix: ' + str(j+1))   
+        A, B = matrix_generator(n,m,c)
+        print(A,B)
+        with open('./one_way_function/sparse_matrix_creater/B'+str(i)+'.pickle', 'rb') as handle:
+            b = pickle.load(handle)
+        b.append(B) # will check if it is dense afterwards
+        with open('./one_way_function/sparse_matrix_creater/B'+str(i)+'.pickle', 'wb') as fp:
+            pickle.dump(b, fp)
 
 
+n = 20
+m = 30
+c=5
 
-
-
+if __name__ == '__main__':
+    jobs = [] # list of jobs
+    jobs_num = 6 # number of workers
+    for i in range(jobs_num):
+        # Declare a new process and pass arguments to it
+        p1 = multiprocessing.Process(target=worker, args=(n,m,c,i))
+        jobs.append(p1)
+        # Declare a new process and pass arguments to it
+        # p2 = multiprocessing.Process(target=worker, args=(4,6,0,))
+        # jobs.append(p2)
+        p1.start() # starting workers
+        # p2.start() # starting workers
 
