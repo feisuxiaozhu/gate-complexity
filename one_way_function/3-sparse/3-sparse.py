@@ -14,6 +14,7 @@ new_matrix = Matrix(new_matrix)
 
 # print(int(np.linalg.det(new_matrix)) %2)
 new_matrix_inverse = new_matrix.inv_mod(2)
+print(new_matrix_inverse)
 print(latex(new_matrix_inverse))
 
 
