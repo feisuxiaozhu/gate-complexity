@@ -6,6 +6,7 @@ import os
 import pickle
 import multiprocessing
 from sympy import Matrix, latex
+from itertools import combinations, product, permutations
 
 
 
@@ -77,7 +78,8 @@ def matrix_generator(n,m,c):
             while np.linalg.matrix_rank(temp_matrix) < counter:
                 i -= 1
                 if i<0:
-                    return [], []
+                    return np.zeros((n,n)), np.zeros((n,n))
+                    # continue
                 temp_matrix = np.concatenate((result_matrix, candidates[i].T), axis=0)
                 temp_matrix = GF2(temp_matrix)
             result_matrix = temp_matrix
@@ -92,36 +94,65 @@ def matrix_generator(n,m,c):
         return result_matrix, result_matrix_inv
 
         
+def gen_matrix(n, m, c):
+  j = 0
+  while True:
+    
+    B_inv, B = matrix_generator(n,m,c)
+    
+    A = np.matrix(B)
+
+    # j += 1
+    # print(j)
+    flag = 0
+    row_sum = np.array(np.sum(np.matrix(A), axis = 0))[0]
+    if np.any([i in row_sum for i in range(6)]):
+      continue
+    for ind in pair_cols:
+      
+      if np.sum(np.array(B[:, ind[0]] + B[:, ind[1]])) <= 5:
+        flag = 1
+        break 
+    if flag: 
+      continue
+    
+    return (B_inv, B)
+
+
         
 def worker(n,m,c,i):
     # with open('./one_way_function/sparse_matrix_creater/B'+str(i)+'.pickle',"wb") as f:
     #     pickle.dump([], f)
-    j=0
-    while True: 
-        j+=1
-        # print('Thread '+str(i)+' finding matrix: ' + str(j))   
-        A, B = matrix_generator(n,m,c)
+    # j=0
+    # while True: 
+    #     j+=1
+    print('Thread '+str(i)+' working')   
+    A, B = gen_matrix(n,m,c)
         
         # with open('./one_way_function/sparse_matrix_creater/B'+str(i)+'.pickle', 'rb') as handle:
         #     b = pickle.load(handle)
         # b.append(B) # will check if it is dense afterwards
         # with open('./one_way_function/sparse_matrix_creater/B'+str(i)+'.pickle', 'wb') as fp:
         #     pickle.dump(b, fp)
-        if np.count_nonzero(B)/n > 7.3:
-            print(A)
-            print(B)
-            print('A density: ' + str(np.count_nonzero(A)/n))
-            print('B density: ' + str(np.count_nonzero(B)/n))
-            break
+        # if np.count_nonzero(B)/n > 7:
+        #     print(A)
+        #     print(B)
+        #     print('A density: ' + str(np.count_nonzero(A)/n))
+        #     print('B density: ' + str(np.count_nonzero(B)/n))
+        #     break
+    print(A)
+    print(B)
 
 
 n = 20
-m = 30
+m = 40
 c=0
+pair_cols = [list(i) for i in list(combinations(range(n), 2))]
+
 
 if __name__ == '__main__':
     jobs = [] # list of jobs
-    jobs_num = 19 # number of workers
+    jobs_num = 16 # number of workers
     for i in range(jobs_num):
         # Declare a new process and pass arguments to it
         p1 = multiprocessing.Process(target=worker, args=(n,m,c,i))
@@ -132,3 +163,10 @@ if __name__ == '__main__':
         p1.start() # starting workers
         # p2.start() # starting workers
 
+
+    # B, B_inv = gen_matrix(n,m,c)
+    # print(j)
+    # print("Matrix")
+    # print(B)
+    # print("Inverse")
+    # print(B_inv)
