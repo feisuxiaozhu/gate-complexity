@@ -94,7 +94,7 @@ def matrix_generator(n,m,c):
         return result_matrix, result_matrix_inv
 
         
-def gen_matrix(n, m, c):
+def sidant_test(n, m, c):
   j = 0
   while True:
     
@@ -127,7 +127,7 @@ def worker(n,m,c,i):
     # while True: 
     #     j+=1
     print('Thread '+str(i)+' working')   
-    A, B = gen_matrix(n,m,c)
+    A, B = sidant_test(n,m,c)
         
         # with open('./one_way_function/sparse_matrix_creater/B'+str(i)+'.pickle', 'rb') as handle:
         #     b = pickle.load(handle)
@@ -144,15 +144,12 @@ def worker(n,m,c,i):
     print(B)
 
 
-n = 20
-m = 40
-c=0
-pair_cols = [list(i) for i in list(combinations(range(n), 2))]
+
 
 
 if __name__ == '__main__':
     jobs = [] # list of jobs
-    jobs_num = 16 # number of workers
+    jobs_num = 12 # number of workers
     for i in range(jobs_num):
         # Declare a new process and pass arguments to it
         p1 = multiprocessing.Process(target=worker, args=(n,m,c,i))
@@ -170,3 +167,8 @@ if __name__ == '__main__':
     # print(B)
     # print("Inverse")
     # print(B_inv)
+
+    n = 20
+    m = 40
+    c=0
+    pair_cols = [list(i) for i in list(combinations(range(n), 2))]
