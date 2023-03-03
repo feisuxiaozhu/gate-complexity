@@ -30,9 +30,10 @@ def sidant_test(n, m):
     # print(j)
     flag = 0
     row_sum = np.array(np.sum(np.matrix(A), axis = 0))[0]
-    if np.any([i in row_sum for i in range(6)]):
+    if np.any([i in row_sum for i in range(6)]): # first sidhant test
       continue
-    for ind in pair_cols:
+    print('passed column denstiy check!')
+    for ind in pair_cols: # second sidhant test
       
       if np.sum(np.array(B[:, ind[0]] + B[:, ind[1]])) <= 5:
         flag = 1
@@ -43,7 +44,7 @@ def sidant_test(n, m):
     return (B_inv, B)
        
 
-def matrix_generator(n,m):
+def matrix_generator(n,m,k):
     GF2 = galois.GF(2)
     counter = 0
     c=int(n/2)
@@ -68,7 +69,7 @@ def matrix_generator(n,m):
         for i in range(c, m): # add m-c gates using Hamming weight distribution of previous candidates
             Hamming = []
             for candidate in candidates:
-                Hamming.append((np.sum(candidate))**1) # non-linear distribution
+                Hamming.append((np.sum(candidate))**(k)) # non-linear distribution
             normed = [float(i)/np.sum(Hamming) for i in Hamming]
             all_indices = [j for j in range(len(candidates))]
             index1 = weighted_sample(all_indices, normed)
@@ -109,17 +110,15 @@ def matrix_generator(n,m):
            continue
         result_matrix = GF2(result_matrix)
         result_matrix_inv = np.linalg.inv(result_matrix)
-        # print(result_matrix)
-        # print(np.linalg.matrix_rank(result_matrix))
-        # print(np.asmatrix(result_matrix))
-        # result_matrix_inv = Matrix(np.asmatrix(result_matrix)).inv_mod(2)
-
+        row_sum = np.array(np.sum(np.matrix(result_matrix_inv), axis = 0))[0]
+        if np.any([i in row_sum for i in range(6)]): # must pass the fist Sidhant test!
+            continue
         return result_matrix, result_matrix_inv
 
 
-def worker(n,m,i):
+def worker(n,m,k,i):
     print('Thread '+str(i)+' working') 
-    A,B = sidant_test(n,m)
+    A,B = matrix_generator(n,m,k)
     print(A)
     print(B)
 
@@ -131,19 +130,20 @@ if __name__ == '__main__':
     pair_cols = [list(i) for i in list(combinations(range(n), 2))]
 
     jobs = [] # list of jobs
-    jobs_num = 19 # number of workers
+    jobs_num = 10 # number of workers
     for i in range(jobs_num):
-        p1 = multiprocessing.Process(target=worker, args=(n,m,i))
+        k = 0.1*i + 0.1
+        p1 = multiprocessing.Process(target=worker, args=(n,m,k,i))
         jobs.append(p1)
         p1.start() # starting workers
 
 
 
-
-
-
-
-
+    # A,B = matrix_generator(n,m)
+    # print(A)
+    # print(B)
+    # print('A density: ' + str(np.count_nonzero(A)/n))
+    # print('B density: ' + str(np.count_nonzero(B)/n))
 
 
 
