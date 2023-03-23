@@ -111,8 +111,8 @@ def matrix_generator(n,m,k):
         result_matrix = GF2(result_matrix)
         result_matrix_inv = np.linalg.inv(result_matrix)
         row_sum = np.array(np.sum(np.matrix(result_matrix_inv), axis = 0))[0]
-        if np.any([i in row_sum for i in range(6)]): # must pass the fist Sidhant test!
-            continue
+        # if np.any([i in row_sum for i in range(6)]): # must pass the fist Sidhant test!
+        #     continue
         return result_matrix, result_matrix_inv
 
 
