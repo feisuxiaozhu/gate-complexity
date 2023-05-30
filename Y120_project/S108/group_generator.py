@@ -3,6 +3,7 @@ import numpy as np
 import _pickle as pickle
 import math as math
 from numpy.linalg import matrix_power
+import sympy as sym
 
 # Check whether matrix A equals matrix B
 
@@ -87,3 +88,53 @@ for index, A in S108_dict.items():
         pattern[str(new_t)].append(index)
 print(pattern)
 print(len(pattern))
+
+
+def index_converter(a):
+    mapping = {'0':'00', '1':'01', '2':'11'}
+    newstring=''
+    newstring += mapping[a[0]]
+    newstring += mapping[a[1]]
+    newstring += mapping[a[2]]
+    newstring += a[3]
+    newstring += a[4]
+    return newstring
+
+# Trace study 
+
+Z_p0 = sym.Symbol('Z_p0')
+Z_p1 = sym.Symbol('Z_p1')
+Z_q0 = sym.Symbol('Z_q0')
+Z_q1 = sym.Symbol('Z_q1')
+Z_r0 = sym.Symbol('Z_r0')
+Z_r1 = sym.Symbol('Z_r1')
+Z_s = sym.Symbol('Z_s')
+Z_t = sym.Symbol('Z_t')
+Z_array = [Z_p0, Z_p1, Z_q0, Z_q1, Z_r0, Z_r1, Z_s, Z_t]
+
+def poly_builder(indices, trace):
+    temp = 1
+    for i in range(8):
+        if indices[i] == '0':
+            temp = temp* (1+Z_array[i])
+        else:
+            temp = temp*(1-Z_array[i])
+    trace = sym.sympify(trace, rational=True)
+    temp = temp*trace
+    # temp = temp* (1/256) Don't forget this factor in the end!
+    # print(sym.simplify(temp))
+    return temp
+
+
+result = 0
+for index, A in S108_dict.items():
+    t  = trace(A)
+    real = t.real.round(5)[0][0]
+    new_index = index_converter(index)
+    result = result + sym.expand(poly_builder(new_index, real))
+    
+
+
+print(sym.simplify(result))
+
+
