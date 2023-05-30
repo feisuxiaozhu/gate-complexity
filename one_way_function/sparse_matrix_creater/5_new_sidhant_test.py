@@ -107,10 +107,10 @@ def new_sidhant_test(B,n, pair_dimension):
                 first_check =1
                 break
         if first_check == 0:
-            # print('fail first check at columns ' + str(pair_col) )
+            print('fail first check at columns ' + str(pair_col) )
             return False
     
-    # print('pass first check!')
+    print('pass first check!')
            
         
 
@@ -145,6 +145,7 @@ def new_sidhant_test(B,n, pair_dimension):
                                 break
                         
                         if check_pass == 0:
+                            print('fail second check at columns ' + str(pair_col) )
                             return False
     print('pass second check!')                 
     return True
