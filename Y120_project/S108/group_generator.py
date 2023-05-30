@@ -74,22 +74,7 @@ for p in range(3):
 #     pattern.add(p)
 
 
-# Find trace
-pattern = {}
-for index, A in S108_dict.items():
-    t  = trace(A)
-    real = t.real.round(5)
-    img = t.imag.round(5)
-    new_t = complex(real, img)
-    print(index, new_t)
-    if str(new_t) not in pattern.keys():
-        pattern[str(new_t)] = [index]
-    else:
-        pattern[str(new_t)].append(index)
-print(pattern)
-print(len(pattern))
-
-
+# convert index so that they can only be 0 or 1.
 def index_converter(a):
     mapping = {'0':'00', '1':'01', '2':'11'}
     newstring=''
@@ -100,7 +85,27 @@ def index_converter(a):
     newstring += a[4]
     return newstring
 
-# Trace study 
+# Find trace
+pattern = {}
+for index, A in S108_dict.items():
+    t  = trace(A)
+    real = t.real.round(5)
+    img = t.imag.round(5)
+    new_t = complex(real, img)
+    index = index_converter(index)
+    print(index, new_t)
+    if str(new_t) not in pattern.keys():
+        pattern[str(new_t)] = [index]
+    else:
+        pattern[str(new_t)].append(index)
+print(pattern)
+print(len(pattern))
+
+
+
+
+# Trace study, find a Hamiltonian that 
+# will return real part of the trace as eigen value
 
 Z_p0 = sym.Symbol('Z_p0')
 Z_p1 = sym.Symbol('Z_p1')
