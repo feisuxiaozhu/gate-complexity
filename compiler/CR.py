@@ -1,10 +1,12 @@
 from mpmath import pslq, im, re, sqrt, matrix, norm
 import numpy as np
 
+# Follow the theoretical work from https://arxiv.org/pdf/2311.08696
+
 omega = -0.5 + 0.866025j
 
 def isInR3(a):
-# Chek if the input is in the ring R_{3,chi}
+# Check if the input is in the ring R_{3}
   imgPart = im(a)
   realPart = re(a)
 
