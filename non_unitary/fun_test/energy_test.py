@@ -29,11 +29,13 @@ E_2 = (rho_2*H).tr()
 
 P = qt.tensor(qt.sigmax(), qt.sigmax(), qt.qeye(2),qt.qeye(2),qt.qeye(2))
 # Q = qt.tensor( qt.qeye(2),qt.qeye(2),qt.sigmax(), qt.sigmax(),  qt.sigmax())
-# t=20000000000000000
-# U_t = (-1j * P * t).expm()  # e^(-i P t)
-# U_t_dag = (1j * P * t).expm()  # e^(i P t)
-# rho_t = U_t * rho_1 * U_t_dag
-# print((rho_t*H).tr())
+t=0
+while t<np.pi:
+    t += np.pi/1000
+    U_t = (-1j * P * t).expm()  # e^(-i P t)
+    U_t_dag = (1j * P * t).expm()  # e^(i P t)
+    rho_t = U_t * rho_1 * U_t_dag
+    print((rho_t*H).tr())
 
 
 # state_3 = Q*state_1
@@ -42,8 +44,8 @@ P = qt.tensor(qt.sigmax(), qt.sigmax(), qt.qeye(2),qt.qeye(2),qt.qeye(2))
 # print(E_3)
 
 
-commutator = -1j * (P * rho_1 - rho_1 * P)
-print(commutator)
-result = (commutator * H).tr()
+# commutator = -1j * (P * rho_1 - rho_1 * P)
+# print(commutator)
+# result = (commutator * H).tr()
 
 # print("Derivative at t=0:", result)
