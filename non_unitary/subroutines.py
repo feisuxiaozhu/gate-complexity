@@ -97,7 +97,67 @@ def check_rho_type(rho, H, gateset):
     return result
 
 
+def extract_pure_state(rho):
+    # Validate that rho is Hermitian and has trace 1
+    if not rho.isherm or not qt.expect(rho, qt.qeye(rho.dims[0])) == 1:
+        raise ValueError("Input must be a valid density matrix with trace 1.")
+
+    # Get the eigenstates of rho
+    eigenvalues, eigenstates = rho.eigenstates()
+
+    # Extract the eigenstate with eigenvalue ~1
+    for eigval, eigvec in zip(eigenvalues, eigenstates):
+        if abs(eigval - 1) < 1e-10:  # Tolerance for numerical precision
+            return eigvec
 
 
+def extract_spin_directions_from_rho(rho):
+
+    # Check if the density matrix is pure: ρ^2 = ρ
+    if not np.isclose((rho * rho - rho).norm(), 0):
+        raise ValueError("The input density matrix is not a pure state.")
+    
+    # Extract the dominant eigenstate of the density matrix
+    eigenvalues, eigenstates = rho.eigenstates()
+    index = np.argmax(eigenvalues)  # Find the eigenvector with eigenvalue ~1
+    psi = eigenstates[index]  # Corresponding pure state vector |ψ⟩
+
+    # Find the spin directions
+    state_vector = psi.full().flatten()
+    index = np.argmax(np.abs(state_vector))  # Find the index of the largest amplitude
+
+    # Convert index to binary representation
+    num_qubits = int(np.log2(psi.shape[0]))
+    binary_rep = format(index, f"0{num_qubits}b")  # Binary string representing the state
+    # Interpret binary representation as spin directions
+
+    spin_directions = ["↑" if b == "0" else "↓" for b in binary_rep]
+    beauty = "|"+"".join(spin_directions)+">"
+
+    return beauty
+
+# give list of gradients and their associate operators that reduce energy
+def gradient(rho, H, gateset):
+    dt= np.pi/10
+    legit_gradient = []
+    legit_operator = []
+    legit_perturb_gradient = []
+    legit_perturb_operator = []
+    perturbed_rho = []
+    for p in gateset:
+        derivative = first_derivative(rho,H, p)
+        if derivative.real <0 and not np.isclose(derivative.real, 0):
+            print('before perturb: ' + str(derivative.real))
+            legit_gradient.append(derivative)
+            legit_operator.append(p)
+        elif derivative.real==0:
+            new_rho = evolve(rho, p, dt)
+            new_derivative = first_derivative(new_rho,H, p)
+            if new_derivative.real <0 and not np.isclose(new_derivative.real, 0):
+                print('after perturb: '+ str(new_derivative))
+# def optimize(rho):
+#     t = check_rho_type(rho)
+#     if t!= 'local min':
+#         e
 
 
