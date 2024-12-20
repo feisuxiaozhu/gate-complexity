@@ -26,17 +26,25 @@ dt = np.pi*(1/10)
 
 
 # 2 If the state is a saddle point or max, keep envolving it
+# manual gradient descent
 
-
-#(a)
-rho = create_spin_state(N,[0,1]) #sadle point
-p = qt.tensor([sx, sx, qt.qeye(2),qt.qeye(2),  qt.qeye(2)])
-rho= evolve(rho, p, np.pi/4)
-rho= evolve(rho, p, np.pi/4)
-gradient(rho,H, two_qubit_set)
+#(a) demonstration
+# rho = create_spin_state(N,[0,1]) #sadle point
+# p = qt.tensor([sx, sx, qt.qeye(2),qt.qeye(2),  qt.qeye(2)])
+# rho= evolve(rho, p, np.pi/4)
+# rho= evolve(rho, p, np.pi/4)
+# gradient(rho,H, two_qubit_set)
 
 # #(b) demonstration, the best path should be the one with greatest derivative
 # rho = create_spin_state(N,[1,3]) #local maximum
 # p = qt.tensor([qt.qeye(2), sx, qt.qeye(2),  sx, qt.qeye(2)])
 # # rho= evolve(rho, p, dt)
 # gradient(rho,H, two_qubit_set)
+
+# #(c)
+# states = generate_all_spin_states(N)
+# for rho in states:
+#     print(extract_spin_directions_from_rho(rho))
+#     gradient(rho,H, two_qubit_set)
+
+
