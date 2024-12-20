@@ -97,10 +97,9 @@ def check_rho_type(rho, H, gateset):
     return result
 
 
-def extract_pure_state(rho):
-    # Validate that rho is Hermitian and has trace 1
-    if not rho.isherm or not qt.expect(rho, qt.qeye(rho.dims[0])) == 1:
-        raise ValueError("Input must be a valid density matrix with trace 1.")
+def extract_pure_state(rho): #bad code don't use
+    # Validate that rho has trace 1
+    
 
     # Get the eigenstates of rho
     eigenvalues, eigenstates = rho.eigenstates()

@@ -38,8 +38,20 @@ dt = np.pi*(1/10)
 # #(b) demonstration, the best path should be the one with greatest derivative
 # rho = create_spin_state(N,[1,3]) #local maximum
 # p = qt.tensor([qt.qeye(2), sx, qt.qeye(2),  sx, qt.qeye(2)])
-# # rho= evolve(rho, p, dt)
+
+# rho= evolve(rho, p, dt)
+# print(extract_spin_directions_from_rho(rho))
+# rho= evolve(rho, p, dt)
+# print(extract_spin_directions_from_rho(rho))
+# rho= evolve(rho, p, dt)
+# print(extract_spin_directions_from_rho(rho))
+# rho= evolve(rho, p, dt)
+# print(extract_spin_directions_from_rho(rho))
+# rho= evolve(rho, p, dt)
+# print(extract_spin_directions_from_rho(rho))
 # gradient(rho,H, two_qubit_set)
+
+
 
 # #(c)
 # states = generate_all_spin_states(N)
