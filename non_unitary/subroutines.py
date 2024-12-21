@@ -35,6 +35,39 @@ def two_qubit_set(N):
             operators.append(qt.tensor(op_list))
     return operators
 
+def all_two_qubit_set_complete(N):
+    operators = []
+    single_qubit_gates = [qt.sigmax(), qt.sigmay(), qt.sigmaz()]  # Single-qubit X, Y, Z gates
+    two_qubit_gates = [(qt.sigmax(), qt.sigmax()), 
+                       (qt.sigmax(), qt.sigmay()), 
+                       (qt.sigmax(), qt.sigmaz()),
+                       (qt.sigmay(), qt.sigmax()), 
+                       (qt.sigmay(), qt.sigmay()), 
+                       (qt.sigmay(), qt.sigmaz()),
+                       (qt.sigmaz(), qt.sigmax()), 
+                       (qt.sigmaz(), qt.sigmay()), 
+                       (qt.sigmaz(), qt.sigmaz())]  # All two-qubit combinations
+    
+    # Single-qubit operators
+    for i in range(N):
+        for single_gate in single_qubit_gates:
+            op_list = [qt.qeye(2) for _ in range(N)]
+            op_list[i] = single_gate
+            single_op = qt.tensor(op_list)
+            operators.append(single_op)
+    
+    # Two-qubit operators (allowing non-neighboring qubits)
+    for i in range(N):
+        for j in range(i + 1, N):
+            for gate_pair in two_qubit_gates:
+                op_list = [qt.qeye(2) for _ in range(N)]
+                op_list[i] = gate_pair[0]
+                op_list[j] = gate_pair[1]
+                two_qubit_op = qt.tensor(op_list)
+                operators.append(two_qubit_op)
+    
+    return operators
+
 # Create a quantum state of length N with spins up at locations in set A
 def create_spin_state(N, A):
     spin_up = qt.basis(2, 0)   
@@ -58,11 +91,12 @@ def generate_all_spin_states(N):
     return spin_states
 
 
-# Compute the first time derivative of Tr(exp(-iPt)*rho*exp(iPt)*H)
+# Compute the first time derivative of Tr(exp(-iPt)*rho*exp(iPt)*H) at t=0
 def first_derivative(rho,H, P):
     # Compute commutator [-iP, rho]
     commutator = -1j * (P * rho - rho * P)
-    return((commutator * H).tr())
+    result = (commutator * H).tr().real
+    return(result)
 
 # evolve the state rho with P for time increment dt
 def evolve(rho, P, dt):
@@ -72,7 +106,7 @@ def evolve(rho, P, dt):
     return rho_t
 
 def energy(rho, H):
-    return (rho*H).tr()
+    return (rho*H).tr().real
 
 #decide if rho is local min, max, or a saddle point.
 def check_rho_type(rho, H, gateset):
@@ -136,7 +170,7 @@ def extract_spin_directions_from_rho(rho):
     return beauty
 
 # give list of gradients and their associate operators that reduce energy
-def gradient(rho, H, gateset):
+def negative_gradient(rho, H, gateset):
     dt= np.pi/10
     legit_gradient = []
     legit_operator = []
@@ -158,5 +192,23 @@ def gradient(rho, H, gateset):
 #     t = check_rho_type(rho)
 #     if t!= 'local min':
 #         e
+
+def compute_gradient(rho, H, gateset):
+    gradients = []
+    for p in gateset:
+        gradients.append(first_derivative(rho,H, p))
+    return gradients
+
+
+# Output new parameter rho 
+def optimize_rho(rho, gradients, gateset):
+    dt = np.pi/1000
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+            P += gradients[i]* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
 
 
