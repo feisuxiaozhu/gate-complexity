@@ -35,6 +35,40 @@ def two_qubit_set(N):
             operators.append(qt.tensor(op_list))
     return operators
 
+# Two qubit operator on nearest neightbor
+def all_two_qubit_set_NN(N):
+    operators = []
+    single_qubit_gates = [qt.sigmax(), qt.sigmay(), qt.sigmaz()]  # Single-qubit X, Y, Z gates
+    two_qubit_gates = [(qt.sigmax(), qt.sigmax()), 
+                       (qt.sigmax(), qt.sigmay()), 
+                       (qt.sigmax(), qt.sigmaz()),
+                       (qt.sigmay(), qt.sigmax()), 
+                       (qt.sigmay(), qt.sigmay()), 
+                       (qt.sigmay(), qt.sigmaz()),
+                       (qt.sigmaz(), qt.sigmax()), 
+                       (qt.sigmaz(), qt.sigmay()), 
+                       (qt.sigmaz(), qt.sigmaz())]  # All two-qubit combinations
+
+    # Single-qubit operators
+    for i in range(N):
+        for single_gate in single_qubit_gates:
+            op_list = [qt.qeye(2) for _ in range(N)]
+            op_list[i] = single_gate
+            single_op = qt.tensor(op_list)
+            operators.append(single_op)
+
+    # Two-qubit operators (only on neighboring qubits)
+    for i in range(N - 1):  # Restrict to neighbors
+        for gate_pair in two_qubit_gates:
+            op_list = [qt.qeye(2) for _ in range(N)]
+            op_list[i] = gate_pair[0]
+            op_list[i + 1] = gate_pair[1]
+            two_qubit_op = qt.tensor(op_list)
+            operators.append(two_qubit_op)
+
+    return operators
+
+# Include all possible gates, not only restricted to NN operators
 def all_two_qubit_set_complete(N):
     operators = []
     single_qubit_gates = [qt.sigmax(), qt.sigmay(), qt.sigmaz()]  # Single-qubit X, Y, Z gates
@@ -91,10 +125,14 @@ def generate_all_spin_states(N):
     return spin_states
 
 
+def adj(P, rho):
+    return (P * rho - rho * P)
+
 # Compute the first time derivative of Tr(exp(-iPt)*rho*exp(iPt)*H) at t=0
 def first_derivative(rho,H, P):
     # Compute commutator [-iP, rho]
-    commutator = -1j * (P * rho - rho * P)
+    # commutator = -1j * (P * rho - rho * P)
+    commutator = -1j*adj(P, rho)
     result = (commutator * H).tr().real
     return(result)
 
@@ -169,29 +207,6 @@ def extract_spin_directions_from_rho(rho):
 
     return beauty
 
-# give list of gradients and their associate operators that reduce energy
-def negative_gradient(rho, H, gateset):
-    dt= np.pi/10
-    legit_gradient = []
-    legit_operator = []
-    legit_perturb_gradient = []
-    legit_perturb_operator = []
-    perturbed_rho = []
-    for p in gateset:
-        derivative = first_derivative(rho,H, p)
-        if derivative.real <0 and not np.isclose(derivative.real, 0):
-            print('before perturb: ' + str(derivative.real))
-            legit_gradient.append(derivative)
-            legit_operator.append(p)
-        elif derivative.real==0:
-            new_rho = evolve(rho, p, dt)
-            new_derivative = first_derivative(new_rho,H, p)
-            if new_derivative.real <0 and not np.isclose(new_derivative.real, 0):
-                print('after perturb: '+ str(new_derivative))
-# def optimize(rho):
-#     t = check_rho_type(rho)
-#     if t!= 'local min':
-#         e
 
 def compute_gradient(rho, H, gateset):
     gradients = []
@@ -211,4 +226,26 @@ def optimize_rho(rho, gradients, gateset):
     return rho
 
 
+def compute_hessian(rho, H, gateset):
+    d = len(gateset)
+    K = np.zeros((d,d))
+    for j in range(d):
+        for k in range(d):
+            P_j = gateset[j]
+            P_k = gateset[k]
+            Kjk = -(adj(P_k, adj(P_j, rho))*H).tr().real
+            K[j][k] = Kjk
+    return K
 
+
+def find_non_symmetric_indices(matrix):
+    non_symmetric_indices = []
+    rows, cols = matrix.shape
+
+    # Check for equality only in the upper triangular part
+    for i in range(rows):
+        for j in range(i + 1, cols):  # Avoid checking the diagonal
+            if not np.isclose(matrix[i, j], matrix[j, i]):  # Use isclose for floating-point comparison
+                non_symmetric_indices.append((i, j))
+
+    return non_symmetric_indices
