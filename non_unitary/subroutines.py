@@ -233,7 +233,7 @@ def compute_hessian(rho, H, gateset):
         for k in range(d):
             P_j = gateset[j]
             P_k = gateset[k]
-            Kjk = -(adj(P_k, adj(P_j, rho))*H).tr().real
+            Kjk = -1/2*(adj(P_k, adj(P_j, rho))*H+adj(P_j, adj(P_k, rho))*H).tr().real
             K[j][k] = Kjk
     return K
 
@@ -249,3 +249,17 @@ def find_non_symmetric_indices(matrix):
                 non_symmetric_indices.append((i, j))
 
     return non_symmetric_indices
+
+def is_positive_semi_definite(matrix):
+    tolerance=1e-10
+    # Check if the matrix is symmetric
+    if not np.allclose(matrix, matrix.T):
+        print("Matrix is not symmetric.")
+        return False
+    # Compute eigenvalues
+    eigenvalues = np.linalg.eigvalsh(matrix)
+    # Set eigenvalues close to zero to exactly zero
+    eigenvalues[np.abs(eigenvalues) < tolerance] = 0 
+    print(eigenvalues)
+    # Check if all eigenvalues are non-negative
+    return np.all(eigenvalues >= 0)
