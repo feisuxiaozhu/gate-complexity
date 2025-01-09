@@ -217,13 +217,42 @@ def compute_gradient(rho, H, gateset):
 
 # Output new parameter rho 
 def optimize_rho(rho, gradients, gateset):
-    dt = np.pi/1000
+    dt = np.pi/100
     num_qubits = len(gateset[0].dims[0])
     P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
     for i in range(len(gradients)):
             P += gradients[i]* gateset[i]
     rho = evolve(rho, P, -dt)
     return rho
+
+# Output new parameter rho with noise added to gradient
+def optimize_rho_with_noise(rho, gradients, gateset):
+    dt = np.pi/100
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+            epsilon = np.random.normal(0,np.sqrt(dt))
+            P += (gradients[i]+epsilon)* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
+
+def optimize_rho_noise_dynamicdt(rho, gradients, gateset):
+    dt = np.pi/100
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+            if i> 50000:
+                dt = np.pi/10000
+            if i> 100000:
+                dt = np.pi/1000000
+            if i>150000:
+                dt = np.pi/100000000
+            epsilon = np.random.normal(0,np.sqrt(dt))
+            P += (gradients[i]+epsilon)* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
 
 
 def compute_hessian(rho, H, gateset):
@@ -260,6 +289,6 @@ def is_positive_semi_definite(matrix):
     eigenvalues = np.linalg.eigvalsh(matrix)
     # Set eigenvalues close to zero to exactly zero
     eigenvalues[np.abs(eigenvalues) < tolerance] = 0 
-    print(eigenvalues)
+    # print(eigenvalues)
     # Check if all eigenvalues are non-negative
     return np.all(eigenvalues >= 0)
