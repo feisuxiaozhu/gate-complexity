@@ -15,6 +15,14 @@ def NN_H(N):
         H += -qt.tensor(op_list)
     return H
 
+def Z_H(N):
+    H = 0
+    for i in range(N):
+        op_list = [qt.qeye(2) for _ in range(N)]
+        op_list[i] = sz
+        H += -qt.tensor(op_list)
+    return H
+
 # Generate a set of all possible two-qubit Paulis
 # For now, we use X⊗X and X⊗I only
 def two_qubit_set(N):
@@ -237,23 +245,65 @@ def optimize_rho_with_noise(rho, gradients, gateset):
     return rho
 
 
-def optimize_rho_noise_dynamicdt(rho, gradients, gateset):
-    dt = np.pi/100
+def optimize_rho_noise_dynamicdt(rho, gradients, gateset,dt):
     num_qubits = len(gateset[0].dims[0])
     P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
     for i in range(len(gradients)):
-            if i> 50000:
-                dt = np.pi/10000
-            if i> 100000:
-                dt = np.pi/1000000
-            if i>150000:
-                dt = np.pi/100000000
+            # if i> 50000:
+            #     dt = np.pi/10000
+            # if i> 100000:
+            #     dt = np.pi/1000000
+            # if i>150000:
+            #     dt = np.pi/100000000
             epsilon = np.random.normal(0,np.sqrt(dt))
-            P += (gradients[i]+epsilon)* gateset[i]
+            P += (gradients[i])* gateset[i]
+
     rho = evolve(rho, P, -dt)
     return rho
 
 
+def optimizer_1step_pure_GD(rho, gradients, gateset, dt):
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        P += (gradients[i])* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
+
+def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        epsilon = np.random.normal(0,np.sqrt(dt))/1000
+        P += (gradients[i]+epsilon)* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
+def optimizer_1step_SGD_dt_scheduling(rho, gradients, gateset, dt0, round):
+    dt = dt0/100
+    # if round > 5000:
+    #     dt = dt0/10
+    # if round > 10000:
+    #     dt=dt0/100
+    # if round > 15000:
+    #     dt = dt0/1000
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        epsilon = np.random.normal(0,np.sqrt(dt))
+        P += (gradients[i]+epsilon)* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
+def optimizer_1step_SGD_noise_scheduling(rho, gradients, gateset, dt0, round):
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        epsilon = np.random.normal(0,np.sqrt(dt))
+        P += (gradients[i]+epsilon)* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
 
 def compute_hessian(rho, H, gateset):
     d = len(gateset)

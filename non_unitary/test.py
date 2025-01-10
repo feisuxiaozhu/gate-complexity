@@ -2,6 +2,7 @@ import qutip as qt
 import numpy as np
 from subroutines import *
 import pickle
+import matplotlib.pyplot as plt
 
 N=5
 H = NN_H(N)
@@ -18,23 +19,49 @@ rho_2 = evolve(rho_2,p2,dt)
  
 rho = 1/2*rho_1 + 1/2*rho_2
 
-rho_3 = create_spin_state(N,[])
 
 
+with open('rho_3.pkl', 'rb') as f:
+    rho = np.load(f, allow_pickle=True)
 
-for i in range(100000):
+# new_rho = rho.full()
+# diag = new_rho.diagonal().real
+# # diag = np.sort(diag)
+# k = 3
+# indices = np.argpartition(diag, -k)[-k:]
+# print(indices)
+T_column = []
+E_column = []
+Gradient_norm_column = []
+
+dt = np.pi/100
+for i in range(2000):
     gradients = compute_gradient(rho, H, two_qubit_set)
-    rho = optimize_rho_noise_dynamicdt(rho,gradients,two_qubit_set)
-    print(energy(rho,H))
-    # hessian = compute_hessian(rho, H, two_qubit_set)
-    # is_positive_semi_definite(hessian)
-    # print(is_positive_semi_definite(hessian))
-    # print(gradients)
+    # print(np.linalg.norm(gradients))
+    rho = optimizer_1step_SGD_no_scheduling(rho,gradients,two_qubit_set,dt)
+    E = energy(rho,H)
+    gradient_norm = np.linalg.norm(gradients)
+    print(i)
+    print(E)
+    print(gradient_norm)
+    T_column.append(i)
+    E_column.append(E)
+    Gradient_norm_column.append(gradient_norm)
 
+fig, axes = plt.subplots(1, 2, figsize=(16, 5))
+axes[0].plot(T_column, E_column)
+axes[0].set_xlabel('t')
+axes[0].set_ylabel('Energy')
+axes[0].ticklabel_format(style='plain', axis='y', useOffset=False)
 
+axes[1].plot(T_column, Gradient_norm_column)
+axes[1].set_xlabel('t')
+axes[1].set_ylabel('Gradient norm')
+
+plt.show()
 # hessian = compute_hessian(rho, H, two_qubit_set)
 # print(is_positive_semi_definite(hessian))
-# file_name = 'rho.pkl'
+# file_name = 'rho_3.pkl'
 # with open(file_name, "wb") as f:
 #     pickle.dump(rho, f)
 
