@@ -297,13 +297,45 @@ def optimizer_1step_SGD_dt_scheduling(rho, gradients, gateset, dt0, round):
     return rho
 
 def optimizer_1step_SGD_noise_scheduling(rho, gradients, gateset, dt0, round):
+    dt = dt0
     num_qubits = len(gateset[0].dims[0])
     P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
     for i in range(len(gradients)):
         epsilon = np.random.normal(0,np.sqrt(dt))
+        # epsilon = np.sign(epsilon)* np.sqrt(np.abs(epsilon))
+        epsilon = epsilon/1000
         P += (gradients[i]+epsilon)* gateset[i]
     rho = evolve(rho, P, -dt)
     return rho
+
+
+def optimizer_1step_SGD_hessian(rho, gradients, gateset, dt0, H):
+    tolerance=1e-10
+    dt = dt0
+    num_qubits = len(gateset[0].dims[0])
+    Hessian = compute_hessian(rho, H, gateset)
+    eigenvalues, eigenvectors = np.linalg.eigh(Hessian)
+    eigenvalues[np.abs(eigenvalues) < tolerance] = 0
+    D = np.diag(eigenvalues)
+    Q = eigenvectors
+    # residual = Hessian - Q @ D @ Q.T
+    # print(np.allclose(residual, np.zeros_like(Hessian), atol=1e-8)) 
+    eigenvalues = eigenvalues.real
+    negative_indices = np.where(eigenvalues < 0)[0]
+    # print(eigenvalues)
+    # print(negative_indices)
+    epsilon_col = [0 for _ in range(len(gradients))]
+    for index in negative_indices:
+        epsilon = np.random.normal(0,np.sqrt(dt))
+        epsilon_col[index] = epsilon
+    epsilon_col = Q @ epsilon_col
+
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        P += (gradients[i]+epsilon_col[i])* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
 
 def compute_hessian(rho, H, gateset):
     d = len(gateset)

@@ -19,10 +19,11 @@ rho_2 = evolve(rho_2,p2,dt)
  
 rho = 1/2*rho_1 + 1/2*rho_2
 
+# rho_3 = create_spin_state(N,[])
 
 
-with open('rho_3.pkl', 'rb') as f:
-    rho = np.load(f, allow_pickle=True)
+# with open('rho.pkl', 'rb') as f:
+#     rho = np.load(f, allow_pickle=True)
 
 # new_rho = rho.full()
 # diag = new_rho.diagonal().real
@@ -38,7 +39,7 @@ dt = np.pi/100
 for i in range(2000):
     gradients = compute_gradient(rho, H, two_qubit_set)
     # print(np.linalg.norm(gradients))
-    rho = optimizer_1step_SGD_no_scheduling(rho,gradients,two_qubit_set,dt)
+    rho = optimizer_1step_SGD_hessian(rho,gradients,two_qubit_set,dt, H)
     E = energy(rho,H)
     gradient_norm = np.linalg.norm(gradients)
     print(i)
@@ -59,6 +60,7 @@ axes[1].set_xlabel('t')
 axes[1].set_ylabel('Gradient norm')
 
 plt.show()
+
 # hessian = compute_hessian(rho, H, two_qubit_set)
 # print(is_positive_semi_definite(hessian))
 # file_name = 'rho_3.pkl'
