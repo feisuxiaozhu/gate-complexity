@@ -19,7 +19,8 @@ rho_2 = evolve(rho_2,p2,dt)
  
 rho = 1/2*rho_1 + 1/2*rho_2
 
-# rho_3 = create_spin_state(N,[])
+# rho_3 = create_spin_state(N,[0,1])
+# rho = rho_3
 
 
 # with open('rho.pkl', 'rb') as f:
@@ -39,7 +40,8 @@ dt = np.pi/100
 for i in range(2000):
     gradients = compute_gradient(rho, H, two_qubit_set)
     # print(np.linalg.norm(gradients))
-    rho = optimizer_1step_SGD_hessian(rho,gradients,two_qubit_set,dt, H)
+    rho =  optimizer_1step_SGD_hessian(rho,gradients,two_qubit_set,dt, H)
+    # rho = optimizer_1step_SGD_no_scheduling(rho, gradients, two_qubit_set, dt)
     E = energy(rho,H)
     gradient_norm = np.linalg.norm(gradients)
     print(i)
