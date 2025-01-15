@@ -19,8 +19,8 @@ rho_2 = evolve(rho_2,p2,dt)
  
 rho = 1/2*rho_1 + 1/2*rho_2
 
-# rho_3 = create_spin_state(N,[0,1])
-# rho = rho_3
+rho_3 = create_spin_state(N,[])
+rho = 1/3*rho_1 + 1/3*rho_2 +1/3*rho_3
 
 
 # with open('rho.pkl', 'rb') as f:
