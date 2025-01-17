@@ -39,6 +39,15 @@ def all_two_qubit_set_NN(N):
             single_op = qt.tensor([qt.qeye(2)]+op_list)
             operators.append(single_op)
 
+    # Two-qubit connecting ancilla and normal qubit
+    for ancilla_gate in single_qubit_gates:
+        for i in range(N):
+            for single_gate in single_qubit_gates:
+                op_list = [qt.qeye(2) for _ in range(N)]
+                op_list[i] = single_gate
+                ancilla_op = qt.tensor([ancilla_gate] + op_list)
+                operators.append(ancilla_op)
+
     # Two-qubit operators (only on neighboring qubits)
     for i in range(N - 1):  # Restrict to neighbors
         for gate_pair in two_qubit_gates:
@@ -64,12 +73,99 @@ def create_spin_state(N, A):
     zero = qt.basis(2, 0).proj()
     return qt.tensor(zero, rho)
 
-
-def trace_out(rho):
+# Only trace out the first register
+def trace_out_rho_tilde(rho):
     N = len(rho.dims[0])
     rho_reduced = qt.ptrace(rho, list(range(1,N)))
     return rho_reduced
 
-def rho_tilde(rho):
+# Form \tilde{rho} from rho
+def rho_to_rho_tilde(rho):
     zero = qt.basis(2, 0).proj()
     return qt.tensor(zero, rho)
+
+
+def adj(P, rho):
+    return (P * rho - rho * P)
+
+# Compute the first time derivative of Tr(exp(-iPt)*rho*exp(iPt)*H) at t=0
+def first_derivative(rho,H, P):
+    # Compute commutator [-iP, rho]
+    # commutator = -1j * (P * rho - rho * P)
+    commutator = -1j*adj(P, rho)
+    result = (commutator * H).tr().real
+    return(result)
+
+
+# evolve the state rho with P for time increment dt
+def evolve(rho, P, dt):
+    U_t = (-1j * P * dt).expm()
+    U_t_dag = (1j * P * dt).expm()
+    rho_t = U_t * rho * U_t_dag
+    return rho_t
+
+def energy(rho, H):
+    return (rho*H).tr().real
+
+def compute_gradient(rho, H, gateset):
+    gradients = []
+    for p in gateset:
+        gradients.append(first_derivative(rho,H, p))
+    return gradients
+
+def compute_hessian(rho, H, gateset):
+    d = len(gateset)
+    K = np.zeros((d,d))
+    for j in range(d):
+        for k in range(d):
+            P_j = gateset[j]
+            P_k = gateset[k]
+            Kjk = -1/2*(adj(P_k, adj(P_j, rho))*H+adj(P_j, adj(P_k, rho))*H).tr().real
+            K[j][k] = Kjk
+    return K
+
+def optimizer_1step_pure_GD(rho, gradients, gateset, dt):
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        P += (gradients[i])* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
+def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        epsilon = np.random.normal(0,np.sqrt(dt))
+        P += (gradients[i]+epsilon)* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
+def optimizer_1step_SGD_hessian(rho, gradients, gateset, dt0, H):
+    tolerance=1e-10
+    dt = dt0
+    num_qubits = len(gateset[0].dims[0])
+    Hessian = compute_hessian(rho, H, gateset)
+    eigenvalues, eigenvectors = np.linalg.eigh(Hessian)
+    eigenvalues[np.abs(eigenvalues) < tolerance] = 0
+    D = np.diag(eigenvalues)
+    Q = eigenvectors
+    # residual = Hessian - Q @ D @ Q.T
+    # print(np.allclose(residual, np.zeros_like(Hessian), atol=1e-8)) 
+    eigenvalues = eigenvalues.real
+    negative_indices = np.where(eigenvalues < 0)[0]
+    # print(eigenvalues)
+    # print(negative_indices)
+    epsilon_col = [0 for _ in range(len(gradients))]
+    for index in negative_indices:
+        epsilon = np.random.normal(0,np.sqrt(dt))
+        epsilon_col[index] = epsilon
+  
+    epsilon_col = Q @ epsilon_col *10
+ 
+
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        P += (gradients[i]+epsilon_col[i])* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho

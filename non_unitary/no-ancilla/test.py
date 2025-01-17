@@ -10,19 +10,19 @@ two_qubit_set = all_two_qubit_set_NN(N)
 dt = np.pi*(1/1000)
 
 rho_1 = create_spin_state(N,[0,1])
-p1 = qt.tensor([sx, sx, qt.qeye(2),qt.qeye(2),  qt.qeye(2)])
-rho_1 = evolve(rho_1,p1,dt)
+# p1 = qt.tensor([sx, sx, qt.qeye(2),qt.qeye(2),  qt.qeye(2)])
+# rho_1 = evolve(rho_1,p1,dt)
 
 rho_2 = create_spin_state(N,[1,3])
-p2 = qt.tensor([qt.qeye(2), sx, qt.qeye(2),sx,  qt.qeye(2)])
-rho_2 = evolve(rho_2,p2,dt)
+# p2 = qt.tensor([qt.qeye(2), sx, qt.qeye(2),sx,  qt.qeye(2)])
+# rho_2 = evolve(rho_2,p2,dt)
  
 rho = 1/2*rho_1 + 1/2*rho_2
 
 rho_3 = create_spin_state(N,[])
 rho = 1/3*rho_1 + 1/3*rho_2 +1/3*rho_3
 
-
+print(energy(rho, H))
 # with open('rho.pkl', 'rb') as f:
 #     rho = np.load(f, allow_pickle=True)
 
@@ -37,11 +37,11 @@ E_column = []
 Gradient_norm_column = []
 
 dt = np.pi/100
-for i in range(2000):
+for i in range(1):
     gradients = compute_gradient(rho, H, two_qubit_set)
     # print(np.linalg.norm(gradients))
-    rho =  optimizer_1step_SGD_hessian(rho,gradients,two_qubit_set,dt, H)
-    # rho = optimizer_1step_SGD_no_scheduling(rho, gradients, two_qubit_set, dt)
+    # rho =  optimizer_1step_SGD_hessian(rho,gradients,two_qubit_set,dt, H)
+    rho = optimizer_1step_SGD_no_scheduling(rho, gradients, two_qubit_set, dt)
     E = energy(rho,H)
     gradient_norm = np.linalg.norm(gradients)
     print(i)
