@@ -5,8 +5,9 @@ import pickle
 import matplotlib.pyplot as plt
 
 N = 5
-H_tilde = NN_H(N)
+H_tilde = NN_H_tilde(N)
 two_qubit_set_tilde = all_two_qubit_set_NN(N)
+ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(N)
 
 rho_1_tilde = create_spin_state(N,[0,1])
 rho_2_tilde = create_spin_state(N,[1,3])
@@ -14,6 +15,7 @@ rho_3_tilde = create_spin_state(N,[])
 
 rho_tilde = 1/3*rho_1_tilde + 1/3*rho_2_tilde + 1/3*rho_3_tilde 
 # rho_tilde = 1/2*rho_1_tilde + 1/2*rho_2_tilde
+# rho_tilde = rho_3_tilde
 # print(energy(rho_to_rho_tilde(rho_tilde), rho_to_rho_tilde(H_tilde)))
 
 T_column = []
@@ -22,10 +24,14 @@ Gradient_norm_column = []
 
 dt = np.pi/100
 
+
+
+
 for i in range(2000):
     gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
     # rho_tilde =  optimizer_1step_SGD_hessian(rho_tilde,gradients,two_qubit_set_tilde,dt, H_tilde)
     rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
+    rho_tilde = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
     # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
     rho = trace_out_rho_tilde(rho_tilde)
     # E = energy(rho,trace_out_rho_tilde(H_tilde))
