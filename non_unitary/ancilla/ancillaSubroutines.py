@@ -75,6 +75,16 @@ def ancilla_two_qubit_set(N):
                 ancilla_op = qt.tensor([ancilla_gate] + op_list)
                 operators.append(ancilla_op)
 
+    # temp = [qt.qeye(2) for _ in range(N)]
+    # temp[N-1] = qt.sigmax()
+    # return [qt.tensor([qt.sigmax()]+temp)]
+
+    # for i in range(N):
+    #     op_list = [qt.qeye(2) for _ in range(N)]
+    #     op_list[i] = qt.sigmaz()
+    #     ancilla_op = qt.tensor([qt.sigmaz()] + op_list)
+    #     operators.append(ancilla_op)
+
     return operators
 
 
@@ -149,6 +159,23 @@ def compute_hessian(rho, H, gateset):
             K[j][k] = Kjk
     return K
 
+def compute_hessian_diagonal(rho, H, gateset):
+    d = len(gateset)
+    K = np.zeros((d,d))
+    for j in range(d):
+        P_j = gateset[j]
+        P_k = gateset[j]
+        Kjk = -1/2*(adj(P_k, adj(P_j, rho))*H+adj(P_j, adj(P_k, rho))*H).tr().real
+        K[j][j] = Kjk
+    return K
+
+def compute_hessian_diagonal_norm(rho, H, gateset):
+    tolerance=1e-10
+    Hessian = compute_hessian_diagonal(rho, H, gateset)
+    second_derivatives = np.copy(np.diag(Hessian))
+    second_derivatives[np.abs(second_derivatives) < tolerance] = 0
+    return np.linalg.norm(second_derivatives)
+
 def optimizer_1step_pure_GD(rho, gradients, gateset, dt):
     num_qubits = len(gateset[0].dims[0])
     P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
@@ -166,14 +193,28 @@ def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
     rho = evolve(rho, P, -dt)
     return rho
 
-def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt, H):
-    dt=dt**2
+def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
+    tolerance=1e-10
+    dt=np.sqrt(dt0)
     num_qubits = len(ancilla_gateset[0].dims[0])
     P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
     Hessian = compute_hessian(rho, H, ancilla_gateset)
-    second_derivative = np.diag(Hessian)
-    for i in range(len(second_derivative)):
-        P += second_derivative[i]*ancilla_gateset[i]
+    # Hessian = compute_hessian_diagonal(rho, H, ancilla_gateset)
+    # eigenvalues, eigenvectors = np.linalg.eigh(Hessian)
+    # eigenvalues[np.abs(eigenvalues) < tolerance] = 0
+    # D = np.diag(eigenvalues)
+    
+    Hessian[np.abs(Hessian)<tolerance]=0
+    Hessian[Hessian>0]=0
+
+    print(Hessian)
+    print('Full Hessian negative norm: '+ str(np.linalg.norm(Hessian)))
+    second_derivatives = np.copy(np.diag(Hessian))
+    second_derivatives[np.abs(second_derivatives) < tolerance] = 0
+    # print(second_derivatives)
+    for i in range(len(second_derivatives)):
+        if second_derivatives[i]<0:
+            P += second_derivatives[i]* ancilla_gateset[i]
     rho = evolve(rho, P, dt)
     return rho
 
