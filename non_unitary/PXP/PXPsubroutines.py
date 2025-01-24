@@ -19,8 +19,6 @@ def H_PXP_tilde(N):
         H += qt.tensor(new_list)
     return H
 
-
-
 def all_two_qubit_set_NN(N):
     operators = []
     single_qubit_gates = [qt.sigmax(), qt.sigmay(),qt.sigmaz()]  # Single-qubit X, Y, Z gates
@@ -52,7 +50,6 @@ def all_two_qubit_set_NN(N):
    
     return operators
 
-
 def ancilla_two_qubit_set(N):
     # Two-qubit connecting ancilla and normal qubit
     operators = []
@@ -67,7 +64,6 @@ def ancilla_two_qubit_set(N):
                 operators.append(ancilla_op)
 
     return operators
-
 
 # Assume N even
 def create_zero_minus_state(N):
@@ -93,6 +89,29 @@ def create_minus_zero_state(N):
     state = qt.tensor(ket_minus, ket_0)
     for i in range(2, N, 2): 
         state = qt.tensor(state, ket_minus, ket_0)
+    rho = state.proj()
+    zero = qt.basis(2, 0).proj()
+    return qt.tensor(zero, rho)
+
+def create_CDW_state(N):
+    if N % 2 != 0:
+        raise ValueError("N must be even to create a perfect CDW state.")
+    cdw_basis_states = [qt.basis(2, i % 2) for i in range(N)]
+    cdw_state = qt.tensor(cdw_basis_states)
+    rho = cdw_state.proj()
+    zero = qt.basis(2, 0).proj()
+    return qt.tensor(zero, rho)
+
+def create_spin_state(N, A):
+    spin_up = qt.basis(2, 0)   
+    spin_down = qt.basis(2, 1) 
+    spin_states = []
+    for i in range(N):
+        if i in A:
+            spin_states.append(spin_up)
+        else:
+            spin_states.append(spin_down)
+    state = qt.tensor(spin_states)
     rho = state.proj()
     zero = qt.basis(2, 0).proj()
     return qt.tensor(zero, rho)
@@ -205,3 +224,45 @@ def optimizer_1step_SGD_hessian(rho, gradients, gateset, dt0, H):
         P += (gradients[i]+epsilon_col[i])* gateset[i]
     rho = evolve(rho, P, -dt)
     return rho
+
+def compute_overlap_with_ground_state(H, rho):
+    if not H.isherm:
+        raise ValueError("Hamiltonian H must be Hermitian.")
+    if not rho.isoper:
+        raise ValueError("rho must be a density matrix.")
+    eigenenergies, eigenstates = H.eigenstates()
+    ground_state = eigenstates[0]
+    rho_tilde = rho_to_rho_tilde(rho)
+    rho_gs = ground_state.proj()
+    overlap = (rho_gs*rho).tr().real
+
+    return overlap
+
+
+def decompose_into_product_state(state):
+    # Ensure input is a ket or density matrix
+    if not (state.isket or state.isoper):
+        raise ValueError("Input state must be a ket or a density matrix.")
+
+    # If the state is a density matrix, convert it to a pure state (if possible)
+    if state.isoper:
+        purity = state.purity()
+        if purity < 1 - 1e-10: 
+            raise ValueError("The state is not pure, cannot decompose into a product state.")
+        state = state.eigenstates()[1][0]  # Extract the dominant eigenstate (pure state)
+
+    # Get the dimensions of the subsystems
+    dims = state.dims[0]
+    if len(dims) < 2:
+        raise ValueError("The state it not a multipartite system.")
+
+    # Decompose into subsystems
+    subsystem_states = []
+    for i in range(len(dims)):
+        reduced_rho = state.ptrace(i)
+        if reduced_rho.purity() < 1 - 1e-10:
+            return None  
+        subsystem_states.append(reduced_rho)
+
+    # Return the list of subsystem states
+    return subsystem_states
