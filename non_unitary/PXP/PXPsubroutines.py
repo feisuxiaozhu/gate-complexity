@@ -266,3 +266,11 @@ def decompose_into_product_state(state):
 
     # Return the list of subsystem states
     return subsystem_states
+
+def find_ground_state(H):
+    eigenvalues, eigenstates = H.eigenstates()
+    ground_state = eigenstates[0]
+    rho = ground_state.proj()
+    return rho
+
+
