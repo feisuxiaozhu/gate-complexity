@@ -23,3 +23,5 @@ non_unitary/ancilla/__pycache__/ancillaSubroutines.cpython-311.pyc
 non_unitary/ancilla/__pycache__/ancillaSubroutines.cpython-312.pyc
 non_unitary/PXP/__pycache__/PXPsubroutines.cpython-311.pyc
 non_unitary/PXP/__pycache__/PXPsubroutines.cpython-312.pyc
+non_unitary/no-ancilla/__pycache__/subroutines.cpython-311.pyc
+non_unitary/false-vacuum/__pycache__/false_vacuum_subroutines.cpython-312.pyc
