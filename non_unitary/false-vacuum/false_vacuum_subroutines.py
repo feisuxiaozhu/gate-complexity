@@ -1,6 +1,6 @@
 import qutip as qt
 import numpy as np
-
+import itertools
 
 def H_TFIM(N,hx,hz):
     si = qt.qeye(2)  
@@ -76,6 +76,18 @@ def create_spin_state(N, A):
     rho = state.proj()
     zero = qt.basis(2, 0).proj()
     return qt.tensor(zero, rho)
+
+def generate_all_spin_states(N):
+    spin_states = []
+    for bits in itertools.product([0, 1], repeat=N):
+        # Create a tensor product state for the spin configuration
+        state = qt.tensor([qt.basis(2, b) for b in bits])
+        rho = state.proj()
+        zero = qt.basis(2, 0).proj()
+
+        spin_states.append(qt.tensor(zero,rho))
+    
+    return spin_states
 
 def energy(rho, H):
     return (rho*H).tr().real
@@ -161,3 +173,20 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
         P += second_derivatives[i]* ancilla_gateset[i]
     rho = evolve(rho, P, dt)
     return rho, second_derivatives
+
+def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt):
+    for i in range(50):
+        gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
+        rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
+        # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+        rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
+        # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+        rho = trace_out_rho_tilde(rho_tilde)
+        rho_tilde = rho_to_rho_tilde(rho)
+
+        E = energy(rho_tilde, H_tilde)
+        print('iteration: '+ str(i))
+        # print(E)
+    return E
+
+    # print(rho_tilde.purity())
