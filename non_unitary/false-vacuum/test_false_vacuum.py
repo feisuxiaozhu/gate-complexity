@@ -6,7 +6,7 @@ import pickle
 
 
 N=6
-H_tilde = H_TFIM(N,hx=0.25,hz=0.25)
+H_tilde = H_TFIM(N,hx=0.75,hz=0.25)
 two_qubit_set_tilde = all_two_qubit_set_NN(N)
 ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(N)
 
