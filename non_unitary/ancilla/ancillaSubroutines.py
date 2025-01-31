@@ -1,6 +1,8 @@
 import qutip as qt
 import numpy as np
 import itertools
+import time
+from numba import njit, prange
 
 sz = qt.sigmaz()
 sx = qt.sigmax()
@@ -69,7 +71,7 @@ def ancilla_two_qubit_set(N):
     single_qubit_gates = [qt.sigmax(), qt.sigmay(),qt.sigmaz()] 
     for ancilla_gate in ancilla_gates:
         for single_gate in single_qubit_gates:
-            for i in range(N):
+            for i in range(1):
                 op_list = [qt.qeye(2) for _ in range(N)]
                 op_list[i] = single_gate
                 ancilla_op = qt.tensor([ancilla_gate] + op_list)
@@ -115,7 +117,7 @@ def rho_to_rho_tilde(rho):
 
 
 def adj(P, rho):
-    return (P * rho - rho * P)
+    return (P @ rho - rho @ P)
 
 
 # H_cheat = NN_H(5)
@@ -148,7 +150,7 @@ def compute_gradient(rho, H, gateset):
         gradients.append(first_derivative(rho,H, p))
     return gradients
 
-def compute_hessian(rho, H, gateset):
+def compute_hessian_old(rho, H, gateset):
     d = len(gateset)
     K = np.zeros((d,d))
     for j in range(d):
@@ -158,6 +160,29 @@ def compute_hessian(rho, H, gateset):
             Kjk = -1/2*(adj(P_k, adj(P_j, rho))*H+adj(P_j, adj(P_k, rho))*H).tr().real
             K[j][k] = Kjk
     return K
+
+def compute_hessian_new(rho, H, gateset):
+    d = len(gateset)
+    K = np.zeros((d, d))
+
+    # Store adjoint operators as a list (avoiding dictionary hash issues)
+    adj_rho = [adj(P, rho) for P in gateset]
+
+    for j in range(d):
+        P_j = gateset[j]
+        adj_Pj_rho = adj_rho[j]
+
+        for k in range(j, d):  # Exploit symmetry
+            P_k = gateset[k]
+            adj_Pk_rho = adj_rho[k]
+            adj_Pk_Pj_rho = adj(P_k, adj_Pj_rho)
+            Kjk = -0.5 * (adj_Pk_Pj_rho * H + adj(P_j, adj_Pk_rho) * H).tr().real
+            K[j, k] = Kjk
+            K[k, j] = Kjk
+
+    return K
+
+
 
 def compute_hessian_diagonal(rho, H, gateset):
     d = len(gateset)
@@ -197,8 +222,11 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     tolerance=1e-10
     dt=np.sqrt(dt0)
     num_qubits = len(ancilla_gateset[0].dims[0])
-    
-    Hessian = compute_hessian(rho, H, ancilla_gateset)
+    start_time = time.time()
+    Hessian = compute_hessian_new(rho, H, ancilla_gateset)
+    end_time = time.time()  # Record end time
+    elapsed_time = end_time - start_time
+    print('Hessian compute time: '+ str(elapsed_time))
 
     eigenvalues, eigenvectors = np.linalg.eigh(Hessian)
     eigenvalues[np.abs(eigenvalues) < tolerance] = 0
