@@ -117,7 +117,7 @@ def rho_to_rho_tilde(rho):
 
 
 def adj(P, rho):
-    return (P @ rho - rho @ P)
+    return (P * rho - rho * P)
 
 
 # H_cheat = NN_H(5)
