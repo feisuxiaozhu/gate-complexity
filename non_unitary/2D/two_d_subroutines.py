@@ -1,6 +1,8 @@
 import qutip as qt
 import numpy as np
 import itertools
+import time
+from multiprocessing import Pool
 
 def ising_2d_hamiltonian(M, N, J=1.0, h=0, periodic=False):
     num_sites = M * N  
@@ -30,7 +32,7 @@ def ising_2d_hamiltonian(M, N, J=1.0, h=0, periodic=False):
             H += -h * transverse_field_term(site)
     return qt.tensor(qt.qeye(2),H)
 
-def generate_gates(M, N):
+def all_two_qubit_set_NN(M, N):
     num_sites = M * N  
     sx, sy, sz, I = qt.sigmax(), qt.sigmay(), qt.sigmaz(), qt.qeye(2)  
     pauli_ops = [sx, sy, sz]  
@@ -63,6 +65,22 @@ def generate_gates(M, N):
                         two_qubit_gates.append(qt.tensor(I,two_site_operator(op1, site, op2, neighbor)))
     return one_qubit_gates + two_qubit_gates
 
+
+def ancilla_two_qubit_set(M,N):
+    # Two-qubit connecting ancilla and normal qubit
+    # We chose only connect the first qubit of each row to the ancilla
+    operators = []
+    ancilla_gates = [qt.sigmax(), qt.sigmay()]
+    single_qubit_gates = [qt.sigmax(), qt.sigmay(),qt.sigmaz()] 
+    for ancilla_gate in ancilla_gates:
+        for single_gate in single_qubit_gates:
+            for i in range(M):
+                op_list = [qt.qeye(2) for _ in range(M*N)]
+                op_list[i*N] = single_gate
+                ancilla_op = qt.tensor([ancilla_gate] + op_list)
+                operators.append(ancilla_op)
+
+    return operators
 
 def generate_spin_state(M, N, state_type="up", custom_state=None):
     num_sites = M * N  
@@ -149,6 +167,15 @@ def compute_hessian(rho, H, gateset):
             K[k, j] = Kjk
     return K
 
+def compute_hessian_diagonal(rho, H, gateset):
+    d = len(gateset)
+    K = np.zeros((d,d))
+    for j in range(d):
+        P_j = gateset[j]
+        P_k = gateset[j]
+        Kjk = -1/2*(adj(P_k, adj(P_j, rho))*H+adj(P_j, adj(P_k, rho))*H).tr().real
+        K[j][j] = Kjk
+    return K
 
 def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
     num_qubits = len(gateset[0].dims[0])
@@ -185,17 +212,24 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
 
 
 def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt):
-    for i in range(1):
+    for i in range(15):
+        print('iteration: '+ str(i))
+        time_in = time.time()
         gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
+        time_final = time.time()
+        print('time to find gradient: ' + str(time_final-time_in))
         rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
         # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
-        # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
+        time_in = time.time()
+        rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
+        time_final = time.time()
+        print('time for 1step ancilla update: ' + str(time_final-time_in))
         # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
         rho = trace_out_rho_tilde(rho_tilde)
         rho_tilde = rho_to_rho_tilde(rho)
 
         E = energy(rho_tilde, H_tilde)
-        print('iteration: '+ str(i))
+        
         # print(E)
     return E
 

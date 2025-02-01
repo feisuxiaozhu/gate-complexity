@@ -4,17 +4,18 @@ from two_d_subroutines import *
 import time
 import matplotlib.pyplot as plt
 import random
+M=3
+N=3
+H_tilde =  ising_2d_hamiltonian(M,N)
 
-H_tilde =  ising_2d_hamiltonian(3,3)
-
-two_qubit_set_tilde = generate_gates(3,3)
-
+two_qubit_set_tilde = all_two_qubit_set_NN(M,N)
+ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(M,N)
 
 
-rho_tilde = generate_spin_state(3,3, state_type='custom',custom_state = [1, 1, 0, 0, 0, 0, 0, 0, 0] )
+# rho_tilde = generate_spin_state(3,3, state_type='custom',custom_state = [1, 1, 0, 0, 0, 0, 0, 0, 0] )
 all_rho_tilde = generate_all_spin_states(3,3)
 
-print(len(all_rho_tilde))
+
 T_column = []
 E_column = []
 Gradient_norm_column = []
@@ -22,11 +23,11 @@ Gradient_norm_column = []
 dt = np.pi/100
 
 i=0
-for j in range(1):
+for j in range(40):
     rho_tilde = random.choice(all_rho_tilde)
     i+=1
     print('checking state: '+str(i))
-    E_final = driver(rho_tilde,H_tilde,two_qubit_set_tilde,[] ,dt)
+    E_final = driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt)
     E_column.append(E_final)
     print(E_final)
 print(E_column)
