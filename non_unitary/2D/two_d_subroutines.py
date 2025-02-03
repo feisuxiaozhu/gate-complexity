@@ -4,7 +4,7 @@ import itertools
 import time
 from multiprocessing import Pool
 
-def ising_2d_hamiltonian(M, N, J=1.0, h=0, periodic=False):
+def ising_2d_hamiltonian(M, N, J=1.0, hx=0, hz=0, periodic=False):
     num_sites = M * N  
     sx, sz, I = qt.sigmax(), qt.sigmaz(), qt.qeye(2)  
     def interaction_term(i, j):
@@ -12,9 +12,13 @@ def ising_2d_hamiltonian(M, N, J=1.0, h=0, periodic=False):
         op_list[i] = sz  
         op_list[j] = sz  
         return qt.tensor(op_list)
-    def transverse_field_term(i):
+    def transverse_field_term_x(i):
         op_list = [I] * num_sites
         op_list[i] = sx  
+        return qt.tensor(op_list)
+    def transverse_field_term_z(i):
+        op_list = [I] * num_sites
+        op_list[i] = sz  
         return qt.tensor(op_list)
     H = 0
     for i in range(M):
@@ -29,7 +33,8 @@ def ising_2d_hamiltonian(M, N, J=1.0, h=0, periodic=False):
                 neighbor = ((i + 1) % M) * N + j  # Bottom neighbor (wrap if periodic)
                 H += -J * interaction_term(site, neighbor)
             # Transverse field term
-            H += -h * transverse_field_term(site)
+            H += -hx * transverse_field_term_x(site)
+            H += -hz * transverse_field_term_z(site)
     return qt.tensor(I,H)
 
 def all_two_qubit_set_NN(M, N):
