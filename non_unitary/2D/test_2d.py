@@ -4,16 +4,14 @@ from two_d_subroutines import *
 import time
 import matplotlib.pyplot as plt
 import random
-M=3
+M=2
 N=3
 H_tilde =  ising_2d_hamiltonian(M,N)
-
 two_qubit_set_tilde = all_two_qubit_set_NN(M,N)
 ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(M,N)
 
+rho_tilde = generate_spin_state(M,N, state_type='custom',custom_state = [1, 0, 1, 0,1,0] )
 
-# rho_tilde = generate_spin_state(3,3, state_type='custom',custom_state = [1, 1, 0, 0, 0, 0, 0, 0, 0] )
-all_rho_tilde = generate_all_spin_states(3,3)
 
 
 T_column = []
@@ -22,22 +20,28 @@ Gradient_norm_column = []
 
 dt = np.pi/100
 
-i=0
-for j in range(40):
-    rho_tilde = random.choice(all_rho_tilde)
-    i+=1
-    print('checking state: '+str(i))
-    E_final = driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt)
-    E_column.append(E_final)
-    print(E_final)
-print(E_column)
+# print('initial energy: '+ str(energy(rho_tilde,H_tilde)))
 
-# for i in range(50):
+all_rho_tilde = generate_all_spin_states(M,N)
+# for j in range(40):
+j=0
+for rho_tilde in all_rho_tilde:
+    # rho_tilde = random.choice(all_rho_tilde)
+    j+=1
+    print('checking state: '+str(j))
+    E_final, gradient_norm_final = driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt)
+    E_column.append(E_final)
+    Gradient_norm_column.append(gradient_norm_final)
+print(E_column)
+print(Gradient_norm_column)
+
+# for i in range(500):
 #     start_time = time.time()
     
 #     gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
+#     # if i == 0 :
 #     rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
-#     # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+
 #     # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
 #     # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
 #     rho = trace_out_rho_tilde(rho_tilde)

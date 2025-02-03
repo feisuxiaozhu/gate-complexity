@@ -30,7 +30,7 @@ def ising_2d_hamiltonian(M, N, J=1.0, h=0, periodic=False):
                 H += -J * interaction_term(site, neighbor)
             # Transverse field term
             H += -h * transverse_field_term(site)
-    return qt.tensor(qt.qeye(2),H)
+    return qt.tensor(I,H)
 
 def all_two_qubit_set_NN(M, N):
     num_sites = M * N  
@@ -177,6 +177,15 @@ def compute_hessian_diagonal(rho, H, gateset):
         K[j][j] = Kjk
     return K
 
+def optimizer_1step_pure_GD(rho, gradients, gateset, dt):
+    num_qubits = len(gateset[0].dims[0])
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        P += (gradients[i])* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
+
+
 def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
     num_qubits = len(gateset[0].dims[0])
     P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
@@ -212,18 +221,18 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
 
 
 def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt):
-    for i in range(15):
+    for i in range(1000):
         print('iteration: '+ str(i))
-        time_in = time.time()
+        # time_in = time.time()
         gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
-        time_final = time.time()
-        print('time to find gradient: ' + str(time_final-time_in))
+        # time_final = time.time()
+        # print('time to find gradient: ' + str(time_final-time_in))
         rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
         # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
-        time_in = time.time()
-        rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
-        time_final = time.time()
-        print('time for 1step ancilla update: ' + str(time_final-time_in))
+        # time_in = time.time()
+        # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
+        # time_final = time.time()
+        # print('time for 1step ancilla update: ' + str(time_final-time_in))
         # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
         rho = trace_out_rho_tilde(rho_tilde)
         rho_tilde = rho_to_rho_tilde(rho)
@@ -231,7 +240,7 @@ def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt
         E = energy(rho_tilde, H_tilde)
         
         # print(E)
-    return E
+    return (E, np.linalg.norm(gradients))
 
 
 
