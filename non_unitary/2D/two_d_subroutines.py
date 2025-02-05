@@ -43,6 +43,7 @@ def all_two_qubit_set_NN(M, N):
     pauli_ops = [sx, sy, sz]  
     one_qubit_gates = []
     two_qubit_gates = []
+    gate_descriptions = []
     def single_site_operator(op, site):
         return qt.tensor([op if k == site else I for k in range(num_sites)])
     def two_site_operator(op1, site1, op2, site2):
@@ -52,6 +53,10 @@ def all_two_qubit_set_NN(M, N):
         one_qubit_gates.append(qt.tensor(I,single_site_operator(sx, site)))  
         one_qubit_gates.append(qt.tensor(I,single_site_operator(sy, site)))  
         one_qubit_gates.append(qt.tensor(I,single_site_operator(sz, site)))  
+        gate_descriptions.append(f"Single-qubit X gate on site {site}")
+        gate_descriptions.append(f"Single-qubit Y gate on site {site}")
+        gate_descriptions.append(f"Single-qubit Z gate on site {site}")
+
     # Generate all nearest-neighbor two-qubit gates
     for i in range(M):
         for j in range(N):
@@ -59,16 +64,19 @@ def all_two_qubit_set_NN(M, N):
             # Interaction with right neighbor (horizontal)
             if j < N - 1:
                 neighbor = i * N + (j + 1)
-                for op1 in pauli_ops:
-                    for op2 in pauli_ops:
+                for op1, label1 in zip(pauli_ops, ["X", "Y", "Z"]):
+                    for op2, label2 in zip(pauli_ops, ["X", "Y", "Z"]):
                         two_qubit_gates.append(qt.tensor(I,two_site_operator(op1, site, op2, neighbor)))
+                        gate_descriptions.append(f"Two-qubit {label1} ⊗ {label2} gate between site {site} and site {neighbor}")
             # Interaction with bottom neighbor (vertical)
             if i < M - 1:
                 neighbor = (i + 1) * N + j
-                for op1 in pauli_ops:
-                    for op2 in pauli_ops:
+                for op1, label1 in zip(pauli_ops, ["X", "Y", "Z"]):
+                    for op2, label2 in zip(pauli_ops, ["X", "Y", "Z"]):
                         two_qubit_gates.append(qt.tensor(I,two_site_operator(op1, site, op2, neighbor)))
-    return one_qubit_gates + two_qubit_gates
+                        gate_descriptions.append(f"Two-qubit {label1} ⊗ {label2} gate between site {site} and site {neighbor}")
+
+    return one_qubit_gates + two_qubit_gates, gate_descriptions
 
 
 def ancilla_two_qubit_set(M,N):
@@ -224,16 +232,44 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     rho = evolve(rho, P, dt)
     return rho, second_derivatives
 
+def optimizer_1step_SGD_hessian(rho, gradients, gateset, dt0, H):
+    tolerance=1e-10
+    dt = dt0
+    num_qubits = len(gateset[0].dims[0])
+    Hessian = compute_hessian_diagonal(rho, H, gateset)
+    eigenvalues, eigenvectors = np.linalg.eigh(Hessian)
+    eigenvalues[np.abs(eigenvalues) < tolerance] = 0
+    D = np.diag(eigenvalues)
+    Q = eigenvectors
+    # residual = Hessian - Q @ D @ Q.T
+    # print(np.allclose(residual, np.zeros_like(Hessian), atol=1e-8)) 
+    eigenvalues = eigenvalues.real
+    negative_indices = np.where(eigenvalues < 0)[0]
+    # print(eigenvalues)
+    # print(negative_indices)
+    epsilon_col = [0 for _ in range(len(gradients))]
+    for index in negative_indices:
+        epsilon = np.random.normal(0,np.sqrt(dt))
+        epsilon_col[index] = epsilon
+  
+    epsilon_col = Q @ epsilon_col *10
+    P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
+    for i in range(len(gradients)):
+        P += (gradients[i]+epsilon_col[i])* gateset[i]
+    rho = evolve(rho, P, -dt)
+    return rho
 
 def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt):
     for i in range(1000):
-        print('iteration: '+ str(i))
+        if i%100==0:
+            print('iteration: '+ str(i))
         # time_in = time.time()
         gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
         # time_final = time.time()
         # print('time to find gradient: ' + str(time_final-time_in))
         rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
-        # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+        gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
+        rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
         # time_in = time.time()
         # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
         # time_final = time.time()
@@ -246,12 +282,5 @@ def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt
         
         # print(E)
     return (E, np.linalg.norm(gradients))
-
-
-
-
-
-
-
 
 
