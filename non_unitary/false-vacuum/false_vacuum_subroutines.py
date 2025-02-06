@@ -1,6 +1,7 @@
 import qutip as qt
 import numpy as np
 import itertools
+import matplotlib.pyplot as plt
 
 def H_TFIM(N,hx,hz):
     si = qt.qeye(2)  
@@ -15,6 +16,35 @@ def H_TFIM(N,hx,hz):
         H += -hz * qt.tensor([sz if j == i else si for j in range(N)])
     
     return qt.tensor(si,H)
+
+def rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc):
+    if N % 2 != 0:
+        raise ValueError("N must be even for periodic boundary conditions.")
+
+    sx, sz, I = qt.sigmax(), qt.sigmaz(), qt.qeye(2)
+    n_op = (I - sz) / 2
+    V_nn = C6 / (r0 ** 6)       # Nearest-neighbor interaction 
+    V_nnn = C6 / ((2 * r0) ** 6)  # Next-nearest-neighbor interaction
+    H = 0
+    # First term
+    for j in range(N):
+        H += (Omega / 2) * qt.tensor([sx if k == j else I for k in range(N)])
+    # Second term: Global detuning term 
+    for j in range(N):
+        H -= (Delta_glob+ (-1)**j*Delta_loc) * qt.tensor([n_op if k == j else I for k in range(N)])
+    # Third term: Interaction term with periodic boundary conditions
+    for j in range(N):
+        k_nn = (j + 1) % N  # Nearest neighbor
+        k_nnn = (j + 2) % N  # Next-nearest neighbor
+        # Nearest-neighbor interaction
+        H += V_nn * qt.tensor([
+            n_op if site == j or site == k_nn else I for site in range(N)
+        ])
+        # Next-nearest-neighbor interaction
+        H += V_nnn * qt.tensor([
+            n_op if site == j or site == k_nnn else I for site in range(N)
+        ])
+    return qt.tensor(I,H)
 
 def all_two_qubit_set_NN(N):
     operators = []
@@ -69,9 +99,9 @@ def create_spin_state(N, A):
     spin_states = []
     for i in range(N):
         if i in A:
-            spin_states.append(spin_up)
-        else:
             spin_states.append(spin_down)
+        else:
+            spin_states.append(spin_up)
     state = qt.tensor(spin_states)
     rho = state.proj()
     zero = qt.basis(2, 0).proj()
@@ -175,18 +205,54 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     return rho, second_derivatives
 
 def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt):
-    for i in range(50):
+    for i in range(500):
         gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
         rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
         # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
-        rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
+        # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
         # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
         rho = trace_out_rho_tilde(rho_tilde)
         rho_tilde = rho_to_rho_tilde(rho)
 
         E = energy(rho_tilde, H_tilde)
-        print('iteration: '+ str(i))
+        if i%100==0:
+            print('iteration: '+ str(i))
         # print(E)
     return E
 
     # print(rho_tilde.purity())
+
+def rydberg_landscape(N, Omega, C6, r0, Delta_glob,Delta_loc):
+    H = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc)
+    all_rho_tilde = generate_all_spin_states(N)
+    E_column = []
+    for rho_tilde in all_rho_tilde:
+        E_column.append(energy(rho_tilde, H))
+    plt.figure(figsize=(8, 5))
+    plt.plot(E_column, marker='o', linestyle='-', color='b')
+    plt.xlabel('Spin')
+    plt.ylabel('Energy')
+    title_text = (f"Energy Landscape (N={N}, Ω={Omega:.2f}, C₆={C6:.2f}, r₀={r0:.2f}, "
+                  f"Δ_glob={Delta_glob:.2f}, Δ_loc={Delta_loc:.2f})")
+    plt.title(title_text)
+    # plt.grid(True)
+    plt.show()
+
+
+def top_three_spin_configurations(rho):
+    N = int(np.log2(rho.shape[0]))  # Number of qubits
+    eigenvalues, eigenvectors = rho.eigenstates()
+
+    # Sort eigenvalues in descending order
+    sorted_indices = np.argsort(eigenvalues)[::-1]
+    top_indices = sorted_indices[:3]  # Get indices of the top three configurations
+
+    # Convert eigenvectors to computational basis representation
+    top_configurations = []
+    for idx in top_indices:
+        basis_state = eigenvectors[idx].full().flatten()  # Get eigenvector as an array
+        index = np.argmax(np.abs(basis_state))
+        spin_string = format(index, f"0{N}b")
+        top_configurations.append((spin_string, eigenvalues[idx].real))
+
+    return top_configurations

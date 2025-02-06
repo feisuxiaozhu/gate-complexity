@@ -4,15 +4,15 @@ from two_d_subroutines import *
 import time
 import matplotlib.pyplot as plt
 import random
-M=3
-N=3
+M=2
+N=5
 H_tilde =  ising_2d_hamiltonian(M,N,hx=0,hz=0)
 two_qubit_set_tilde,gate_description  = all_two_qubit_set_NN(M,N)
 ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(M,N)
 
 # rho_tilde = generate_spin_state(M,N, state_type='custom',custom_state = [1, 1, 1, 0,0,0] )
 
-rho_tilde = generate_spin_state(M,N, state_type='custom',custom_state = [1, 1, 1, 0,0,0,0,0,0] )
+rho_tilde = generate_spin_state(M,N, state_type='custom',custom_state = [1, 0, 0, 0,0,0,0,0,0,0] )
 # rho_tilde = generate_spin_state(M,N)
 
 T_column = []
@@ -39,12 +39,13 @@ for i in range(50):
     start_time = time.time()
     
     gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
-    # if i == 0 :
-    # rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
+    if i == 0 :
+        rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
     # gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
-    rho_tilde = optimizer_1step_SGD_hessian(rho_tilde, gradients, two_qubit_set_tilde, dt, H_tilde)
-    rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
-    # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+    # rho_tilde = optimizer_1step_SGD_hessian(rho_tilde, gradients, two_qubit_set_tilde, dt, H_tilde)
+    # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
+    else:
+        rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
     rho = trace_out_rho_tilde(rho_tilde)
     rho_tilde = rho_to_rho_tilde(rho)
 

@@ -161,7 +161,7 @@ def compute_hessian_old(rho, H, gateset):
             K[j][k] = Kjk
     return K
 
-def compute_hessian_new(rho, H, gateset):
+def compute_hessian(rho, H, gateset):
     d = len(gateset)
     K = np.zeros((d, d))
 
@@ -223,7 +223,7 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     dt=np.sqrt(dt0)
     num_qubits = len(ancilla_gateset[0].dims[0])
     start_time = time.time()
-    Hessian = compute_hessian_new(rho, H, ancilla_gateset)
+    Hessian = compute_hessian(rho, H, ancilla_gateset)
     end_time = time.time()  # Record end time
     elapsed_time = end_time - start_time
     print('Hessian compute time: '+ str(elapsed_time))
