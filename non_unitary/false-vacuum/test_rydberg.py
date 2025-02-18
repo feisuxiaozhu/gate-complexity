@@ -17,7 +17,7 @@ H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc)
 two_qubit_set_tilde = all_two_qubit_set_NN(N)
 ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(N)
 
-print(list(itertools.product([0, 1], repeat=N))[21])
+print(list(itertools.product([0, 1], repeat=N))[32])
 rho_tilde = create_spin_state(N,[1,3,5])
 print(energy(rho_tilde,H_tilde))
 all_rho_tilde = generate_all_spin_states(N)
