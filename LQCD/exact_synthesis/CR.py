@@ -1,11 +1,11 @@
 import sys
-from mpmath import pslq, im, re, sqrt, matrix, norm, mp
+from mpmath import pslq, im, re, sqrt, matrix, norm
 import numpy as np
 import csv
 import io
 
 # Follow the theoretical work from https://arxiv.org/pdf/2311.08696
-omega = -0.5 + 0.866025j
+omega = -0.5 + 0.8660254037844387j
 
 def read_approx(file_name):
     with open(file_name, 'r') as file:
@@ -19,7 +19,7 @@ def read_approx(file_name):
 
         # Split the line into parts based on a delimiter (e.g., comma, space)
             parts = line.split(',')
-            print(parts)
+            # print(parts)
             if len(parts)==9:
                 return parts
 
@@ -33,18 +33,18 @@ def isInR3(a):
 # Check if the input is in the ring R_{3}
   imgPart = im(a)
   realPart = re(a)
-
-  if abs(imgPart-0)<0.001:
+  # print(imgPart, realPart)
+  if abs(imgPart-0)<1e-9:
     a1=0
     
-  elif check_integer_division(imgPart,0.8660254038):
-    a1 =check_integer_division(imgPart,0.8660254038)
+  elif check_integer_division(imgPart,0.8660254037844387):
+    a1 =check_integer_division(imgPart,0.8660254037844387)
     
   else:
     return 0
   
 
-  if abs(realPart+a1/2)<0.001:
+  if abs(realPart+a1/2)<1e-9:
     a0 = 0
   elif check_integer_division(realPart+a1/2,1):
     a0 = check_integer_division(realPart+a1/2,1)
@@ -54,7 +54,7 @@ def isInR3(a):
   return 1
 
 def sde(z):
-  if abs(z-0)<0.001:
+  if abs(z-0)<1e-9:
     return 0
 #  print("z: ",z)
   # notice that z has to be in the ring R_{3,chi}, or it will become an infinite loop
@@ -71,28 +71,29 @@ def DMatrix(a,b,c):
   temp = matrix([[omega**a,0,0],[0,omega**b,0],[0,0,omega**c]])
   return temp
 
-def sdeReduceList(z):
-  H = matrix([[1,1,1],[1,omega,omega**2],[1,omega**2,omega]])/sqrt(-3)
-  S = matrix([[1,0,0],[0,omega,0],[0,0,1]])
-  R = matrix([[1,0,0],[0,1,0],[0,0,-1]])
-  X = matrix([[0,0,1],[1,0,0],[0,1,0]])
-  original_sde = [sde(z[0]),sde(z[1]),sde(z[2])]
-  print('original sde is:' + str(original_sde))
-  a_list = [0,1,2]
-  epsilon_list = [0,1]
-  delta_list = [0,1,2]
-  for a_0 in a_list:
-    for a_1 in a_list:
-      for a_2 in a_list:
-        for epsilon in epsilon_list:
-          for delta in delta_list:
-            D = DMatrix(a_0,a_1,a_2)
-            new_z = H*D*R**epsilon*X**delta*S*z
-            new_z1 = new_z[0]
-            new_z2 = new_z[1]
-            new_z3 = new_z[2]
-            new_sde = [sde(new_z1),sde(new_z2),sde(new_z3)]
-            print(new_sde)
+# def sdeReduceList(z):
+#   H = matrix([[1,1,1],[1,omega,omega**2],[1,omega**2,omega]])/sqrt(-3)
+#   S = matrix([[1,0,0],[0,omega,0],[0,0,1]])
+#   R = matrix([[1,0,0],[0,1,0],[0,0,-1]])
+#   X = matrix([[0,0,1],[1,0,0],[0,1,0]])
+#   original_sde = [sde(z[0]),sde(z[1]),sde(z[2])]
+#   print('original sde is:' + str(original_sde))
+#   a_list = [0,1,2]
+#   epsilon_list = [0,1]
+#   delta_list = [0,1,2]
+#   for a_0 in a_list:
+#     for a_1 in a_list:
+#       for a_2 in a_list:
+#         for epsilon in epsilon_list:
+#           for delta in delta_list:
+#             D = DMatrix(a_0,a_1,a_2)
+#             new_z = H*D*R**epsilon*X**delta*S*z
+#             new_z1 = new_z[0]
+#             new_z2 = new_z[1]
+#             new_z3 = new_z[2]
+#             print(new_z)
+#             new_sde = [sde(new_z1),sde(new_z2),sde(new_z3)]
+#             # print(new_sde)
 
 def sdeReduceOneRound(z):
   H = matrix([[1,1,1],[1,omega,omega**2],[1,omega**2,omega]])/sqrt(-3)
@@ -114,6 +115,7 @@ def sdeReduceOneRound(z):
             new_z1 = new_z[0]
             new_z2 = new_z[1]
             new_z3 = new_z[2]
+            # print(new_z)
             new_sde = [sde(new_z1),sde(new_z2),sde(new_z3)]
             # print(new_sde)
             if new_sde[0] == original_sde[0]-1:
@@ -137,7 +139,7 @@ def sdeReduceIteration(z):
   else:
     return 0
 
-def check_integer_division(a, divisor,tol=1e-2):
+def check_integer_division(a, divisor,tol=1e-3):
     # divisor = 0.8660254038
     result = a / divisor
     
@@ -162,15 +164,21 @@ else:
 
 parts=read_approx(file_name)
 testy = matrix([[float(parts[4])],[float(parts[5])+float(parts[6])*1j],[float(parts[7])+float(parts[8])*1j]])
+# print(sde(testy[0]),sde(testy[1]),sde(testy[2]))
 
-# testy = matrix([[191-82*omega],[4+1*omega],[15+8*omega]])/sqrt(-3)**10
-# print(testy[0]*sqrt(-3)**10,isInR3(testy[0]*sqrt(-3)**10))
-# print(sdeReduceOneRound(testy))
+# problem = (0.345602804445033 - 0.0641549186501988j)
+# print(sde(problem))
+# print(isInR3(problem))
+# result = sdeReduceOneRound(testy)
+# testy = result['reduced_z']
+# result = sdeReduceOneRound(testy)
+# print(result)
 
 # for part in parts:
 #     print(part+",",end='')
 z,count = sdeReduceIteration(testy)
-print(count)
+print(z)
+# print(count)
 
 
 
