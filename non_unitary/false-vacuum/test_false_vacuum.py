@@ -3,32 +3,27 @@ import numpy as np
 from false_vacuum_subroutines import *
 import matplotlib.pyplot as plt
 import pickle
-
-
+import random
 N=6
-H_tilde = H_TFIM(N,hx=0,hz=0.25)
+H_tilde = H_TFIM(N,hx=1,hz=0.25)
 two_qubit_set_tilde = all_two_qubit_set_NN(N)
 ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(N)
-
 all_down_tilde = create_spin_state(N,[])
 up_index = [i for i in range(N)]
 all_up_tilde = create_spin_state(N,up_index)
-
 rho_tilde = all_down_tilde
 all_rho_tilde = generate_all_spin_states(N)
-
-
 T_column = []
 E_column = []
 Gradient_norm_column = []
 Second_derivative_column = []
 dt = np.pi/100
-
+# all_rho_tilde = random.sample(all_rho_tilde,16)
 i=0
 for rho_tilde in all_rho_tilde:
     i+=1
     print(i)
-    E_final = driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt)
+    E_final = driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt,75)
     E_column.append(E_final)
     print(E_final)
 print(E_column)

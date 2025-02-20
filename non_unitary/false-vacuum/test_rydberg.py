@@ -3,7 +3,7 @@ import numpy as np
 from false_vacuum_subroutines import *
 import matplotlib.pyplot as plt
 import pickle
-
+import random
 N = 6
 Omega =  2*np.pi * 1
 r0 = 8.
@@ -31,6 +31,7 @@ dt = np.pi/1000
 
 
 
+# all_rho_tilde = random.sample(all_rho_tilde,1)
 
 i=0
 for rho_tilde in all_rho_tilde:
@@ -43,12 +44,14 @@ print(E_column)
 
 
 
-# for i in range(20):
+# for i in range(300):
 #     gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
 #     if i==0:
 #         rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
 #     else:
 #         rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+
+#     # rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
 #     # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
 #     # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
 #     rho = trace_out_rho_tilde(rho_tilde)

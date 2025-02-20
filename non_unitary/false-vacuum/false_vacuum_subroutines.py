@@ -181,7 +181,8 @@ def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
 
 def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     tolerance=1e-10
-    dt=np.sqrt(dt0)
+    dt = dt0*10 # for Rydberg
+    # dt=np.sqrt(dt0) # for TFIM
     num_qubits = len(ancilla_gateset[0].dims[0])
     
     Hessian = compute_hessian(rho, H, ancilla_gateset)
@@ -204,8 +205,8 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     rho = evolve(rho, P, dt)
     return rho, second_derivatives
 
-def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt):
-    for i in range(150):
+def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt, steps):
+    for i in range(steps):
         gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
         rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
         # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
@@ -215,7 +216,7 @@ def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt
         rho_tilde = rho_to_rho_tilde(rho)
 
         E = energy(rho_tilde, H_tilde)
-        if i%100==0:
+        if i%50==0:
             print('iteration: '+ str(i))
         # print(E)
     return E
