@@ -218,7 +218,7 @@ def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt
 
         E = energy(rho_tilde, H_tilde)
         if i%50==0:
-            print('iteration: '+ str(i))
+            print('iteration: '+ str(i) + ' energy: ' +str(E))
         # print(E)
     return E
 
