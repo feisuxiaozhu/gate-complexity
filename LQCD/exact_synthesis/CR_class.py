@@ -235,91 +235,124 @@ class EisensteinMatrix3x3:
         else:
             raise TypeError("Multiplication is defined only for EisensteinFraction, EisensteinMatrix3x3, or EisensteinVector3 objects.")
 
+def HMatrix():
+    omega = EisensteinFraction(EisensteinInteger(0, 1), 0)
+    omega2 = omega * omega
+    one_over_sqrt_neg3 = EisensteinFraction(EisensteinInteger(1, 0), 1)
 
-omega = EisensteinFraction(EisensteinInteger(0, 1), 0)
-omega2 = omega * omega
-one_over_sqrt_neg3 = EisensteinFraction(EisensteinInteger(1, 0), 1)
+    H_numerator = EisensteinMatrix3x3([
+        [
+            EisensteinFraction(EisensteinInteger(1, 0), 0),
+            EisensteinFraction(EisensteinInteger(1, 0), 0),
+            EisensteinFraction(EisensteinInteger(1, 0), 0)
+        ],
+        [
+            EisensteinFraction(EisensteinInteger(1, 0), 0),
+            omega,
+            omega2
+        ],
+        [
+            EisensteinFraction(EisensteinInteger(1, 0), 0),
+            omega2,
+            omega
+        ]
+    ])
+    H = H_numerator * one_over_sqrt_neg3
+    return H
 
-H_numerator = EisensteinMatrix3x3([
-    [
-        EisensteinFraction(EisensteinInteger(1, 0), 0),
-        EisensteinFraction(EisensteinInteger(1, 0), 0),
-        EisensteinFraction(EisensteinInteger(1, 0), 0)
-    ],
-    [
-        EisensteinFraction(EisensteinInteger(1, 0), 0),
-        omega,
-        omega2
-    ],
-    [
-        EisensteinFraction(EisensteinInteger(1, 0), 0),
-        omega2,
-        omega
-    ]
-])
-H = H_numerator * one_over_sqrt_neg3
+def SMatrix():
+    S = EisensteinMatrix3x3([
+        [
+            EisensteinFraction(EisensteinInteger(1, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0)
+        ],
+        [
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            omega,
+            EisensteinFraction(EisensteinInteger(0, 0), 0)
+        ],
+        [
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(1, 0), 0)
+        ]
+    ])
+    return S
 
-S = EisensteinMatrix3x3([
-    [
-        EisensteinFraction(EisensteinInteger(1, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0)
-    ],
-    [
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        omega,
-        EisensteinFraction(EisensteinInteger(0, 0), 0)
-    ],
-    [
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(1, 0), 0)
-    ]
-])
+def RMatrix():
+    R = EisensteinMatrix3x3([
+        [
+            EisensteinFraction(EisensteinInteger(1, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0)
+        ],
+        [
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(1, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0)
+        ],
+        [
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(-1, 0), 0)
+        ]
+    ])
+    return R
 
-R = EisensteinMatrix3x3([
-    [
-        EisensteinFraction(EisensteinInteger(1, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0)
-    ],
-    [
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(1, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0)
-    ],
-    [
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(-1, 0), 0)
-    ]
-])
+def XMatrix():
+    X = EisensteinMatrix3x3([
+        [
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(1, 0), 0)
+        ],
+        [
+            EisensteinFraction(EisensteinInteger(1, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0)
+        ],
+        [
+            EisensteinFraction(EisensteinInteger(0, 0), 0),
+            EisensteinFraction(EisensteinInteger(1, 0), 0),
+            EisensteinFraction(EisensteinInteger(0, 0), 0)
+        ]
+    ])
+    return X
 
-X = EisensteinMatrix3x3([
-    [
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(1, 0), 0)
-    ],
-    [
-        EisensteinFraction(EisensteinInteger(1, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0)
-    ],
-    [
-        EisensteinFraction(EisensteinInteger(0, 0), 0),
-        EisensteinFraction(EisensteinInteger(1, 0), 0),
-        EisensteinFraction(EisensteinInteger(0, 0), 0)
-    ]
-])
-print("H =")
-print(H)
-print("\nS =")
-print(S)
-print("\nR =")
-print(R)
-print("\nX =")
-print(X)
+def DMatrix(a, b, c):
+    # Suppose omega is an EisensteinInteger(0, 1).
+    # Define a zero fraction for the off-diagonal entries.
+    zero_fraction = EisensteinFraction(EisensteinInteger(0, 0), 0)
+
+    # Compute omega^a, omega^b, omega^c as Eisenstein integers,
+    # then make each one into an Eisenstein fraction with exponent 0.
+    omega_a = EisensteinFraction(EisensteinInteger(0, 1) ** a, 0)
+    omega_b = EisensteinFraction(EisensteinInteger(0, 1) ** b, 0)
+    omega_c = EisensteinFraction(EisensteinInteger(0, 1) ** c, 0)
+
+    # Build the diagonal matrix as a 3-by-3 matrix of EisensteinFraction entries.
+    return EisensteinMatrix3x3([
+        [omega_a, zero_fraction, zero_fraction],
+        [zero_fraction, omega_b, zero_fraction],
+        [zero_fraction, zero_fraction, omega_c]
+    ])
+
+
+# dmat = DMatrix(1, 2, 3)
+# print("DMatrix(1, 2, 3) =")
+# print(dmat)
+
+
+
+# print("H =")
+# print(H)
+# print("\nS =")
+# print(S)
+# print("\nR =")
+# print(R)
+# print("\nX =")
+# print(X)
 # Example usage:
 # It is assumed that EisensteinFraction, EisensteinInteger, and EisensteinVector3 have been defined.
 
