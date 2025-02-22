@@ -234,6 +234,33 @@ class EisensteinMatrix3x3:
             return EisensteinVector3(new_x, new_y, new_z)
         else:
             raise TypeError("Multiplication is defined only for EisensteinFraction, EisensteinMatrix3x3, or EisensteinVector3 objects.")
+        
+    def __pow__(self, exponent):
+        if not isinstance(exponent, int):
+            raise TypeError("Exponent must be an integer.")
+        if exponent < 0:
+            raise ValueError("Negative exponent is not supported.")
+        result = EisensteinMatrix3x3.identity()
+        base = self
+        e = exponent
+        # Repeated squaring
+        while e > 0:
+            if e % 2 == 1:
+                result = result * base
+            base = base * base
+            e //= 2
+        return result
+    
+    @staticmethod
+    def identity():
+        # Return the 3-by-3 identity matrix with EisensteinFraction entries.
+        one = EisensteinFraction(EisensteinInteger(1, 0), 0)
+        zero = EisensteinFraction(EisensteinInteger(0, 0), 0)
+        return EisensteinMatrix3x3([
+            [one, zero, zero],
+            [zero, one, zero],
+            [zero, zero, one]
+        ])
 
 def HMatrix():
     omega = EisensteinFraction(EisensteinInteger(0, 1), 0)
@@ -261,6 +288,7 @@ def HMatrix():
     return H
 
 def SMatrix():
+    omega = EisensteinFraction(EisensteinInteger(0, 1), 0)
     S = EisensteinMatrix3x3([
         [
             EisensteinFraction(EisensteinInteger(1, 0), 0),
@@ -338,6 +366,9 @@ def DMatrix(a, b, c):
         [zero_fraction, zero_fraction, omega_c]
     ])
 
+def ExtractSDE(vector: EisensteinVector3):
+    result = [vector.x.f, vector.y.f, vector.z.f]
+    return result
 
 # dmat = DMatrix(1, 2, 3)
 # print("DMatrix(1, 2, 3) =")
