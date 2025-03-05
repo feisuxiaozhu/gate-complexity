@@ -6,7 +6,7 @@ import pickle
 import random
 import os
 N=6
-H_tilde = H_TFIM(N,hx=0,hz=0.25)
+H_tilde = H_TFIM(N,hx=0.25,hz=0.25)
 two_qubit_set_tilde = all_two_qubit_set_NN(N)
 ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(N)
 all_down_tilde = create_spin_state(N,[])
@@ -20,6 +20,12 @@ Gradient_norm_column = []
 Second_derivative_column = []
 dt = np.pi/100
 
+# list_of_energyies=[]
+# for i in range(5):
+#     hx = i*0.25
+#     H_tilde = H_TFIM(N,hx,hz=0.25)
+#     list_of_energyies.append(ground_state_energy(H_tilde))
+# print(list_of_energyies)
 
 # check metastable state separation
 # i=0
@@ -204,9 +210,9 @@ dt = np.pi/100
 
 #1 v 1 for a single state, comparison between SGD and ancilla + SGD method.
 # divide into eight groups, each group contains 8 figures
-rho_tilde = create_spin_state(N,[0,2,4])
+rho_tilde = create_spin_state(N,[0,1,2,5])
 fig, axes = plt.subplots(1, 2, figsize=(16, 5))
-steps = 100
+steps = 50
 rho_tilde_SGD = rho_tilde.copy()
 rho_tilde_ancilla = rho_tilde.copy()
 top_three, top_state = top_three_spin_configurations(rho_tilde)
@@ -270,3 +276,8 @@ axes[1].set_ylabel('Gradient norm ')
 # filename = '1v1_omega2pi_100steps_set'+str(k+1) +'.pdf'
 # file_path = os.path.join(script_dir, filename)
 plt.show()
+print(T_column)
+print(E_column_SGD)
+print(E_column_ancilla)
+print(Gradient_norm_column_SGD)
+print(Gradient_norm_column_ancilla)

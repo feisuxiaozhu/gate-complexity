@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+import numpy as np
 # hz = 0.25, hx=0, 300 steps, ancilla + SGD, 16 random samples from all 64 possible initial states
 a=[-6.362512546535749, -6.408968461405659, -6.413570902400392, -3.4494436622809617, -6.370655426823487, -6.435457459137675, -6.405727221775655, -6.391405556645677, -6.374746037452868, -6.428278265604507, -6.374632019359057, -3.3664220782250935, -3.167588962034185, -6.435420186110975, -3.3972583687967215, -6.326025132856283]
 # hz = 0.25, hx=0.25, 300 steps, ancilla + SGD, 16 random samples from all 64 possible initial states
@@ -40,20 +40,38 @@ d=[-7.44238630268144, -7.441425681142082, -7.448164354143908, -7.429486881250249
 # hz = 0.25, hx=1, 100 steps, SGD, all 64 possible initial states
 e=[-8.189713664721205, -8.19112704757248, -8.192490745449787, -8.179783398188558, -8.190291137786655, -8.18282688042461, -8.171432397797302, -8.177254041990013, -8.19113627338354, -8.183708378819512, -8.168017989085559, -8.168903431864955, -8.155499543362247, -8.141432477141876, -8.153608080138088, -8.137948359154336, -8.19030856102643, -8.19757387479619, -8.195984710105533, -8.179805258834087, -8.177267633734692, -8.137855454564447, -8.14306541833658, -8.143511317843966, -8.170110443134933, -8.154873011048204, -8.144442713343274, -8.1134567246818, -8.134695347487504, -8.130280871896185, -8.125875646066385, -8.119556941445977, -8.189083261607514, -8.193600130522212, -8.190986749238572, -8.173004789543638, -8.186623176382279, -8.17379134819983, -8.159104716418982, -8.161109961310549, -8.176784421730519, -8.171347315622056, -8.126003850276527, -8.134047476886646, -8.142143503451772, -8.125860380422276, -8.128447492395216, -8.11985828672331, -8.177247174009203, -8.186935786794454, -8.189124474355113, -8.16747674875421, -8.160829560588093, -8.133067927377832, -8.140866811961669, -8.119398876320323, -8.162738173157297, -8.151557341490163, -8.139042358954647, -8.12184258473318, -8.134623416063498, -8.129674131989482, -8.13455247292295, -8.127334874329836]
 
+
+ground_state_energies = [np.float64(-6.5), np.float64(-6.605664158394072), np.float64(-6.923864630173677), np.float64(-7.457397588944909), np.float64(-8.207373050071812)]
 list_of_results = [a,b,c,d,e]
+
+plt.figure(figsize=(3.375, 2.5))  # PRL width, adjusted height
+plt.rcParams.update({'font.size': 8})  # Adjust font size for PRL
+
+scaling_factor = 0.3  # Adjust this to bring points closer together
+
 for i, numbers in enumerate(list_of_results):
-    y = [i] * len(numbers)  
-    plt.scatter(numbers, y, label=f"hx {i*0.25}", marker='o', s=10)
-plt.axvline(0, color='black', linewidth=0.5, linestyle='--')  
-plt.yticks(range(len(list_of_results)), [f"hx= {i*0.25}" for i in range(len(list_of_results))]) 
-plt.xlabel("Final energy")
-plt.title("100 stpes, pure SGD, hz=0.25")
-plt.legend()
+    y = [i * scaling_factor] * len(numbers)  # Scale down y values
+    hx_value = i * 0.25
+    plt.scatter(numbers, y, label=fr"$h_x={hx_value}$", marker='o', s=10)
+    plt.scatter(ground_state_energies[i], [i * scaling_factor], marker='x', color='black', s=50)
+
+plt.axvline(0, color='black', linewidth=0.5, linestyle='--')
+
+# Adjust y-ticks to reflect the scaled spacing
+plt.yticks([i * scaling_factor for i in range(len(list_of_results))], 
+           [fr"${i*0.25}$" for i in range(len(list_of_results))])
+
+plt.xlabel("Final energy", fontsize=8)
+plt.ylabel(r"$h_x$", fontsize=8)
+plt.title(r"$100$ SGD steps, $h_z=0.25$", fontsize=9)
+
 plt.grid(axis='x', linestyle='--', alpha=0.5)
+# plt.legend(fontsize=7, loc='best', frameon=False)
+plt.tight_layout()
+
+# Save for PRL
+plt.savefig("plot.pdf", dpi=300, bbox_inches='tight', format='pdf')
 plt.show()
-
-
-
 
 
 

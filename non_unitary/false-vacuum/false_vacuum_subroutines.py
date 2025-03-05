@@ -181,8 +181,8 @@ def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
 
 def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     tolerance=1e-10
-    # dt = dt0*10 # for Rydberg
-    dt=np.sqrt(dt0) # for TFIM
+    dt = dt0*10 # for Rydberg
+    # dt=np.sqrt(dt0) # for TFIM
     # dt = dt0
     num_qubits = len(ancilla_gateset[0].dims[0])
     
@@ -258,3 +258,8 @@ def top_three_spin_configurations(rho):
         top_configurations.append((spin_string, eigenvalues[idx].real))
     top_state = top_configurations[0][0]
     return top_configurations, top_state
+
+
+def ground_state_energy(H):
+    eigenvalues = H.eigenenergies()  
+    return min(eigenvalues)  
