@@ -17,6 +17,19 @@ def H_TFIM(N,hx,hz):
     
     return qt.tensor(si,H)
 
+
+# Define time-dependent hx(t) with an arbitrary initial and final value
+def hx_t(t, args):
+    hx_init = args["hx_init"]
+    hx_final = args["hx_final"]
+    return hx_init + (hx_final - hx_init) * (t / args["T_max"])  # Linear ramp
+
+# Construct time-dependent Hamiltonian
+def H_TFIM_time_dep(N, hz):
+    return [[H_TFIM(N, 1, hz), hx_t]]  # hx_t scales the Sx term
+
+
+
 def rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc):
     if N % 2 != 0:
         raise ValueError("N must be even for periodic boundary conditions.")
@@ -181,9 +194,9 @@ def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
 
 def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     tolerance=1e-10
-    dt = dt0*10 # for Rydberg
-    # dt=np.sqrt(dt0) # for TFIM
-    dt = dt0
+    # dt = dt0*10 # for Rydberg
+    dt=np.sqrt(dt0) # for TFIM
+    # dt = dt0
     num_qubits = len(ancilla_gateset[0].dims[0])
     
     Hessian = compute_hessian(rho, H, ancilla_gateset)

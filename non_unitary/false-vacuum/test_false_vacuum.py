@@ -6,10 +6,10 @@ import pickle
 import random
 import os
 N=6
-H_tilde = H_TFIM(N,hx=0.25,hz=0.25)
+H_tilde = H_TFIM(N,hx=1,hz=0.25)
 two_qubit_set_tilde = all_two_qubit_set_NN(N)
 ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(N)
-all_down_tilde = create_spin_state(N,[])
+rho_tilde = create_spin_state(N,[])
 up_index = [i for i in range(N)]
 all_up_tilde = create_spin_state(N,up_index)
 
@@ -19,6 +19,7 @@ E_column = []
 Gradient_norm_column = []
 Second_derivative_column = []
 dt = np.pi/100
+# print(energy(rho_tilde,H_tilde))
 
 # list_of_energyies=[]
 # for i in range(5):
@@ -26,6 +27,21 @@ dt = np.pi/100
 #     H_tilde = H_TFIM(N,hx,hz=0.25)
 #     list_of_energyies.append(ground_state_energy(H_tilde))
 # print(list_of_energyies)
+
+# list_of_metastable_energies = []
+# for i in range(5):
+#     hx_init = 0
+#     hx_final = i*0.25
+#     T_max = 1
+#     time_list = np.linspace(0, T_max,100)
+#     rho_initial = create_spin_state(N,[])
+#     # H_time_dep = H_TFIM_time_dep(N, hz=-0.25)
+#     # result = qt.mesolve(H_time_dep, rho_initial, time_list, [], [], args={"T_max": T_max, "hx_init": hx_init, "hx_final": hx_final})
+#     # # Extract final density matrix
+#     # rho_final = result.states[-1]
+#     list_of_metastable_energies.append(energy(rho_final,H_TFIM(N,hx_final,hz=0.25)))
+# print(list_of_metastable_energies)
+list_of_metastable_energies = [-3.5,-3.6521754430129625,-4.177989522499477,-5.1179157987952255]
 
 # check metastable state separation
 # i=0
@@ -88,43 +104,44 @@ dt = np.pi/100
 
 
 # single state long run
-# rho_tilde =create_spin_state(N,[1,2,3,4])
-# top_three, top_state = top_three_spin_configurations(rho_tilde)
-# for i in range(5000):
-#         gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
-#         rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
-#         # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
-#         rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
-#         # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
-#         rho = trace_out_rho_tilde(rho_tilde)
-#         rho_tilde = rho_to_rho_tilde(rho)
+rho_tilde =create_spin_state(N,[0,1,2,3,4,5])
+top_three, top_state = top_three_spin_configurations(rho_tilde)
+for i in range(20):
+        gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
+        rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
+        # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+        # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
+        # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+        rho = trace_out_rho_tilde(rho_tilde)
+        rho_tilde = rho_to_rho_tilde(rho)
 
-#         E = energy(rho_tilde, H_tilde)
-#         gradient_norm = np.linalg.norm(gradients)
-#         if i%100==0:
-#             print(i)
-#             print(E)
-#             print(gradient_norm)
-#         # print(compute_overlap_with_ground_state(H_tilde, rho_tilde))
-#         gradient_norm = np.linalg.norm(gradients)
-#         T_column.append(i)
-#         E_column.append(E)
-#         Gradient_norm_column.append(gradient_norm)
-#         # print(rho_tilde.purity())
-# fig, axes = plt.subplots(1, 2, figsize=(16, 5))
-# axes[0].plot(T_column, E_column)
-# axes[0].set_xlabel('t')
-# axes[0].set_ylabel('Energy')
-# axes[0].ticklabel_format(style='plain', axis='y', useOffset=False)
-# axes[0].set_ylim(-7, 6)
-# axes[0].set_title(top_state.removeprefix(top_state[0]))
-# axes[0].set_xticks([])
+        E = energy(rho_tilde, H_tilde)
+        gradient_norm = np.linalg.norm(gradients)
+        # if i%100==0:
+        #     print(i)
+        #     print(E)
+        #     print(gradient_norm)
+        # print(compute_overlap_with_ground_state(H_tilde, rho_tilde))
+        gradient_norm = np.linalg.norm(gradients)
+        T_column.append(i)
+        E_column.append(E)
+        Gradient_norm_column.append(gradient_norm)
+        # print(rho_tilde.purity())
+print(E)
+fig, axes = plt.subplots(1, 2, figsize=(16, 5))
+axes[0].plot(T_column, E_column)
+axes[0].set_xlabel('t')
+axes[0].set_ylabel('Energy')
+axes[0].ticklabel_format(style='plain', axis='y', useOffset=False)
+axes[0].set_ylim(-7, 6)
+axes[0].set_title(top_state.removeprefix(top_state[0]))
+axes[0].set_xticks([])
 
-# axes[1].plot(T_column, Gradient_norm_column)
-# axes[1].set_xlabel('t')
-# axes[1].set_ylabel('Gradient norm ')
-
-# plt.show()
+axes[1].plot(T_column, Gradient_norm_column)
+axes[1].set_xlabel('t')
+axes[1].set_ylabel('Gradient norm ')
+print(qt.tracedist(create_spin_state(N,[0,1,2,3,4,5]), rho_tilde))
+plt.show()
 
 
 
@@ -209,75 +226,74 @@ dt = np.pi/100
 
 
 #1 v 1 for a single state, comparison between SGD and ancilla + SGD method.
-# divide into eight groups, each group contains 8 figures
-rho_tilde = create_spin_state(N,[0,1,2,5])
-fig, axes = plt.subplots(1, 2, figsize=(16, 5))
-steps = 50
-rho_tilde_SGD = rho_tilde.copy()
-rho_tilde_ancilla = rho_tilde.copy()
-top_three, top_state = top_three_spin_configurations(rho_tilde)
-E_column_SGD = []
-Gradient_norm_column_SGD = []
-E_column_ancilla = []
-Gradient_norm_column_ancilla = []
-for i in range(steps):
-    if i%10 ==0:
-        print('at step: '+str(i+1))
-    # Do SGD 
-    gradients_SGD = compute_gradient(rho_tilde_SGD, H_tilde, two_qubit_set_tilde)
-    rho_tilde_SGD = optimizer_1step_SGD_no_scheduling(rho_tilde_SGD, gradients_SGD, two_qubit_set_tilde, dt)
-    # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
-    # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
-    rho = trace_out_rho_tilde(rho_tilde_SGD)
-    rho_tilde_SGD = rho_to_rho_tilde(rho)
-    E = energy(rho_tilde_SGD, H_tilde)
-    gradient_norm_SGD = np.linalg.norm(gradients_SGD)
-    
-    # print(E)
-    # print(gradient_norm_SGD)
-    T_column.append(i)
-    E_column_SGD.append(E)
-    Gradient_norm_column_SGD.append(gradient_norm_SGD)
+# rho_tilde = create_spin_state(N,[0,1,2,3,4,5])
+# fig, axes = plt.subplots(1, 2, figsize=(16, 5))
+# steps = 50
+# rho_tilde_SGD = rho_tilde.copy()
+# rho_tilde_ancilla = rho_tilde.copy()
+# top_three, top_state = top_three_spin_configurations(rho_tilde)
+# E_column_SGD = []
+# Gradient_norm_column_SGD = []
+# E_column_ancilla = []
+# Gradient_norm_column_ancilla = []
 # for i in range(steps):
-    # Do ancilla
-    gradients_ancilla = compute_gradient(rho_tilde_ancilla, H_tilde, two_qubit_set_tilde)
-    rho_tilde_ancilla = optimizer_1step_SGD_no_scheduling(rho_tilde_ancilla, gradients_ancilla, two_qubit_set_tilde, dt)
-    # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
-    rho_tilde_ancilla, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde_ancilla, ancilla_two_qubit_set_tilde , dt, H_tilde)
-    rho = trace_out_rho_tilde(rho_tilde_ancilla)
-    rho_tilde_ancilla = rho_to_rho_tilde(rho)
+#     if i%10 ==0:
+#         print('at step: '+str(i+1))
+#     # Do SGD 
+#     gradients_SGD = compute_gradient(rho_tilde_SGD, H_tilde, two_qubit_set_tilde)
+#     rho_tilde_SGD = optimizer_1step_SGD_no_scheduling(rho_tilde_SGD, gradients_SGD, two_qubit_set_tilde, dt)
+#     # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+#     # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
+#     rho = trace_out_rho_tilde(rho_tilde_SGD)
+#     rho_tilde_SGD = rho_to_rho_tilde(rho)
+#     E = energy(rho_tilde_SGD, H_tilde)
+#     gradient_norm_SGD = np.linalg.norm(gradients_SGD)
+    
+#     # print(E)
+#     # print(gradient_norm_SGD)
+#     T_column.append(i)
+#     E_column_SGD.append(E)
+#     Gradient_norm_column_SGD.append(gradient_norm_SGD)
+# # for i in range(steps):
+#     # Do ancilla
+#     gradients_ancilla = compute_gradient(rho_tilde_ancilla, H_tilde, two_qubit_set_tilde)
+#     rho_tilde_ancilla = optimizer_1step_SGD_no_scheduling(rho_tilde_ancilla, gradients_ancilla, two_qubit_set_tilde, dt)
+#     # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+#     rho_tilde_ancilla, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde_ancilla, ancilla_two_qubit_set_tilde , dt, H_tilde)
+#     rho = trace_out_rho_tilde(rho_tilde_ancilla)
+#     rho_tilde_ancilla = rho_to_rho_tilde(rho)
 
-    E = energy(rho_tilde_ancilla, H_tilde)
-    gradient_norm_ancilla = np.linalg.norm(gradients_ancilla)
-    # print(i)
-    # print(E)
-    # print(gradient_norm_ancilla)
-    E_column_ancilla.append(E)
-    Gradient_norm_column_ancilla.append(gradient_norm_ancilla)
+#     E = energy(rho_tilde_ancilla, H_tilde)
+#     gradient_norm_ancilla = np.linalg.norm(gradients_ancilla)
+#     # print(i)
+#     # print(E)
+#     # print(gradient_norm_ancilla)
+#     E_column_ancilla.append(E)
+#     Gradient_norm_column_ancilla.append(gradient_norm_ancilla)
 
-# print(T_column)
-# print(E_column_SGD)
-axes[0].plot(T_column, E_column_SGD, color='blue')
-axes[0].plot(T_column, E_column_ancilla,color='red')
-axes[0].set_xlabel('t')
-axes[0].set_ylabel('Energy')
-# axes[0].ticklabel_format(style='plain', axis='y')
-# axes[0].set_ylim(-65, 15)
-axes[0].set_title(top_state.removeprefix(top_state[0]))
-# axes[0].set_xticks([])
+# # print(T_column)
+# # print(E_column_SGD)
+# axes[0].plot(T_column, E_column_SGD, color='blue')
+# axes[0].plot(T_column, E_column_ancilla,color='red')
+# axes[0].set_xlabel('t')
+# axes[0].set_ylabel('Energy')
+# # axes[0].ticklabel_format(style='plain', axis='y')
+# # axes[0].set_ylim(-65, 15)
+# axes[0].set_title(top_state.removeprefix(top_state[0]))
+# # axes[0].set_xticks([])
 
-axes[1].plot(T_column, Gradient_norm_column_SGD,color='blue')
-axes[1].plot(T_column, Gradient_norm_column_ancilla,color='red')
-axes[1].set_xlabel('t')
-axes[1].set_ylabel('Gradient norm ')
+# axes[1].plot(T_column, Gradient_norm_column_SGD,color='blue')
+# axes[1].plot(T_column, Gradient_norm_column_ancilla,color='red')
+# axes[1].set_xlabel('t')
+# axes[1].set_ylabel('Gradient norm ')
 
-# print(compute_overlap_with_ground_state(H_tilde,rho_tilde))
-# script_dir = os.path.dirname(os.path.abspath(__file__))  # Get script location
-# filename = '1v1_omega2pi_100steps_set'+str(k+1) +'.pdf'
-# file_path = os.path.join(script_dir, filename)
-plt.show()
-print(T_column)
-print(E_column_SGD)
-print(E_column_ancilla)
-print(Gradient_norm_column_SGD)
-print(Gradient_norm_column_ancilla)
+# # print(compute_overlap_with_ground_state(H_tilde,rho_tilde))
+# # script_dir = os.path.dirname(os.path.abspath(__file__))  # Get script location
+# # filename = '1v1_omega2pi_100steps_set'+str(k+1) +'.pdf'
+# # file_path = os.path.join(script_dir, filename)
+# plt.show()
+# # print(T_column)
+# # print(E_column_SGD)
+# # print(E_column_ancilla)
+# # print(Gradient_norm_column_SGD)
+# # print(Gradient_norm_column_ancilla)
