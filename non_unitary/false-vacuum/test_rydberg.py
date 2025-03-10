@@ -6,7 +6,7 @@ import pickle
 import random
 import os
 N = 6
-Omega =  2*np.pi 
+Omega =  5*np.pi 
 r0 = 8.
 Rb = 9.76
 C6 = Rb**6*Omega
@@ -19,7 +19,7 @@ two_qubit_set_tilde = all_two_qubit_set_NN(N)
 ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(N)
 
 # print(list(itertools.product([0, 1], repeat=N))[32])
-rho_tilde = create_spin_state(N,[1,2])
+rho_tilde = create_spin_state(N,[1,3,5])
 # print(energy(rho_tilde,H_tilde))
 full_rho_tilde = generate_all_spin_states(N)
 # rydberg_landscape(N, Omega, C6, r0, Delta_glob,Delta_loc)
@@ -30,12 +30,14 @@ Gradient_norm_column = []
 Second_derivative_column = []
 dt = np.pi/1000
 
-list_of_energyies=[]
-for i in range(1,6):
-    Omega = i*np.pi 
-    H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc)
-    list_of_energyies.append(ground_state_energy(H_tilde))
-print(list_of_energyies)
+# list_of_energyies=[]
+# for i in range(1,6):
+#     Omega = i*np.pi 
+#     H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc)
+#     list_of_energyies.append(ground_state_energy(H_tilde))
+# print(list_of_energyies)
+
+metastable_energies = [-38.74178040308486, -41.63262826035188, -45.61503026245358,-50.521617385184896]
 
 # all_rho_tilde = random.sample(all_rho_tilde,1)
 
@@ -50,44 +52,44 @@ print(list_of_energyies)
 
 
 
-# for i in range(100):
-#     gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
-#     # if i==0:
-#     #     rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
-#     # else:
-#     #     rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+for i in range(50):
+    gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
+    # if i==0:
+    #     rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
+    # else:
+    #     rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
 
-#     rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
-#     rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
-#     # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
-#     rho = trace_out_rho_tilde(rho_tilde)
-#     rho_tilde = rho_to_rho_tilde(rho)
+    rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
+    # rho_tilde, second_derivatives = optimizer_1step_SGD_ancilla_no_scheduling(rho_tilde, ancilla_two_qubit_set_tilde , dt, H_tilde)
+    # rho_tilde = optimizer_1step_pure_GD(rho_tilde, gradients, two_qubit_set_tilde, dt)
+    rho = trace_out_rho_tilde(rho_tilde)
+    rho_tilde = rho_to_rho_tilde(rho)
 
-#     E = energy(rho_tilde, H_tilde)
-#     gradient_norm = np.linalg.norm(gradients)
-#     print('iteration: '+str(i))
-#     print('energy: ' + str(E))
-#     # print(gradient_norm)
-#     # print(top_three_spin_configurations(rho_tilde))
-#     # print(compute_overlap_with_ground_state(H_tilde, rho_tilde))
-#     gradient_norm = np.linalg.norm(gradients)
-#     T_column.append(i)
-#     E_column.append(E)
-#     Gradient_norm_column.append(gradient_norm)
-#     # print(rho_tilde.purity())
+    E = energy(rho_tilde, H_tilde)
+    gradient_norm = np.linalg.norm(gradients)
+    print('iteration: '+str(i))
+    print('energy: ' + str(E))
+    # print(gradient_norm)
+    # print(top_three_spin_configurations(rho_tilde))
+    # print(compute_overlap_with_ground_state(H_tilde, rho_tilde))
+    gradient_norm = np.linalg.norm(gradients)
+    T_column.append(i)
+    E_column.append(E)
+    Gradient_norm_column.append(gradient_norm)
+    # print(rho_tilde.purity())
+print(top_three_spin_configurations(rho_tilde))
+fig, axes = plt.subplots(1, 2, figsize=(16, 5))
+axes[0].plot(T_column, E_column)
+axes[0].set_xlabel('t')
+axes[0].set_ylabel('Energy')
+axes[0].ticklabel_format(style='plain', axis='y', useOffset=False)
 
-# fig, axes = plt.subplots(1, 2, figsize=(16, 5))
-# axes[0].plot(T_column, E_column)
-# axes[0].set_xlabel('t')
-# axes[0].set_ylabel('Energy')
-# axes[0].ticklabel_format(style='plain', axis='y', useOffset=False)
+axes[1].plot(T_column, Gradient_norm_column)
+axes[1].set_xlabel('t')
+axes[1].set_ylabel('Gradient norm (non ancilla gates)')
 
-# axes[1].plot(T_column, Gradient_norm_column)
-# axes[1].set_xlabel('t')
-# axes[1].set_ylabel('Gradient norm (non ancilla gates)')
-
-# # print(compute_overlap_with_ground_state(H_tilde,rho_tilde))
-# plt.show()
+# print(compute_overlap_with_ground_state(H_tilde,rho_tilde))
+plt.show()
 
 
 

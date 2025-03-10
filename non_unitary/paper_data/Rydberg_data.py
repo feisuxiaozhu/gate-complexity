@@ -18,6 +18,7 @@ list_of_results = [a,b,c,d,e]
 
 
 ground_state_energies =[np.float64(-58.57393075708798), np.float64(-60.50351434521007), np.float64(-63.74753969407684), np.float64(-68.32829924295996), np.float64(-74.20083815309168)]
+metastable_energies = ['holder',-38.74178040308486, -41.63262826035188, -45.61503026245358,-50.521617385184896]
 list_of_results = [a, b, c, d, e]  
 
 plt.figure(figsize=(3.375, 2.5))  # PRL-compatible size
@@ -28,8 +29,10 @@ scaling_factor = 0.3  # Adjust this to bring points closer together
 for i, numbers in enumerate(list_of_results):
     y = [i * scaling_factor] * len(numbers)  # Scale down y values
     hx_value = i * 0.25
-    plt.scatter(numbers, y, label=fr"$h_x={hx_value}$", marker='o', s=10)
-    plt.scatter(ground_state_energies[i], [i * scaling_factor], marker='x', color='black', s=50)
+    plt.scatter(numbers, y, label=fr"$h_x={hx_value}$", marker='o', s=15)
+    plt.scatter(ground_state_energies[i], [i * scaling_factor], marker='x', color='black', s=20)
+    if i != 0:
+        plt.scatter(metastable_energies[i], [i * scaling_factor], marker='d', color='black', s=10)
 plt.axvline(0, color='black', linewidth=0.5, linestyle='--')
 
 
