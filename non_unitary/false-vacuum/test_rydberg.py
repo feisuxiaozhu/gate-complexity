@@ -6,7 +6,7 @@ import pickle
 import random
 import os
 N = 6
-Omega =  5*np.pi 
+Omega =  0*np.pi 
 r0 = 8.
 Rb = 9.76
 C6 = Rb**6*Omega
@@ -31,13 +31,13 @@ Second_derivative_column = []
 dt = np.pi/1000
 
 # list_of_energyies=[]
-# for i in range(1,6):
+# for i in range(5):
 #     Omega = i*np.pi 
 #     H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc)
 #     list_of_energyies.append(ground_state_energy(H_tilde))
 # print(list_of_energyies)
 
-metastable_energies = [-38.74178040308486, -41.63262826035188, -45.61503026245358,-50.521617385184896]
+# metastable_energies = [-38.74178040308486, -41.63262826035188, -45.61503026245358,-50.521617385184896]
 
 # all_rho_tilde = random.sample(all_rho_tilde,1)
 
