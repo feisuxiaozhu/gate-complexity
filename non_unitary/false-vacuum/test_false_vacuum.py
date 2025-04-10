@@ -228,7 +228,7 @@ dt = np.pi/100
 
 
 #1 v 1 for a single state, comparison between SGD and ancilla + SGD method.
-rho_tilde = create_spin_state(N,[3,4,5])
+rho_tilde = create_spin_state(N,[0,1,2,5])
 fig, axes = plt.subplots(1, 2, figsize=(16, 5))
 steps = 50
 rho_tilde_SGD = rho_tilde.copy()

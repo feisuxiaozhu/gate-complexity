@@ -201,23 +201,32 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     
     Hessian = compute_hessian(rho, H, ancilla_gateset)
     d = Hessian.shape[0]
-    sigma = dt / d
+    # sigma = dt / d
+    sigma = dt 
     tolerance=-2*np.sqrt(d)*sigma
     noise = np.random.normal(0, np.sqrt(sigma), size=Hessian.shape)
     Hessian_noisy = Hessian + noise
     Hessian = 0.5 * (Hessian_noisy + Hessian_noisy.conj().T)
 
+    
     eigenvalues, eigenvectors = np.linalg.eigh(Hessian)
-    eigenvalues[np.abs(eigenvalues) < tolerance] = 0
-    Q = eigenvectors
-    
-    negative_indices = np.where(eigenvalues < 0)[0]
-    second_derivatives = [0 for _ in range(len(eigenvectors[0]))]
-    
-    for index in negative_indices:
-        second_derivatives[index] = eigenvalues[index]
 
-    second_derivatives = Q @ second_derivatives
+    ## use one eigenvector
+    min_idx = np.argmin(eigenvalues)
+    new_vector = np.zeros_like(eigenvalues)
+    new_vector[min_idx] = -1
+    Q = eigenvectors
+    second_derivatives = Q @ new_vector
+
+    ## use all eigenvectors
+    # eigenvalues[np.abs(eigenvalues) < tolerance] = 0
+    # Q = eigenvectors
+    # negative_indices = np.where(eigenvalues < 0)[0]
+    # second_derivatives = [0 for _ in range(len(eigenvectors[0]))]
+    # for index in negative_indices:
+    #     second_derivatives[index] = eigenvalues[index]
+    # second_derivatives = Q @ second_derivatives
+    
 
     P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])
     for i in range(len(second_derivatives)):
