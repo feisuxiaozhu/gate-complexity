@@ -194,8 +194,8 @@ def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
 
 def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     
-    # dt = dt0*10 # for Rydberg
-    dt=np.sqrt(dt0) # for TFIM
+    dt = dt0*10 # for Rydberg
+    # dt=np.sqrt(dt0) # for TFIM
     # dt = dt0
     num_qubits = len(ancilla_gateset[0].dims[0])
     
