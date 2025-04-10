@@ -193,13 +193,19 @@ def optimizer_1step_SGD_no_scheduling(rho, gradients, gateset, dt):
     return rho
 
 def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
-    tolerance=1e-10
+    
     # dt = dt0*10 # for Rydberg
     dt=np.sqrt(dt0) # for TFIM
     # dt = dt0
     num_qubits = len(ancilla_gateset[0].dims[0])
     
     Hessian = compute_hessian(rho, H, ancilla_gateset)
+    d = Hessian.shape[0]
+    sigma = dt / d
+    tolerance=-2*np.sqrt(d)*sigma
+    noise = np.random.normal(0, np.sqrt(sigma), size=Hessian.shape)
+    Hessian_noisy = Hessian + noise
+    Hessian = 0.5 * (Hessian_noisy + Hessian_noisy.conj().T)
 
     eigenvalues, eigenvectors = np.linalg.eigh(Hessian)
     eigenvalues[np.abs(eigenvalues) < tolerance] = 0
