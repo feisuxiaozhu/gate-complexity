@@ -66,7 +66,7 @@ plt.yticks([i * scaling_factor for i in range(len(list_of_results))],
 
 plt.xlabel("Final energy", fontsize=8)
 plt.ylabel(r"$h_x$", fontsize=8)
-plt.title(r"$100$ SGD steps, $h_z=0.25$", fontsize=9)
+plt.title(r"$100$ SSGD steps, $h_z=0.25$", fontsize=9)
 
 plt.grid(axis='x', linestyle='--', alpha=0.5)
 # plt.legend(fontsize=7, loc='best', frameon=False)

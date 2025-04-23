@@ -6,7 +6,7 @@ import pickle
 import random
 import os
 N = 6
-Omega =  2*np.pi 
+Omega =  5*np.pi 
 r0 = 8.
 Rb = 9.76
 C6 = Rb**6*Omega
@@ -30,44 +30,44 @@ Gradient_norm_column = []
 Second_derivative_column = []
 dt = np.pi/1000
 
-list_of_energyies=[]
-for i in range(4):
-    Omega = (i+1)*np.pi 
-    H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,-Delta_loc)
-    list_of_energyies.append(ground_state_energy(H_tilde))
-print(list_of_energyies)
+# list_of_energyies=[]
+# for i in range(4):
+#     Omega = (i+1)*np.pi 
+#     H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,-Delta_loc)
+#     list_of_energyies.append(ground_state_energy(H_tilde))
+# print(list_of_energyies)
 
 
-list_of_metastable_energies = []
-for i in range(4):
-    Omega = (i+1)*np.pi 
-    rho_tilde = create_spin_state(N,[1,3,5])
-    H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,-Delta_loc)
-    for i in range(300):
-        gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
-        rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
-        E = energy(rho_tilde, H_tilde)
-        if i%50==0:
-            print('iteration: '+ str(i) + ' energy: ' +str(E))
-    H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc)
-    list_of_metastable_energies.append(energy(rho_tilde,H_tilde))
-    # print(energy(rho_tilde,H_tilde))
-print(list_of_metastable_energies)
+# list_of_metastable_energies = []
+# for i in range(4):
+#     Omega = (i+1)*np.pi 
+#     rho_tilde = create_spin_state(N,[1,3,5])
+#     H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,-Delta_loc)
+#     for i in range(300):
+#         gradients = compute_gradient(rho_tilde, H_tilde, two_qubit_set_tilde)
+#         rho_tilde = optimizer_1step_SGD_no_scheduling(rho_tilde, gradients, two_qubit_set_tilde, dt)
+#         E = energy(rho_tilde, H_tilde)
+#         if i%50==0:
+#             print('iteration: '+ str(i) + ' energy: ' +str(E))
+#     H_tilde = rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc)
+#     list_of_metastable_energies.append(energy(rho_tilde,H_tilde))
+#     # print(energy(rho_tilde,H_tilde))
+# print(list_of_metastable_energies)
 
 
 
 # metastable_energies = [-38.74178040308486, -41.63262826035188, -45.61503026245358,-50.521617385184896]
 
-# all_rho_tilde = random.sample(all_rho_tilde,1)
 
-# i=0
-# for rho_tilde in full_rho_tilde:
-#     i+=1
-#     print(i)
-#     E_final = driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt,100)
-#     E_column.append(E_final)
-#     print(E_final)
-# print(E_column)
+
+i=0
+for rho_tilde in full_rho_tilde:
+    i+=1
+    print(i)
+    E_final = driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt,20)
+    E_column.append(E_final)
+    print(E_final)
+print(E_column)
 
 
 
