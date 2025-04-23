@@ -19,6 +19,7 @@ list_of_results = [a,b,c,d,e]
 
 ground_state_energies =[np.float64(-58.57393075708798), np.float64(-60.50351434521007), np.float64(-63.74753969407684), np.float64(-68.32829924295996), np.float64(-74.20083815309168)]
 metastable_energies = ['holder',-38.74178040308486, -41.63262826035188, -45.61503026245358,-50.521617385184896]
+new_meta_energy_by_quenching = ['holder',-35.24185145231475, -37.87831895242096, -42.35891031701157, -48.786975024770875]
 list_of_results = [a, b, c, d, e]  
 
 plt.figure(figsize=(3.375, 2.5))  # PRL-compatible size
