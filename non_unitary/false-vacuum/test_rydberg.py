@@ -6,7 +6,7 @@ import pickle
 import random
 import os
 N = 6
-Omega =  4*np.pi 
+Omega =  5*np.pi 
 r0 = 8.
 Rb = 9.76
 C6 = Rb**6*Omega
