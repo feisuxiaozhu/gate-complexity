@@ -59,6 +59,20 @@ def rydberg_hamiltonian_periodic(N, Omega, C6, r0, Delta_glob,Delta_loc):
         ])
     return qt.tensor(I,H)
 
+def neel_operator(N):
+    sz = qt.sigmaz()
+    si = qt.qeye(2)
+
+    N_op = 0
+    for j in range(N):
+        coeff = (-1)**j
+        op = qt.tensor([si]+[sz if k == j else si for k in range(N)])
+        N_op += coeff * op
+
+    return N_op / N
+
+
+
 def all_two_qubit_set_NN(N):
     operators = []
     single_qubit_gates = [qt.sigmax(), qt.sigmay(),qt.sigmaz()]  # Single-qubit X, Y, Z gates
@@ -245,10 +259,10 @@ def driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt
         rho_tilde = rho_to_rho_tilde(rho)
 
         E = energy(rho_tilde, H_tilde)
-        if i%50==0:
-            print('iteration: '+ str(i) + ' energy: ' +str(E))
+        if (i+1)%50==0 or i==0:
+            print('iteration: '+ str(i+1) + ' energy: ' +str(E))
         # print(E)
-    return E
+    return E,rho_tilde
 
     # print(rho_tilde.purity())
 

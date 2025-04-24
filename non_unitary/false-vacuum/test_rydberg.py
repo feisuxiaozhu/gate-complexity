@@ -6,10 +6,12 @@ import pickle
 import random
 import os
 N = 6
-Omega =  5*np.pi 
+Omega =  1*np.pi 
 r0 = 8.
 Rb = 9.76
 C6 = Rb**6*Omega
+
+Neel = neel_operator(N)
 
 Delta_glob = 2*np.pi * 2.5
 Delta_loc =  2*np.pi *0.625
@@ -19,13 +21,15 @@ two_qubit_set_tilde = all_two_qubit_set_NN(N)
 ancilla_two_qubit_set_tilde = ancilla_two_qubit_set(N)
 
 # print(list(itertools.product([0, 1], repeat=N))[32])
-rho_tilde = create_spin_state(N,[1,3,5])
+rho_tilde = create_spin_state(N,[0,2,4])
+# print((rho_tilde*Neel).tr().real)
 # print(energy(rho_tilde,H_tilde))
 full_rho_tilde = generate_all_spin_states(N)
 # rydberg_landscape(N, Omega, C6, r0, Delta_glob,Delta_loc)
 
 T_column = []
 E_column = []
+N_column = []
 Gradient_norm_column = []
 Second_derivative_column = []
 dt = np.pi/1000
@@ -64,10 +68,14 @@ i=0
 for rho_tilde in full_rho_tilde:
     i+=1
     print(i)
-    E_final = driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt,20)
+    E_final, rho_tilde = driver(rho_tilde,H_tilde,two_qubit_set_tilde,ancilla_two_qubit_set_tilde ,dt,150)
+    N_final = (rho_tilde*Neel).tr().real
     E_column.append(E_final)
+    N_column.append(N_final)
     print(E_final)
+    print(N_final)
 print(E_column)
+print(N_column)
 
 
 
