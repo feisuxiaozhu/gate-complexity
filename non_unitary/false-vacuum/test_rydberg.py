@@ -30,6 +30,7 @@ full_rho_tilde = generate_all_spin_states(N)
 T_column = []
 E_column = []
 N_column = []
+EN_column = []
 Gradient_norm_column = []
 Second_derivative_column = []
 dt = np.pi/1000
@@ -72,10 +73,12 @@ for rho_tilde in full_rho_tilde:
     N_final = (rho_tilde*Neel).tr().real
     E_column.append(E_final)
     N_column.append(N_final)
+    EN_column.append((E_final, N_final))
     print(E_final)
     print(N_final)
-print(E_column)
-print(N_column)
+# print(E_column)
+# print(N_column)
+print(EN_column)
 
 
 

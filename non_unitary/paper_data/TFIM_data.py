@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.lines as mlines
 # hz = 0.25, hx=0, 300 steps, ancilla + SGD, 16 random samples from all 64 possible initial states
 a=[-6.362512546535749, -6.408968461405659, -6.413570902400392, -3.4494436622809617, -6.370655426823487, -6.435457459137675, -6.405727221775655, -6.391405556645677, -6.374746037452868, -6.428278265604507, -6.374632019359057, -3.3664220782250935, -3.167588962034185, -6.435420186110975, -3.3972583687967215, -6.326025132856283]
 # hz = 0.25, hx=0.25, 300 steps, ancilla + SGD, 16 random samples from all 64 possible initial states
@@ -53,7 +54,7 @@ scaling_factor = 0.3  # Adjust this to bring points closer together
 for i, numbers in enumerate(list_of_results):
     y = [i * scaling_factor] * len(numbers)  # Scale down y values
     hx_value = i * 0.25
-    plt.scatter(numbers, y, label=fr"$h_x={hx_value}$", marker='o', s=15)
+    plt.scatter(numbers, y, label=fr"$h_x={hx_value}$", marker='o', color='orange', s=15)
     plt.scatter(ground_state_energies[i], [i * scaling_factor], marker='x', color='black', s=20)
     if i != 4:
         plt.scatter(metastable_energies[i], [i * scaling_factor], marker='d', color='black', s=10)
@@ -67,6 +68,19 @@ plt.yticks([i * scaling_factor for i in range(len(list_of_results))],
 plt.xlabel("Final energy", fontsize=8)
 plt.ylabel(r"$h_x$", fontsize=8)
 plt.title(r"$100$ SSGD steps, $h_z=0.25$", fontsize=9)
+
+
+sample_legend = mlines.Line2D([], [], color='orange', marker='o', linestyle='None',
+                              markersize=4, label='Energy at 100 step')
+ground_legend = mlines.Line2D([], [], color='black', marker='x', linestyle='None',
+                              markersize=3, label='Ground state energy')
+meta_legend   = mlines.Line2D([], [], color='black', marker='d', linestyle='None',
+                              markersize=3, label='Metastable state energy')
+
+plt.legend(handles=[sample_legend, ground_legend, meta_legend],
+           fontsize=6, loc='upper right', frameon=False)
+
+
 
 plt.grid(axis='x', linestyle='--', alpha=0.5)
 # plt.legend(fontsize=7, loc='best', frameon=False)
