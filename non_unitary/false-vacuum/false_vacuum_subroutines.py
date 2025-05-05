@@ -226,20 +226,20 @@ def optimizer_1step_SGD_ancilla_no_scheduling(rho, ancilla_gateset, dt0, H):
     eigenvalues, eigenvectors = np.linalg.eigh(Hessian)
 
     ## use one eigenvector
-    min_idx = np.argmin(eigenvalues)
-    new_vector = np.zeros_like(eigenvalues)
-    new_vector[min_idx] = -1
-    Q = eigenvectors
-    second_derivatives = Q @ new_vector
+    # min_idx = np.argmin(eigenvalues)
+    # new_vector = np.zeros_like(eigenvalues)
+    # new_vector[min_idx] = -1
+    # Q = eigenvectors
+    # second_derivatives = Q @ new_vector
 
     ## use all eigenvectors
-    # eigenvalues[np.abs(eigenvalues) < tolerance] = 0
-    # Q = eigenvectors
-    # negative_indices = np.where(eigenvalues < 0)[0]
-    # second_derivatives = [0 for _ in range(len(eigenvectors[0]))]
-    # for index in negative_indices:
-    #     second_derivatives[index] = eigenvalues[index]
-    # second_derivatives = Q @ second_derivatives
+    eigenvalues[np.abs(eigenvalues) < tolerance] = 0
+    Q = eigenvectors
+    negative_indices = np.where(eigenvalues < 0)[0]
+    second_derivatives = [0 for _ in range(len(eigenvectors[0]))]
+    for index in negative_indices:
+        second_derivatives[index] = eigenvalues[index]
+    second_derivatives = Q @ second_derivatives
     
 
     P = qt.tensor([qt.qzero(2) for _ in range(num_qubits)])

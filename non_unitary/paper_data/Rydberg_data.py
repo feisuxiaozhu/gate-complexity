@@ -65,54 +65,54 @@ k = [-0.8424148999577494, -0.8251074797615332, -0.863742580184864, -0.8537891954
 l=[-0.8022105096757796, -0.7881285338149843, -0.8213331363197882, -0.810708933715332, -0.7925263836084866, -0.7617370335608842, -0.8002317178367231, -0.7707722454803315, -0.8370808267093547, -0.8187351819646395, -0.8402676068226896, -0.8301267134498866, -0.8118683533218484, -0.7958875649031304, -0.8315251731750907, -0.8107358627369982, -0.7936259725943464, -0.7673242280424558, -0.8097775664034674, -0.7917883978282967, -0.7802686770952348, -0.7462760337696352, -0.7954866120936163, -0.760263805625826, -0.815676567789395, -0.7989930133927463, -0.821764938083428, -0.8140396727423653, -0.7879841167061735, -0.7691219384458287, -0.804426643098724, -0.7783585796443833, -0.8288018468494299, -0.8223893083157721, -0.8435481282728212, -0.8402198716037125, -0.8159281075679846, -0.8016832614460901, -0.8226067950960977, -0.8039836573960033, -0.8450649124722684, -0.8392327976020145, -0.8470339504848655, -0.8458139953687832, -0.8272384755750539, -0.8233903692930571, -0.8396261143566934, -0.8174163265689405, -0.8102302031176419, -0.7899475980055249, -0.82473527962274, -0.809372275808719, -0.8033475949241602, -0.7708183341853899, -0.8073715088836058, -0.7846830706217869, -0.8406634605717651, -0.8308920218594645, -0.8436325605621864, -0.8388605864436646, -0.8172531566605005, -0.8021672749665388, -0.8139398178758516, -0.793021449714009]  
 
 # Energy separation
-list_of_results = [a,b,c,d,e]
-ground_state_energies = [np.float64(-59.622762199745964), np.float64(-60.503514345210036), np.float64(-62.30163370252362), np.float64(-64.83413134439574), np.float64(-68.0122127144505)]
-metastable_energies = ['holder',-38.74178040308486, -41.63262826035188, -45.61503026245358,-50.521617385184896]
-new_meta_energy_by_quenching = ['holder',-35.24185145231475, -37.87831895242096, -42.35891031701157, -48.786975024770875]
-list_of_results = [a, b, c, d, e]  
+# list_of_results = [a,b,c,d,e]
+# ground_state_energies = [np.float64(-59.622762199745964), np.float64(-60.503514345210036), np.float64(-62.30163370252362), np.float64(-64.83413134439574), np.float64(-68.0122127144505)]
+# metastable_energies = ['holder',-38.74178040308486, -41.63262826035188, -45.61503026245358,-50.521617385184896]
+# new_meta_energy_by_quenching = ['holder',-35.24185145231475, -37.87831895242096, -42.35891031701157, -48.786975024770875]
+# list_of_results = [a, b, c, d, e]  
 
-plt.figure(figsize=(3.375, 2.5))  # PRL-compatible size
-plt.rcParams.update({'font.size': 8})  # PRL font size
+# plt.figure(figsize=(3.375, 2.5))  # PRL-compatible size
+# plt.rcParams.update({'font.size': 8})  # PRL font size
 
-scaling_factor = 0.3  # Adjust this to bring points closer together
+# scaling_factor = 0.3  # Adjust this to bring points closer together
 
-for i, numbers in enumerate(list_of_results):
-    y = [i * scaling_factor] * len(numbers)  # Scale down y values
-    hx_value = i * 0.25
-    colors = ['#FF9999' if t[1] > 0 else 'lightblue' for t in numbers]
-    plt.scatter([t[0] for t in numbers], y, label=fr"$h_x={hx_value}$", c=colors, marker='o', s=15)
-    plt.scatter(ground_state_energies[i], [i * scaling_factor], marker='x', color='black', s=20)
-    # if i != 0:
-    #     plt.scatter(metastable_energies[i], [i * scaling_factor], marker='d', color='black', s=10)
-plt.axvline(0, color='black', linewidth=0.5, linestyle='--')
-
-
-plt.yticks([i * scaling_factor for i in range(len(list_of_results))], 
-           [str(i+1) for i in range(len(list_of_results))])
-
-plt.xlabel(r"Final energy (MHz)", fontsize=8)
-plt.ylabel(r"$\Omega/\pi$", fontsize=8)
-plt.title(r"$150$ SSGD steps, Rydberg", fontsize=9)
+# for i, numbers in enumerate(list_of_results):
+#     y = [i * scaling_factor] * len(numbers)  # Scale down y values
+#     hx_value = i * 0.25
+#     colors = ['#FF9999' if t[1] > 0 else 'lightblue' for t in numbers]
+#     plt.scatter([t[0] for t in numbers], y, label=fr"$h_x={hx_value}$", c=colors, marker='o', s=15)
+#     plt.scatter(ground_state_energies[i], [i * scaling_factor], marker='x', color='black', s=20)
+#     # if i != 0:
+#     #     plt.scatter(metastable_energies[i], [i * scaling_factor], marker='d', color='black', s=10)
+# plt.axvline(0, color='black', linewidth=0.5, linestyle='--')
 
 
-sample_legend = mlines.Line2D([], [], color='lightblue', marker='o', linestyle='None',
-                              markersize=4, label=r'Energy at 150 step, $N_e<0$')
-sample_legend_2 = mlines.Line2D([], [], color='#FF9999', marker='o', linestyle='None',
-                              markersize=4, label=r'Energy at 150 step, $N_e>0$')
-ground_legend = mlines.Line2D([], [], color='black', marker='x', linestyle='None',
-                              markersize=3, label='Ground state energy')
-# meta_legend   = mlines.Line2D([], [], color='black', marker='d', linestyle='None',
-#                               markersize=3, label='Metastable state energy')
+# plt.yticks([i * scaling_factor for i in range(len(list_of_results))], 
+#            [str(i+1) for i in range(len(list_of_results))])
 
-plt.legend(handles=[sample_legend,sample_legend_2, ground_legend],
-           fontsize=6, loc='upper right', frameon=True)
+# plt.xlabel(r"Final energy (MHz)", fontsize=8)
+# plt.ylabel(r"$\Omega/\pi$", fontsize=8)
+# plt.title(r"$150$ SSGD steps, Rydberg", fontsize=9)
 
-plt.grid(axis='x', linestyle='--', alpha=0.5)
-plt.tight_layout()
 
-# Save as PDF for PRL submission
-plt.savefig("plot.pdf", dpi=300, bbox_inches='tight', format='pdf')
-plt.show()
+# sample_legend = mlines.Line2D([], [], color='lightblue', marker='o', linestyle='None',
+#                               markersize=4, label=r'Energy at 150 step, $N_e<0$')
+# sample_legend_2 = mlines.Line2D([], [], color='#FF9999', marker='o', linestyle='None',
+#                               markersize=4, label=r'Energy at 150 step, $N_e>0$')
+# ground_legend = mlines.Line2D([], [], color='black', marker='x', linestyle='None',
+#                               markersize=3, label='Ground state energy')
+# # meta_legend   = mlines.Line2D([], [], color='black', marker='d', linestyle='None',
+# #                               markersize=3, label='Metastable state energy')
+
+# plt.legend(handles=[sample_legend,sample_legend_2, ground_legend],
+#            fontsize=6, loc='upper right', frameon=True)
+
+# plt.grid(axis='x', linestyle='--', alpha=0.5)
+# plt.tight_layout()
+
+# # Save as PDF for PRL submission
+# plt.savefig("plot.pdf", dpi=300, bbox_inches='tight', format='pdf')
+# plt.show()
 
 
 # Neel number separation
@@ -146,8 +146,10 @@ plt.show()
 
 
 
+d = [(-63.8371439188579, -0.8413624029354575), (-63.14021605771938, -0.8182677762548847), (-64.25453916002282, -0.8621978910499212), (-63.872005622431814, -0.8496980798963727), (-63.07732830669948, -0.8220011099831199), (-61.41779358022245, -0.7492590856535474), (-63.59719409398372, -0.837153315202875), (-62.15205519534388, -0.7790722495716156), (-64.62990410451881, -0.8820900080156879), (-64.2964780583186, -0.865613786268155), (-64.63510480453971, -0.8844505470327054), (-64.29829909500903, -0.8737183098449391), (-63.93511899892336, -0.8543255045388524), (-63.472008114533175, -0.8316850162377418), (-64.48649532399659, -0.8773640594851656), (-63.90111613086941, -0.855470149317942), (-63.312349545334875, -0.8257270486461031), (-61.86340389972782, -0.7675966923274141), (-63.92882618603013, -0.8495587563812945), (-63.096324618419715, -0.8208480982167056), (-62.374656524919565, -0.7960791298425121), (-50.96346349732619, -0.07424598517876377), (-63.32699158306483, -0.8284429808549855), (-61.12527859107111, -0.7437440794231401), (-64.04958607975641, -0.8560418255555794), (-63.57337310249547, -0.8366077210978438), (-64.0626556178422, -0.860424319298149), (-63.929695274428454, -0.8539178849979163), (-62.89011286233262, -0.814126554086271), (-62.10004112006451, -0.7739660683183733), (-63.71516948693222, -0.8427896393266192), (-62.50454308928185, -0.8025112674922102), (-64.46571052837425, -0.8720369392957739), (-64.0675303056378, -0.8634970126473028), (-64.7049689478747, -0.8869325846401299), (-64.4756108258986, -0.8820414077871432), (-64.05938560225023, -0.8567954631805755), (-63.38661202295283, -0.8373837163893573), (-64.15835031311842, -0.8649483143270326), (-63.40010154515111, -0.841335852420087), (-64.69760102980648, -0.8879161734153274), (-64.4154973398343, -0.8807990199855088), (-64.7600176671625, -0.8901976867496051), (-64.50474794356391, -0.8864047663049306), (-64.1798822277502, -0.8676934848574515), (-64.01930680853296, -0.8643989102447572), (-64.56153718819145, -0.8840898616701149), (-63.50291794399141, -0.850600467024751), (-63.94859372901114, -0.8530336697176678), (-62.8979110478492, -0.8180412164420865), (-64.2885865520028, -0.8698589692576675), (-63.86347155780506, -0.8488199937434361), (-63.57606922499821, -0.8411511627846322), (-61.78425006309099, -0.7705226320592344), (-63.83663728915143, -0.8499728213455239), (-62.65173907111159, -0.8098361247868902), (-64.58322402970454, -0.884661969436162), (-64.3151821194521, -0.8763538754842742), (-64.58652115264418, -0.8868424494613862), (-64.49151239657796, -0.8826451808526115), (-63.8687752711852, -0.8569339618294255), (-63.259725178909, -0.841137809821347), (-63.924752770729896, -0.8556881431377606), (-62.14704468143267, -0.8221073579001077)]
 
-
-
-
-
+max_val = max(t[1] for t in d)
+indices = [i for i, t in enumerate(d) if t[1] == max_val]
+def index_to_binary_string(index):
+    return format(index, '06b')
+print(index_to_binary_string(indices[0]))
