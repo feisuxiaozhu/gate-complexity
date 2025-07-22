@@ -3,7 +3,21 @@ import numpy as np
 from qutip import basis, sigmax, sigmay, sigmaz, sesolve, expect, Qobj
 
 pauli = {1: sigmax(), 2: sigmay(), 3: sigmaz()}
-phi_plus = (basis(2, 0) + basis(2, 1)).unit()
+# phi_plus = (basis(2, 0) + basis(2, 1)).unit()
+
+def single_qubit_eigenstate(s, beta):
+    if beta == 1: 
+        ket_plus  = (basis(2, 0) + basis(2, 1)).unit()
+        ket_minus = (basis(2, 0) - basis(2, 1)).unit()
+        return ket_plus if s == 0 else ket_minus
+    if beta == 2:  
+        ket_plus_i  = (basis(2, 0) + 1j * basis(2, 1)).unit()
+        ket_minus_i = (basis(2, 0) - 1j * basis(2, 1)).unit()
+        return ket_plus_i if s == 0 else ket_minus_i
+    if beta == 3:  
+        return basis(2, s)   
+def def_phi_plus(s, beta):
+    return (single_qubit_eigenstate(s, beta) + single_qubit_eigenstate(1 - s, beta)).unit()
 
 def spectral_gap(H_tot):
     evals = H_tot.eigenenergies()
@@ -25,15 +39,15 @@ def decide_low_or_high(a, b, mean_x, mean_y):
     f     = np.imag(z * phase)              # Lemma 8 test function
     return 1 if f > 0 else 0
 
-def robust_gap_estimate(H_tot,O_c,O_s,upper,eps,N_shots,seed: None = None):
+def robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper,eps,N_shots,seed: None = None):
     a, b = 0.0, upper
     rng = np.random.default_rng(seed)
     # helper that returns the sign (+1 or −1) of the empirical mean
     def shot_sign(state, op):
-        mean = run_shots(state, op, N=N_shots, seed=rng.integers(1 << 32))
+        mean = run_shots(state, op, N=N_shots, seed=None)
         return 1.0 if mean >= 0 else -1.0
     while b - a > eps:
-        print(b-a)
+        # print(b-a)
         t = np.pi / (b - a)
         U = (-1j * H_tot * t).expm()
         psi_t = U * phi_plus
@@ -47,15 +61,16 @@ def robust_gap_estimate(H_tot,O_c,O_s,upper,eps,N_shots,seed: None = None):
     return 0.5 * (a + b)
 
 
-H_true = 0.3 * sigmaz() + 0.1 * sigmax()
-nu = 1.0
+
+H_true = 0.3 * sigmaz() + 0.1 * sigmax() + 0.5*sigmay()
+nu = 3.0
 Oc_table = {1: sigmaz(), 2: sigmax(), 3: sigmax()}
 Os_table = {1: sigmay(), 2: sigmaz(), 3: sigmay()}
 E_delta_vec = []
 E_delta_true =[]
 for s1 in (0,1):
     for beta in (1, 2, 3):
-        print('parameters',s1, beta)
+        # print('parameters',s1, beta)
         H_ctrl = 0.5 * s1 * pauli[beta]
         H_tot = H_true - nu * H_ctrl
         if s1 == 0:
@@ -63,8 +78,9 @@ for s1 in (0,1):
         else:
             O_c = Oc_table[beta]
             O_s = Os_table[beta]
-
-        gap_est = robust_gap_estimate(H_tot,O_c,O_s,upper=nu,eps=1e-4,N_shots=54)
+        phi_plus = def_phi_plus(s1,beta)
+        # phi_plus = def_phi_plus(1,3)
+        gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-3,N_shots=54000)
         E_delta_vec.append(gap_est)
         E_delta_true.append(float(spectral_gap(H_tot)))
 
