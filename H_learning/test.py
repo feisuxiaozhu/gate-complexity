@@ -9,31 +9,33 @@ def H_from_lambda(lmb):
     l1, l2, l3 = lmb
     return l1 * sigmaz() + l2 * sigmax() + l3 * sigmay()
 
-# settings = [
-#     (8, 1),
-#     (10, 2),
-#     (12, 3),
-# ]
+experiments = [(6,3),(8,3),(10,3),
+            # (6,1),(8,1),(10,1),
+            (6,2),(8,2),(10,2)] 
 
-settings = [(6,3),(8,3),(10,3),
-            (6,1),(8,1),(10,1),
-            (6,2),(8,2),(10,2)]  
+experiments = [(10,3), (10,2), (10,1)] 
 
 H_true = H_from_lambda(lambda_true)
 targets = []
-for (nu_i, beta_i) in settings:
+for (nu_i, beta_i) in experiments:
     H_ctrl_i = 0.5 * pauli[beta_i]
     H_tot_i = H_true - nu_i * H_ctrl_i
     targets.append(float(spectral_gap(H_tot_i)))
 targets = np.array(targets)
 
+
+# targets = np.array([
+#     delta_E_RFE(lambda_true[0], lambda_true[1], lambda_true[2], nu_i, beta_i)
+#     for (nu_i, beta_i) in experiments
+# ])
+
 def residuals(lmb):
     out = []
-    for (nu_i, beta_i), gap_i in zip(settings, targets):
+    for (nu_i, beta_i), gap_i in zip(experiments, targets):
         out.append(delta_E_RFE(lmb[0], lmb[1], lmb[2], nu_i, beta_i) - gap_i)
     return np.array(out)
 
-x0 = np.array([0.13, 0.55, 0.24])
+x0 = np.array([0.09, 0.51, 0.29])
 res = least_squares(residuals, x0)
 # print("status:", res.status, res.message)
 print("estimate lambda:", res.x)
