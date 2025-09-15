@@ -27,6 +27,7 @@ def residuals(lmb):
         values.append(gap - tgt)
     return np.array(values)
 
-x0 = np.array([0.09, 0.51, 0.29])
-res = least_squares(residuals, x0)
-print("estimate lambda:", res.x)
+if __name__ == "__main__":
+    x0 = np.array([0.09, 0.51, 0.29])
+    res = least_squares(residuals, x0)
+    print("estimate lambda:", res.x)

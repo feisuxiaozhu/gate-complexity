@@ -3,6 +3,8 @@ from qutip import basis, sigmax, sigmay, sigmaz,  expect
 import matplotlib.pyplot as plt
 
 pauli = {1: sigmax(), 2: sigmay(), 3: sigmaz()}
+Oc_table = {1: sigmaz(), 2: sigmaz(), 3: sigmax()}
+Os_table = {1: sigmay(), 2: -sigmax(), 3: -sigmay()}
 
 def single_qubit_eigenstate(s, beta):
     if beta == 1: 
@@ -15,6 +17,7 @@ def single_qubit_eigenstate(s, beta):
         return ket_plus_i if s == 0 else ket_minus_i
     if beta == 3:  
         return basis(2, s)   
+    
 def def_phi_plus(s, beta):
     return (single_qubit_eigenstate(s, beta) + single_qubit_eigenstate(1 - s, beta)).unit()
 
@@ -55,8 +58,6 @@ def robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper,eps,N_shots):
 
 def delta_E_RFE(lambda_1, lambda_2, lambda_3, nu, beta):
     H_true = lambda_1 * sigmaz() + lambda_2 * sigmax() + lambda_3*sigmay()
-    Oc_table = {1: sigmaz(), 2: sigmaz(), 3: sigmax()}
-    Os_table = {1: sigmay(), 2: -sigmax(), 3: -sigmay()}
     H_ctrl = 0.5 * pauli[beta]
     H_tot = H_true - nu * H_ctrl
     O_c = Oc_table[beta]
@@ -66,26 +67,24 @@ def delta_E_RFE(lambda_1, lambda_2, lambda_3, nu, beta):
     return gap_est
 
 
+if __name__ == "__main__":
+    H_true = 0.3 * sigmaz() + 0.1 * sigmax() + 0.5*sigmay()
+    nu = 10
+    E_delta_vec = []
+    E_delta_true =[]
+    for s1 in [1]:
+        for beta in [1,2,3]:
+            H_ctrl = 0.5 * s1 * pauli[beta]
+            H_tot = H_true - nu * H_ctrl
+            if s1 == 0:
+                O_c, O_s = sigmax(), sigmay()
+            else:
+                O_c = Oc_table[beta]
+                O_s = Os_table[beta]
+            phi_plus = def_phi_plus(s1,beta)
+            gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-3,N_shots=540)
+            E_delta_vec.append(gap_est)
+            E_delta_true.append(float(spectral_gap(H_tot)))
 
-# H_true = 0.3 * sigmaz() + 0.1 * sigmax() + 0.5*sigmay()
-# nu = 10
-# Oc_table = {1: sigmaz(), 2: sigmaz(), 3: sigmax()}
-# Os_table = {1: sigmay(), 2: -sigmax(), 3: -sigmay()}
-# E_delta_vec = []
-# E_delta_true =[]
-# for s1 in [1]:
-#     for beta in [1,2,3]:
-#         H_ctrl = 0.5 * s1 * pauli[beta]
-#         H_tot = H_true - nu * H_ctrl
-#         if s1 == 0:
-#             O_c, O_s = sigmax(), sigmay()
-#         else:
-#             O_c = Oc_table[beta]
-#             O_s = Os_table[beta]
-#         phi_plus = def_phi_plus(s1,beta)
-#         gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-3,N_shots=540)
-#         E_delta_vec.append(gap_est)
-#         E_delta_true.append(float(spectral_gap(H_tot)))
-
-# print(E_delta_vec)
-# print(E_delta_true)
+    print(E_delta_vec)
+    print(E_delta_true)
