@@ -63,7 +63,7 @@ def delta_E_RFE(lambda_1, lambda_2, lambda_3, nu, beta):
     O_c = Oc_table[beta]
     O_s = Os_table[beta]
     phi_plus = def_phi_plus(1, beta)
-    gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-3,N_shots=540)
+    gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-3,N_shots=10)
     return gap_est
 
 
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     E_delta_true =[]
     for s1 in [1]:
         for beta in [1,2,3]:
-            H_ctrl = 0.5 * s1 * pauli[beta]
+            H_ctrl = 0.5 * (2*s1-1) * pauli[beta]
             H_tot = H_true - nu * H_ctrl
             if s1 == 0:
                 O_c, O_s = sigmax(), sigmay()

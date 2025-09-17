@@ -6,6 +6,7 @@ pauli = {1: sigmax(), 2: sigmay(), 3: sigmaz()}
 _P = {'I': qeye(2), 'X': sigmax(), 'Y': sigmay(), 'Z': sigmaz()}
 ORDER = ["II","XI","YI","ZI","IX","IY","IZ",
          "XX","XY","XZ","YX","YY","YZ","ZX","ZY","ZZ"]
+# for s=1 only!
 Oc_table = {1: sigmaz(), 2: sigmaz(), 3: sigmax()}
 Os_table = {1: sigmay(), 2: -sigmax(), 3: -sigmay()}
 # (k, beta)
@@ -66,40 +67,107 @@ def H_ctrl_func(k, s1, s2, beta_1, beta_2):
     Similarly, if k=1, H_ctrl = s_1*pauli(beta_1) x I + 1/2*s_2* I x pauli(beta_2) 
     """
     H_ctrl = 0
-    if s1:
-        coeff1 = 0.5 if k == 0 else 1.0
-        H_ctrl += coeff1 * on_qubit(pauli[beta_1], 0, 2)
-    if s2:
-        coeff2 = 0.5 if k == 1 else 1.0
-        H_ctrl += coeff2 * on_qubit(pauli[beta_2], 1, 2)
+    coeff1 = 0.5 if k == 0 else 1.0
+    H_ctrl += coeff1 *(2*s1-1)* on_qubit(pauli[beta_1], 0, 2)
+    coeff2 = 0.5 if k == 1 else 1.0
+    H_ctrl += coeff2 *(2*s2-1)* on_qubit(pauli[beta_2], 1, 2)
     if isinstance(H_ctrl, int): # for case with all zero coeffs
         H_ctrl = 0 * tensor(qeye(2), qeye(2))
     return H_ctrl
 
 
+def check_conditions(Oc, Os, phi0, phi1):
+    # print(Os*phi0,1j*phi1)
+    return ((Oc*phi0-phi1).norm(), (Oc*phi1-phi0).norm(), (Os*phi0-1j*phi1).norm(), (Os*phi1+1j*phi0).norm())
 
-
-if __name__ == "__main__":
-    lambda_vec = [0.1, 0,0.,0, 0,0,0, 0.2,0,0, 0,0,0, 0,0,0] #Sanity checked
-    H_true = H_0(coeffs=lambda_vec) #Sanity checked
-    
-    k = 0
-    s1=1
-    s2=1
-    beta_1=1
-    beta_2=3
-    H_ctrl = H_ctrl_func(k,s1,s2,beta_1,beta_2) #Sanity checked
-    nu = 10
-    H_tot = H_true - nu * H_ctrl
+def Oc_Os_decider(k,s_1,s_2,beta_1,beta_2):
     if k==0:
         beta = beta_1
+        if s_1 == 1:
+            O_c = Oc_table_2q[(k,beta)]
+            O_s = Os_table_2q[(k,beta)]
+        else:
+            O_c = Oc_table_2q[(k,beta)]
+            O_s = -Os_table_2q[(k,beta)]
     else:
         beta = beta_2
-    O_c = Oc_table_2q[(k,beta)]
-    O_s = Oc_table_2q[(k,beta)]
-    phi_plus = def_phi_plus_2q(k,s1,s2, beta_1, beta_2)
-    gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-3,N_shots=540)
-    print(gap_est)
-    print(spectral_gap(H_tot))
+        if s_2==1:
+            O_c = Oc_table_2q[(k,beta)]
+            O_s = Os_table_2q[(k,beta)]
+        else:
+            O_c = Oc_table_2q[(k,beta)]
+            O_s = -Os_table_2q[(k,beta)]
+    return O_c, O_s
+
+# phi_0 = single_qubit_eigenstate(1,3)
+# phi_1 = single_qubit_eigenstate(1,3)
+# O_c = Oc_table[3]
+# O_s = Oc_table[3]
+# print(check_conditions(O_c, O_s, phi_0, phi_1))
+
+if __name__ == "__main__":
+    lambda_vec = [0.0, 0,0.2,0, 0.5,0,0, 0.2,0,0, 0,0.1,0, 0,0,0] #Sanity checked
+    H_true = H_0(coeffs=lambda_vec) #Sanity checked
+    # H_true = 0
+    # k = 0
+    # s1=0
+    # s2=0
+    # beta_1=2
+    # beta_2=1
+    # H_ctrl = H_ctrl_func(k,s1,s2,beta_1,beta_2) #Sanity checked
+    # nu = 10
+    # H_tot = H_true - nu * H_ctrl
+    # if k==0:
+    #     beta = beta_1
+    #     phi_0 = two_qubit_eigenstate(s1, s2, beta_1, beta_2)
+    #     phi_1 = two_qubit_eigenstate(1-s1, s2, beta_1, beta_2)
+    #     if s1 == 1:
+    #         O_c = Oc_table_2q[(k,beta)]
+    #         O_s = Os_table_2q[(k,beta)]
+    #     else:
+    #         O_c = Oc_table_2q[(k,beta)]
+    #         O_s = -Os_table_2q[(k,beta)]
+    # else:
+    #     beta = beta_2
+    #     phi_0 = two_qubit_eigenstate(s1, s2, beta_1, beta_2)
+    #     phi_1 = two_qubit_eigenstate(s1, 1-s2, beta_1, beta_2)
+    #     if s2==1:
+    #         O_c = Oc_table_2q[(k,beta)]
+    #         O_s = Os_table_2q[(k,beta)]
+    #     else:
+    #         O_c = Oc_table_2q[(k,beta)]
+    #         O_s = -Os_table_2q[(k,beta)]
+    # print('Oc+Os conditions: '+str(check_conditions(O_c, O_s, phi_0, phi_1)))
+    # # print(O_c*phi_1, phi_0)
+    # # phi_plus = def_phi_plus_2q(k,s1,s2, beta_1, beta_2)
+    # phi_plus = (phi_0 + phi_1).unit()
+    # # print(phi_plus)
+    # gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-3,N_shots=10)
+    # print('estimate: ' + str(gap_est))
+    # print('true gap: ' + str(spectral_gap(H_tot)))
     
-    
+    for k in [0,1]:
+        for s1 in [0,1]:
+            for s2 in [0,1]:
+                for beta_1 in [1,2,3]:
+                    for beta_2 in [1,2,3]:
+                        nu=20
+                        H_ctrl = H_ctrl_func(k,s1,s2,beta_1,beta_2) 
+                        H_tot = H_true - nu * H_ctrl
+                        if k==0:
+                            beta = beta_1
+                        else:
+                            beta = beta_2
+                        O_c, O_s = Oc_Os_decider(k, s1, s2, beta_1, beta_2)   
+                        if k==0:
+                            phi_0 = two_qubit_eigenstate(s1, s2, beta_1, beta_2)
+                            phi_1 = two_qubit_eigenstate(1-s1, s2, beta_1, beta_2)     
+                        else:
+                            phi_0 = two_qubit_eigenstate(s1, s2, beta_1, beta_2)
+                            phi_1 = two_qubit_eigenstate(s1, 1-s2, beta_1, beta_2)         
+                        # phi_plus = def_phi_plus_2q(k,s1,s2, beta_1, beta_2)
+                        phi_plus = (phi_0 + phi_1).unit()
+                        print('Oc+Os conditions: '+str(check_conditions(O_c, O_s, phi_0, phi_1)))
+                        gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-4,N_shots=10)
+                        gap_true = spectral_gap(H_tot)
+                        print(gap_est,gap_true)
