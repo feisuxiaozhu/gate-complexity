@@ -80,15 +80,16 @@ def H_ctrl_func(k, s1, s2, beta_1, beta_2):
 
 
 if __name__ == "__main__":
-    lambda_vec = [0.3, 0,0.1,0, 0,0,0, 0.2,0,0, 0,0,0, 0,0,0] #Sanity checked
+    lambda_vec = [0.1, 0,0.,0, 0,0,0, 0.2,0,0, 0,0,0, 0,0,0] #Sanity checked
     H_true = H_0(coeffs=lambda_vec) #Sanity checked
-    k = 1
+    
+    k = 0
     s1=1
     s2=1
     beta_1=1
-    beta_2=1
+    beta_2=3
     H_ctrl = H_ctrl_func(k,s1,s2,beta_1,beta_2) #Sanity checked
-    nu = 40
+    nu = 10
     H_tot = H_true - nu * H_ctrl
     if k==0:
         beta = beta_1
