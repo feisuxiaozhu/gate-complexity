@@ -116,8 +116,8 @@ if __name__ == "__main__":
     for k in [0,1]:
         for s1 in [0,1]:
             for s2 in [0,1]:
-                for beta_1 in [3]:
-                    for beta_2 in [3]:
+                for beta_1 in [1,2,3]:
+                    for beta_2 in [1,2,3]:
                         nu=10
                         H_ctrl = H_ctrl_func(k,s1,s2,beta_1,beta_2) 
                         H_tot = H_true - nu * H_ctrl
@@ -139,7 +139,7 @@ if __name__ == "__main__":
                         print(k,s1,s2,beta_1, beta_2)
                         print('energy: ' + str(phi_0.dag()*H_tot*phi_0))
                         print('Oc+Os conditions: '+str(check_conditions(O_c, O_s, phi_0, phi_1)))
-                        gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-4,N_shots=100)
+                        gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu+2.0 * H_true.norm() ,eps=1e-4,N_shots=10)
                         gap_true = spectral_gap(H_tot)
                         print(gap_est,gap_true)
                         print('diff: '+str(np.abs(gap_true-gap_est)))
