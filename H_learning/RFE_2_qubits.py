@@ -4,7 +4,7 @@ from RFE import robust_gap_estimate
 
 pauli = {1: sigmax(), 2: sigmay(), 3: sigmaz()}
 _P = {'I': qeye(2), 'X': sigmax(), 'Y': sigmay(), 'Z': sigmaz()}
-ORDER = ["II","XI","YI","ZI","IX","IY","IZ",
+ORDER = ["XI","YI","ZI","IX","IY","IZ",
          "XX","XY","XZ","YX","YY","YZ","ZX","ZY","ZZ"]
 # for s=1 only!
 Oc_table = {1: sigmaz(), 2: sigmaz(), 3: sigmax()}
@@ -110,7 +110,7 @@ def Oc_Os_decider(k,s_1,s_2,beta_1,beta_2):
 # print(check_conditions(O_c, O_s, phi_0, phi_1))
 
 if __name__ == "__main__":
-    lambda_vec = [0.0, 0.1,0.2,0.3, 0.5,0.6,0.3,0.2,0.1,0.1, 0.2,0.1,0.1, 0.3,0.22,0.15] #Sanity checked
+    lambda_vec = [0.1,0.2,0.3, 0.5,0.6,0.3,0.2,0.1,0.1, 0.2,0.1,0.1, 0.3,0.22,0.15] #Sanity checked
     H_true = H_0(coeffs=lambda_vec) #Sanity checked
     # H_true = 0      
     for k in [0,1]:
