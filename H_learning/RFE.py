@@ -26,14 +26,21 @@ def spectral_gap(H_tot):
     evals = np.sort(evals)        
     return evals[1] - evals[0]
 
-def run_shots(state,operator,N= 54,seed = None):
+def run_shots(state,operator,N= 54,seed = None,p=0.0):
     rng = np.random.default_rng(seed)
     exp_val = expect(operator, state)          
     p_plus   = (1.0 + exp_val) / 2.0    
     # Draw N Bernoulli trials: True = +1, False = −1
     outcomes = rng.random(N) < p_plus          
     # Convert True/False to +1/−1 and take the mean
-    return (2.0 * outcomes.astype(float) - 1.0).mean()
+    results = 2.0 * outcomes.astype(float) - 1.0
+    
+    # apply noise: flip sign with probability p
+    noise_mask = rng.random(N) < p
+    results[noise_mask] *= -1
+    
+    
+    return results.mean()
     
 def decide_low_or_high(a, b, mean_x, mean_y):
     z     = mean_x + 1j * mean_y            # complex sample

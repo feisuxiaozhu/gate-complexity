@@ -6,8 +6,7 @@ from RFE import (
     def_phi_plus, run_shots, decide_low_or_high
 )
 
-lambda_true = np.array([0.1, 0.5, 0.3])
-experiments = [(10, 3), (10, 2), (10, 1)]
+
 
 def H_from_lambda(lmb):
     l1, l2, l3 = lmb
@@ -40,7 +39,7 @@ def delta_E_RFE(lambda_1, lambda_2, lambda_3, nu, beta, eps, N_shots):
     O_c = Oc_table[beta]
     O_s = Os_table[beta]
     phi_plus = def_phi_plus(1, beta)
-    gap_est, total_time = robust_gap_estimate(phi_plus, H_tot, O_c, O_s, nu, eps, N_shots)
+    gap_est, total_time = robust_gap_estimate(phi_plus, H_tot, O_c, O_s, nu+H_true.norm(), eps, N_shots)
     return gap_est, total_time
 
 def residuals(lmb):
@@ -52,10 +51,13 @@ def residuals(lmb):
     return np.array(vals)
 
 if __name__ == "__main__":
-    eps = 1e-9
-    N_shots = 10
-    repeat = 200
-
+    lambda_true = np.array([0.1,0.5,0.3])
+    x0 = np.array([0.0,0.4,0.1])
+    nu=3
+    eps = 1e-4
+    N_shots = 13
+    repeat = 500
+    experiments = [(nu, 3), (nu, 2), (nu, 1)]
     counter = 0
     T_all_exp = []
     l2_error_all_exp = []
@@ -71,7 +73,7 @@ if __name__ == "__main__":
             targets.append(est_gap)
             total_T.append(T_used)
 
-        x0 = np.array([0.09, 0.51, 0.29])
+        
         res = least_squares(residuals, x0)
         result = res.x
         l2_error = np.linalg.norm(result - lambda_true, ord=2)
@@ -80,10 +82,10 @@ if __name__ == "__main__":
             counter += 1
             T_all_exp.append(np.mean(total_T))
             l2_error_all_exp.append(l2_error)
-
+    print(f"nu:  {nu}")
     print(f"repeat: {repeat}")
     print(f"eps: {eps:.3e}")
     print(f"N_shots: {N_shots}")
     print(f"success rate: {counter / repeat:.3f}")
     print("average l2 error: " + f"{np.mean(l2_error_all_exp):.3e}")
-    print("average total time: " + f"{np.mean(T_all_exp):.6f}")
+    print("average total time: " + f"{np.mean(T_all_exp):.3e}")
