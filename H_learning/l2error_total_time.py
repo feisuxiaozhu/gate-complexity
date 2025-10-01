@@ -54,8 +54,8 @@ if __name__ == "__main__":
     lambda_true = np.array([0.1,0.5,0.3])
     x0 = np.array([0.0,0.4,0.1])
     nu=4
-    eps = 1e-3
-    N_shots = 11
+    eps = 1e-6
+    N_shots = 16
     repeat = 500
     experiments = [(nu, 3), (nu, 2), (nu, 1)]
     counter = 0
@@ -73,7 +73,7 @@ if __name__ == "__main__":
             )
             targets.append(est_gap)
             temp_T += T_used
-        total_T.append(T_used)
+        total_T.append(temp_T)
 
         
         res = least_squares(residuals, x0)

@@ -10,6 +10,9 @@ l2_error = [1.791e-04,  1.300e-05, 1.280e-06, 1.747e-07, 1.328e-08,  1.361e-09,2
 T_total = [8.745e+03,1.179e+05, 8.953e+05,1.177e+07,1.430e+08]
 l2_error=[1.642e-03,1.345e-04, 1.648e-05, 1.404e-06, 1.208e-07]
 
+# N_shots = 13 and varies, repeat = 500, success rate >=90, eps start from eps = 1e-2 to 1e-6, (lambda_1,lambda_2,lambda_3) = (0.1,0.5,0.3)
+T_total = [ 2.624e+04,3.537e+05,3.099e+06,3.530e+07 ,4.289e+08]
+l2_error = [1.578e-03,1.267e-04,1.541e-05,1.458e-06,1.253e-07]
 
 T_total = np.array(T_total)
 l2_error = np.array(l2_error)
