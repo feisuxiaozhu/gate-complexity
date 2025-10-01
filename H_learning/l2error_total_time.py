@@ -53,9 +53,9 @@ def residuals(lmb):
 if __name__ == "__main__":
     lambda_true = np.array([0.1,0.5,0.3])
     x0 = np.array([0.0,0.4,0.1])
-    nu=3
-    eps = 1e-4
-    N_shots = 13
+    nu=4
+    eps = 1e-2
+    N_shots = 11
     repeat = 500
     experiments = [(nu, 3), (nu, 2), (nu, 1)]
     counter = 0
