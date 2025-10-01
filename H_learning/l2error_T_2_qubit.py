@@ -55,6 +55,7 @@ if __name__ == "__main__":
         # targets are RFE results, and should only be computed once and remain fixed in later least square algorithm!
         targets = []
         total_T = []
+        temp_T = 0
         for k in [0,1]:
                 for s1 in [0,1]:
                     for s2 in [0,1]:
@@ -72,7 +73,8 @@ if __name__ == "__main__":
                                 phi_plus = (phi_0 + phi_1).unit()
                                 gap_est, T_used = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,nu+2.0 * H_true.norm() ,eps,N_shots)
                                 targets.append(gap_est)
-                                total_T.append(T_used)
+                                temp_T += T_used
+        total_T.append(temp_T)
         
         res = least_squares(residuals, x0)
         result = res.x

@@ -54,7 +54,7 @@ if __name__ == "__main__":
     lambda_true = np.array([0.1,0.5,0.3])
     x0 = np.array([0.0,0.4,0.1])
     nu=4
-    eps = 1e-2
+    eps = 1e-3
     N_shots = 11
     repeat = 500
     experiments = [(nu, 3), (nu, 2), (nu, 1)]
@@ -65,13 +65,15 @@ if __name__ == "__main__":
     for _ in range(repeat):
         total_T = []
         targets = []
+        temp_T = 0
         for (nu, beta) in experiments:
             est_gap, T_used = delta_E_RFE(
                 lambda_true[0], lambda_true[1], lambda_true[2],
                 nu, beta, eps, N_shots
             )
             targets.append(est_gap)
-            total_T.append(T_used)
+            temp_T += T_used
+        total_T.append(T_used)
 
         
         res = least_squares(residuals, x0)
