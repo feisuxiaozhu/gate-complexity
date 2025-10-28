@@ -42,12 +42,13 @@ if __name__ == "__main__":
     x0 = np.array([0.11,0.21,0.32, 0.51,0.63,0.31,0.22,0.11,0.11, 0.22,0.11,0.11, 0.33,0.22,0.15])
     lambda_true = np.array([0.1,0.2,0.3, 0.5,0.6,0.3,0.2,0.1,0.1, 0.2,0.1,0.1, 0.3,0.22,0.15])
     nu=20
-    eps = 1e-6
-    N_shots=31
+    eps = 1e-2
+    N_shots=23
     repeat = 200
     counter = 0
     T_all_exp = []
     l2_error_all_exp = []
+    l2_error_unfiltered = []
     H_true = H_0(lambda_true)
     
     
@@ -79,6 +80,7 @@ if __name__ == "__main__":
         res = least_squares(residuals, x0)
         result = res.x
         l2_error = np.linalg.norm(result - lambda_true, ord=2)
+        l2_error_unfiltered.append(l2_error)
         if l2_error < eps:
             counter += 1
             T_all_exp.append(np.mean(total_T))
@@ -89,6 +91,7 @@ if __name__ == "__main__":
     print(f"N_shots: {N_shots}")
     print(f"success rate: {counter / repeat:.3f}")
     print("average l2 error: " + f"{np.mean(l2_error_all_exp):.3e}")
+    print("80 percentile l2 error: " +f"{np.percentile(l2_error_unfiltered, 80, method='nearest'):.3e}")
     print("average total time: " + f"{np.mean(T_all_exp):.3e}")
         
         
