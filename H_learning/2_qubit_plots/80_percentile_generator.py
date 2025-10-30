@@ -40,12 +40,14 @@ def residuals(lmb):
 
 if __name__ == "__main__":
     eps_col = [1e-2,1e-3,1e-4,1e-5,1e-6]
-    for eps in eps_col:
+    N_shots_col = [25,25,27,29,31]
+    for eps, N_shots in zip( eps_col, N_shots_col):
         x0 = np.array([0.11,0.21,0.32, 0.51,0.63,0.31,0.22,0.11,0.11, 0.22,0.11,0.11, 0.33,0.22,0.15])
         lambda_true = np.array([0.1,0.2,0.3, 0.5,0.6,0.3,0.2,0.1,0.1, 0.2,0.1,0.1, 0.3,0.22,0.15])
-        nu= 30
+        nu= 4
         # eps = 1e-2
-        N_shots=25
+        # N_shots=25
+        # print(eps, N_shots)
         repeat = 200
         counter = 0
         T_all_exp = []
