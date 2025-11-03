@@ -3,7 +3,8 @@ from qutip import sigmax, sigmay, sigmaz
 from scipy.optimize import least_squares
 from RFE import delta_E_RFE, pauli, spectral_gap, run_shots, decide_low_or_high
 from RFE_2_qubits import H_0, H_ctrl_func, two_qubit_eigenstate,Oc_Os_decider
-
+import pandas as pd
+import os
 
 def robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper,eps,N_shots):
     a, b = 0.0, upper
@@ -40,11 +41,11 @@ def residuals(lmb):
 
 if __name__ == "__main__":
     eps_col = [1e-2,1e-3,1e-4,1e-5,1e-6]
-    N_shots_col = [25,25,27,29,31]
+    N_shots_col = [25,27,29,31,33]
     for eps, N_shots in zip( eps_col, N_shots_col):
         x0 = np.array([0.11,0.21,0.32, 0.51,0.63,0.31,0.22,0.11,0.11, 0.22,0.11,0.11, 0.33,0.22,0.15])
         lambda_true = np.array([0.1,0.2,0.3, 0.5,0.6,0.3,0.2,0.1,0.1, 0.2,0.1,0.1, 0.3,0.22,0.15])
-        nu= 4
+        nu= 6
         # eps = 1e-2
         # N_shots=25
         # print(eps, N_shots)
@@ -85,19 +86,28 @@ if __name__ == "__main__":
             result = res.x
             l2_error = np.linalg.norm(result - lambda_true, ord=2)
             l2_error_unfiltered.append(l2_error)
+            
             if l2_error < eps:
                 counter += 1
                 T_all_exp.append(np.mean(total_T))
                 l2_error_all_exp.append(l2_error)
+        unfiltered_mean = np.mean(l2_error_unfiltered)
+        unfiltered_std = np.std(l2_error_unfiltered)
         print(f"nu:  {nu}")
         print(f"repeat: {repeat}")
         print(f"eps: {eps:.3e}")
         print(f"N_shots: {N_shots}")
         print(f"success rate: {counter / repeat:.3f}")
-        print("average l2 error: " + f"{np.mean(l2_error_all_exp):.3e}")
+        print("average l2 error (if success): " + f"{np.mean(l2_error_all_exp):.3e}")
         print("80 percentile l2 error: " +f"{np.percentile(l2_error_unfiltered, 80, method='nearest'):.3e}")
         print("average total time: " + f"{np.mean(T_all_exp):.3e}")
-            
+        print("average l2 error (unfiltered): " + f"{unfiltered_mean:.3e}")
+        print("std (unfiltered): " + f"{unfiltered_std:.3e}")
+        print("---------------------------------------------------")
+        filename = f"l2_error_nu{nu}_eps{eps}_shots{N_shots}.csv"
+        filepath = os.path.join("data", filename)
+        df = pd.DataFrame({'l2_error_unfiltered': l2_error_unfiltered})
+        df.to_csv(filepath, index=False)    
         
         
         
