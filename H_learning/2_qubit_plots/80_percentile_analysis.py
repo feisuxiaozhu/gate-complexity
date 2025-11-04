@@ -49,6 +49,7 @@ data = {
 
 
 
+
 # t_total and l2 error average when succes
 # data = {
 #     10: {
