@@ -56,7 +56,6 @@ if __name__ == "__main__":
         l2_error_unfiltered = []
         H_true = H_0(lambda_true)
         
-        
         for _ in range(repeat):
             # targets are RFE results, and should only be computed once and remain fixed in later least square algorithm!
             targets = []
