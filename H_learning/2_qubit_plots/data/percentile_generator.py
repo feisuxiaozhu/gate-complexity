@@ -1,6 +1,5 @@
 # python percentile_generator.py --dir data --glob "l2_error_*.csv" --column l2_error_unfiltered --shots 25
 # thank chat!
-
 import argparse, glob, os, re, sys
 import numpy as np
 import pandas as pd
@@ -8,9 +7,10 @@ from collections import defaultdict
 from typing import Dict, Tuple, Optional, List
 
 # Example filename: l2_error_nu3_eps1e-05_shots31.csv
-# Allow decimal or scientific eps, variable shots
+
 FILENAME_RE = re.compile(
-    r"nu(\d+)_eps([0-9.eE+-]+)_shots(\d+)\.csv$", re.IGNORECASE
+    r"nu([0-9]+(?:\.[0-9]+)?(?:[eE][+-]?\d+)?)_eps([0-9.eE+-]+)_shots(\d+)\.csv$",
+    re.IGNORECASE
 )
 
 # Fixed eps order for output
@@ -19,13 +19,13 @@ EPS_ORDER = [1e-2, 1e-3, 1e-4, 1e-5, 1e-6]
 # Preference order when multiple shots exist for the same (nu, eps)
 SHOTS_PREFERENCE = [25, 27, 29, 31, 33]
 
-def parse_name(path: str) -> Optional[Tuple[int, float, int]]:
+
+def parse_name(path):
     m = FILENAME_RE.search(os.path.basename(path))
     if not m:
         return None
-    nu = int(m.group(1))
-    # robust float parse: handles "0.0001", "1e-05", etc.
-    eps = float(m.group(2))
+    nu   = float(m.group(1))   # <-- was int(...)
+    eps  = float(m.group(2))
     shots = int(m.group(3))
     return nu, eps, shots
 
@@ -42,12 +42,14 @@ def pick_numeric_series(df: pd.DataFrame, force_col: Optional[str]) -> Tuple[str
         col = pref[0] if pref else num.columns[0]
     return col, num[col].to_numpy()
 
-def percentiles(arr: np.ndarray) -> Tuple[float, float, float]:
-    return (
-        float(np.percentile(arr, 25)),
-        float(np.percentile(arr, 50)),
-        float(np.percentile(arr, 75)),
-    )
+def percentiles(arr: np.ndarray):
+    # return p25, p35, median, p65, p75
+    p25 = float(np.percentile(arr, 25))
+    p35 = float(np.percentile(arr, 35))
+    med = float(np.percentile(arr, 50))
+    p65 = float(np.percentile(arr, 65))
+    p75 = float(np.percentile(arr, 75))
+    return p25, p35, med, p65, p75
 
 def f3e(x: Optional[float]) -> str:
     return "null" if x is None or (isinstance(x, float) and (np.isnan(x) or np.isinf(x))) else f"{x:.3e}"
@@ -95,15 +97,16 @@ def main():
 
     # Compute percentiles and structure output
     # map: nu -> eps -> (p25, median, p75)
-    stats_by_nu: Dict[int, Dict[float, Tuple[float, float, float]]] = defaultdict(dict)
+    # stats_by_nu: Dict[int, Dict[float, Tuple[float, float, float]]] = defaultdict(dict)
+    stats_by_nu: Dict[float, Dict[float, Tuple[float, float, float, float, float]]] = defaultdict(dict)
 
     for nu in sorted(chosen.keys()):
         for eps, path in chosen[nu].items():
             try:
                 df = pd.read_csv(path, header=0)  # skip header row only
                 col, arr = pick_numeric_series(df, args.column)
-                p25, med, p75 = percentiles(arr)
-                stats_by_nu[nu][eps] = (p25, med, p75)
+                p25, p35, med, p65, p75 = percentiles(arr)
+                stats_by_nu[nu][eps] = (p25, p35, med, p65, p75)
             except Exception as e:
                 print(f"ERROR processing {path}: {e}", file=sys.stderr)
 
@@ -113,17 +116,21 @@ def main():
         med_list: List[Optional[float]] = []
         p25_list: List[Optional[float]] = []
         p75_list: List[Optional[float]] = []
+        p35_list: List[Optional[float]] = []
+        p65_list: List[Optional[float]] = []
         for e in EPS_ORDER:
             triplet = stats_by_nu[nu].get(e)
             if triplet is None:
-                p25_list.append(None); med_list.append(None); p75_list.append(None)
+                p25_list.append(None); med_list.append(None); p75_list.append(None); p35_list.append(None); p65_list.append(None)
             else:
-                p25, med, p75 = triplet
-                p25_list.append(p25); med_list.append(med); p75_list.append(p75)
+                p25, p35, med, p65, p75 = triplet
+                p25_list.append(p25); med_list.append(med); p75_list.append(p75); p35_list.append(p35); p65_list.append(p65)
 
         print(f"  {nu}: {{")
         print(f"        \"median\": [{','.join(f3e(x) for x in med_list)}], ")
         print(f"        \"p25\": [{','.join(f3e(x) for x in p25_list)}], ")
+        print(f"        \"p35\": [{','.join(f3e(x) for x in p35_list)}], ")
+        print(f"        \"p65\": [{','.join(f3e(x) for x in p65_list)}], ")
         print(f"        \"p75\": [{','.join(f3e(x) for x in p75_list)}], ")
         print(f"    }},")
     print("}")
