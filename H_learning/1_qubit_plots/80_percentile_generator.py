@@ -54,7 +54,7 @@ N_shots_col = [25,27,29,31,33]
 for eps, N_shots in zip( eps_col, N_shots_col):
     x0 = np.array([0.09, 0.51, 0.29])
     lambda_true = np.array([0.1, 0.5, 0.3])
-    nu = 1.9
+    nu = 1.7
     repeat = 200
     counter = 0 
     T_all_exp = []
