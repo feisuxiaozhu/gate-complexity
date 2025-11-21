@@ -16,6 +16,24 @@ data = {
         "p75": [2.837e-02,2.893e-02,2.457e-02,2.544e-02,2.622e-02], 
         
     },
+    3.5: {
+        "T_total": [1.608e+06,1.320e+07,1.615e+08,1.966e+09,1.589e+10],
+        "median": [1.072e-03,2.164e-04,2.667e-04,9.993e-05,8.417e-05],
+        "p25": [8.332e-04,1.205e-04,1.325e-05,3.577e-06,7.372e-07],
+        "p35": [9.293e-04,1.338e-04,5.184e-05,1.786e-05,5.275e-06],
+        "p65": [2.543e-03,5.962e-04,6.646e-04,4.837e-04,4.608e-04],
+        "p75": [6.855e-03,1.911e-03,1.645e-03,8.359e-04,9.114e-04],
+    },
+     3.75: {
+        "T_total": [1.570e+06,1.289e+07,1.577e+08,1.920e+09,1.552e+10],
+        "median": [1.054e-03,1.680e-04,1.518e-04,4.526e-05,1.743e-05],
+        "p25": [8.203e-04,1.156e-04,1.070e-05,1.007e-06,1.529e-07],
+        "p35": [9.059e-04,1.255e-04,2.112e-05,3.793e-06,1.902e-06],
+        "p65": [1.391e-03,4.488e-04,9.828e-04,2.003e-04,1.639e-04],
+        "p75": [2.816e-03,1.371e-03,2.248e-03,9.236e-04,5.916e-04],
+
+
+    },
     4: {
         "T_total": [1.534e+06,1.259e+07,1.541e+08,1.876e+09,1.516e+10],
         "l2_mean": [8.678e-03,3.194e-03,3.400e-03,4.606e-03,1.943e-03],
@@ -71,45 +89,41 @@ data = {
         "p75": [9.986e-04,9.618e-05,1.252e-05,1.074e-06,8.828e-08],
         
     },
-    6: {
-        "T_total": [1.296e+06,1.596e+07,1.952e+08,1.585e+09,1.921e+10],
-        "l2_mean": [1.490e-03,5.329e-04,9.611e-05,1.886e-04,9.749e-05],
-        "std": [4.017e-03,2.253e-03,4.077e-04,1.167e-03,7.788e-04],
-        "median": [9.237e-04,8.329e-05,7.233e-06,9.112e-07,7.789e-08],
-        "p25": [8.150e-04,7.170e-05,6.382e-06,7.961e-07,6.785e-08],
-        "p35": [8.582e-04,7.684e-05,6.746e-06,8.413e-07,7.164e-08],
-        "p65": [9.889e-04,9.229e-05,7.788e-06,1.006e-06,8.418e-08],
-        "p75": [1.063e-03,9.891e-05,8.211e-06,1.074e-06,9.077e-08],
+    # 6: {
+    #     "T_total": [1.296e+06,1.596e+07,1.952e+08,1.585e+09,1.921e+10],
+    #     "l2_mean": [1.490e-03,5.329e-04,9.611e-05,1.886e-04,9.749e-05],
+    #     "std": [4.017e-03,2.253e-03,4.077e-04,1.167e-03,7.788e-04],
+    #     "median": [9.237e-04,8.329e-05,7.233e-06,9.112e-07,7.789e-08],
+    #     "p25": [8.150e-04,7.170e-05,6.382e-06,7.961e-07,6.785e-08],
+    #     "p35": [8.582e-04,7.684e-05,6.746e-06,8.413e-07,7.164e-08],
+    #     "p65": [9.889e-04,9.229e-05,7.788e-06,1.006e-06,8.418e-08],
+    #     "p75": [1.063e-03,9.891e-05,8.211e-06,1.074e-06,9.077e-08],
         
-    },
-    10: {
-        "T_total": [1.484e+06,1.826e+07,1.490e+08,1.814e+09,2.199e+10],
-        "l2_mean": [2.026e-03, 1.288e-03,4.069e-04,1.240e-03,9.841e-05],
-        "std": [7.585e-03,7.098e-03,2.776e-03,8.232e-03,1.182e-03],
-        "median": [7.626e-04,6.832e-05,8.992e-06,7.914e-07,6.764e-08],
-        "p25": [6.786e-04,5.948e-05,7.918e-06,6.713e-07,5.994e-08],
-        "p35": [7.143e-04,6.318e-05,8.274e-06,7.200e-07,6.254e-08],
-        "p65": [8.484e-04,7.514e-05,9.633e-06,8.592e-07,7.310e-08],
-        "p75": [9.043e-04,7.951e-05,1.013e-05,9.087e-07,7.812e-08],
-    },
-    25: {
-        "T_total": [1.179e+06,1.451e+07,1.775e+08,1.441e+09,1.747e+10],
-        "l2_mean": [3.762e-03,7.491e-04,4.385e-04,2.020e-04,4.266e-04],
-        "std": [1.369e-02,4.559e-03,2.345e-03,2.802e-03,5.442e-03],
-        "median": [1.014e-03,8.694e-05,7.433e-06,9.672e-07,8.431e-08],
-        "p25": [8.930e-04,7.512e-05,6.309e-06,8.249e-07,7.515e-08],
-        "p35": [9.353e-04,8.177e-05,6.839e-06,8.863e-07,7.901e-08],
-        "p65": [1.086e-03,9.340e-05,8.159e-06,1.026e-06,8.938e-08],
-        "p75": [1.161e-03,9.883e-05,8.475e-06,1.096e-06,9.443e-08],
-    },
+    # },
+    # 10: {
+    #     "T_total": [1.484e+06,1.826e+07,1.490e+08,1.814e+09,2.199e+10],
+    #     "l2_mean": [2.026e-03, 1.288e-03,4.069e-04,1.240e-03,9.841e-05],
+    #     "std": [7.585e-03,7.098e-03,2.776e-03,8.232e-03,1.182e-03],
+    #     "median": [7.626e-04,6.832e-05,8.992e-06,7.914e-07,6.764e-08],
+    #     "p25": [6.786e-04,5.948e-05,7.918e-06,6.713e-07,5.994e-08],
+    #     "p35": [7.143e-04,6.318e-05,8.274e-06,7.200e-07,6.254e-08],
+    #     "p65": [8.484e-04,7.514e-05,9.633e-06,8.592e-07,7.310e-08],
+    #     "p75": [9.043e-04,7.951e-05,1.013e-05,9.087e-07,7.812e-08],
+    # },
+    # 25: {
+    #     "T_total": [1.179e+06,1.451e+07,1.775e+08,1.441e+09,1.747e+10],
+    #     "l2_mean": [3.762e-03,7.491e-04,4.385e-04,2.020e-04,4.266e-04],
+    #     "std": [1.369e-02,4.559e-03,2.345e-03,2.802e-03,5.442e-03],
+    #     "median": [1.014e-03,8.694e-05,7.433e-06,9.672e-07,8.431e-08],
+    #     "p25": [8.930e-04,7.512e-05,6.309e-06,8.249e-07,7.515e-08],
+    #     "p35": [9.353e-04,8.177e-05,6.839e-06,8.863e-07,7.901e-08],
+    #     "p65": [1.086e-03,9.340e-05,8.159e-06,1.026e-06,8.938e-08],
+    #     "p75": [1.161e-03,9.883e-05,8.475e-06,1.096e-06,9.443e-08],
+    # },
     
 }
 
 def y_and_errors(med, p35, p65, p25=None, p75=None):
-    """Return y plus two asymmetric errorbars:
-       - yerr_box:  from p35–p65 (your current bar)
-       - yerr_whisk: from p25–p75 (whiskers), if provided
-    """
     med = np.asarray(med, float)
     p35 = np.asarray(p35, float)
     p65 = np.asarray(p65, float)
@@ -124,20 +138,29 @@ def y_and_errors(med, p35, p65, p25=None, p75=None):
 
     yerr_whisk = None
     if p25 is not None and p75 is not None:
-        p25 = np.asarray(p25, float)
-        p75 = np.asarray(p75, float)
+        p25 = np.asarray(p25, float); p75 = np.asarray(p75, float)
         lo_w = np.minimum(p25, p75)
         hi_w = np.maximum(p25, p75)
         y_upper_w = np.log10(1.0 / lo_w) - y
         y_lower_w = y - np.log10(1.0 / hi_w)
         yerr_whisk = np.vstack([y_lower_w, y_upper_w])
-
     return y, yerr_box, yerr_whisk
 
-plt.figure(figsize=(7, 5))
-slopes = {}
+# ---------------- PRL-ish style ----------------
+plt.rcParams.update({
+    "figure.dpi": 300, "savefig.dpi": 600,
+    "font.size": 8, "axes.labelsize": 9,
+    "xtick.labelsize": 8, "ytick.labelsize": 8,
+    "legend.fontsize": 7, "lines.linewidth": 1.2,
+    "axes.linewidth": 0.8, "mathtext.default": "it",
+})
 
-for nu, d in data.items():
+# PRL single-column width ~3.37 in
+fig = plt.figure(figsize=(3.37, 2.60))
+ax = plt.gca()
+
+# ---------------- plot ----------------
+for nu, d in sorted(data.items()):
     T_total = np.asarray(d["T_total"], float)
     med     = np.asarray(d["median"], float)
     p35     = np.asarray(d["p35"], float)
@@ -145,30 +168,32 @@ for nu, d in data.items():
     p25     = np.asarray(d["p25"], float)
     p75     = np.asarray(d["p75"], float)
 
-    log_T = np.log10(T_total)
+    x = np.log10(T_total)
     y, yerr_box, yerr_whisk = y_and_errors(med, p35, p65, p25, p75)
 
-    # Fit on median
-    slope, intercept = np.polyfit(log_T, y, 1)
-    slopes[nu] = (slope, intercept)
-
-    # Main (box) error bar: 35–65%
-    line = plt.errorbar(
-        log_T, y, yerr=yerr_box,
-        fmt='o-', capsize=3, elinewidth=1.4, alpha=0.95, label=f'ν={nu}'
+    line = ax.errorbar(
+        x, y, yerr=yerr_box,
+        fmt='o-', markersize=3, capsize=2.5,
+        elinewidth=1.0, alpha=0.95, label=rf'$\nu={nu}$'
     )
     color = line[0].get_color()
-
-    # Whiskers: 25–75% (no markers/line, just whiskers)
-    plt.errorbar(
-        log_T, y, yerr=yerr_whisk,
-        fmt='none', ecolor=color, elinewidth=0.9, alpha=0.6, capsize=6
+    ax.errorbar(
+        x, y, yerr=yerr_whisk,
+        fmt='none', ecolor=color, elinewidth=0.8, alpha=0.6, capsize=4
     )
 
-plt.xlabel('log10(T_total)')
-plt.ylabel('log10(1 / l2_error)  (median)')
-plt.title('Median with 35–65% bars and 25–75% whiskers')
-plt.grid(True, linestyle='--', alpha=0.6)
-plt.legend(ncol=2, frameon=False)
-plt.tight_layout()
+# ---- dotted slope-1 line, shifted down a bit ----
+x1, x2 = ax.get_xlim()
+y1, y2 = ax.get_ylim()
+dy = -0.45 * (y2 - y1)  # shift by 15% of y-range
+ax.plot([x1, x2], [x1 + dy, x2 + dy], ':', color='k', linewidth=1.0, label='slope $1$')
+
+# math axis labels
+ax.set_xlabel(r'$\log_{10} T_{\mathrm{total}}$')
+ax.set_ylabel(r'$\log_{10}(1/\varepsilon_{\ell_2})$')
+
+ax.grid(True, linestyle='--', linewidth=0.5, alpha=0.5)
+ax.legend(ncol=2, frameon=False, handlelength=2.0, columnspacing=0.8)
+
+fig.tight_layout()
 plt.show()

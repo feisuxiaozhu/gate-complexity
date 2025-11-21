@@ -1,8 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-# t_total, mean, std, varying shot 
+# ---------------- data (as given) ----------------
 data = {
   1.8: {
         "T_total": [4.941e+04,6.092e+05,7.454e+06,6.051e+07,7.337e+08],
@@ -54,11 +53,8 @@ data = {
     },
 }
 
+# ---------------- helpers ----------------
 def y_and_errors(med, p35, p65, p25=None, p75=None):
-    """Return y plus two asymmetric errorbars:
-       - yerr_box:  from p35–p65 (your current bar)
-       - yerr_whisk: from p25–p75 (whiskers), if provided
-    """
     med = np.asarray(med, float)
     p35 = np.asarray(p35, float)
     p65 = np.asarray(p65, float)
@@ -80,13 +76,28 @@ def y_and_errors(med, p35, p65, p25=None, p75=None):
         y_upper_w = np.log10(1.0 / lo_w) - y
         y_lower_w = y - np.log10(1.0 / hi_w)
         yerr_whisk = np.vstack([y_lower_w, y_upper_w])
-
     return y, yerr_box, yerr_whisk
 
-plt.figure(figsize=(7, 5))
-slopes = {}
+# ---------------- PRL-ish style ----------------
+plt.rcParams.update({
+    "figure.dpi": 300,
+    "savefig.dpi": 600,
+    "font.size": 8,
+    "axes.labelsize": 9,
+    "xtick.labelsize": 8,
+    "ytick.labelsize": 8,
+    "legend.fontsize": 7,
+    "lines.linewidth": 1.2,
+    "axes.linewidth": 0.8,
+    "mathtext.default": "it",
+})
 
-for nu, d in data.items():
+# PRL single-column width ~3.37 in
+fig = plt.figure(figsize=(3.37, 2.60))
+ax = plt.gca()
+
+# ---------------- plot ----------------
+for nu, d in sorted(data.items()):
     T_total = np.asarray(d["T_total"], float)
     med     = np.asarray(d["median"], float)
     p35     = np.asarray(d["p35"], float)
@@ -94,30 +105,34 @@ for nu, d in data.items():
     p25     = np.asarray(d["p25"], float)
     p75     = np.asarray(d["p75"], float)
 
-    log_T = np.log10(T_total)
+    x = np.log10(T_total)
     y, yerr_box, yerr_whisk = y_and_errors(med, p35, p65, p25, p75)
 
-    # Fit on median
-    slope, intercept = np.polyfit(log_T, y, 1)
-    slopes[nu] = (slope, intercept)
-
-    # Main (box) error bar: 35–65%
-    line = plt.errorbar(
-        log_T, y, yerr=yerr_box,
-        fmt='o-', capsize=3, elinewidth=1.4, alpha=0.95, label=f'ν={nu}'
+    line = ax.errorbar(
+        x, y, yerr=yerr_box, fmt='o-', markersize=3, capsize=2.5,
+        elinewidth=1.0, alpha=0.95, label=rf'$\nu={nu}$'
     )
     color = line[0].get_color()
-
-    # Whiskers: 25–75% (no markers/line, just whiskers)
-    plt.errorbar(
-        log_T, y, yerr=yerr_whisk,
-        fmt='none', ecolor=color, elinewidth=0.9, alpha=0.6, capsize=6
+    ax.errorbar(
+        x, y, yerr=yerr_whisk, fmt='none',
+        ecolor=color, elinewidth=0.8, alpha=0.6, capsize=4
     )
 
-plt.xlabel('log10(T_total)')
-plt.ylabel('log10(1 / l2_error)  (median)')
-plt.title('Median with 35–65% bars and 25–75% whiskers')
-plt.grid(True, linestyle='--', alpha=0.6)
-plt.legend(ncol=2, frameon=False)
-plt.tight_layout()
+# dotted slope-1 guide (any intercept)
+x1, x2 = ax.get_xlim()
+b = -1.5
+ax.plot([x1, x2], [x1 + b, x2 + b], ':', color='k', linewidth=1.0, label='slope $1$')
+
+# math axis labels
+ax.set_xlabel(r'$\log_{10} T_{\mathrm{total}}$')
+ax.set_ylabel(r'$\log_{10}(1/\epsilon_{\ell_2})$')
+
+ax.grid(True, linestyle='--', linewidth=0.5, alpha=0.5)
+ax.legend(ncol=2, frameon=False, handlelength=2.0, columnspacing=0.8)
+
+fig.tight_layout()
 plt.show()
+
+# To save for submission:
+# fig.savefig("prl_single_column_plot.pdf", bbox_inches="tight")
+# fig.savefig("prl_single_column_plot.png", bbox_inches="tight")

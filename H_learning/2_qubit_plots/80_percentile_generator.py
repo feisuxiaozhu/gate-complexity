@@ -45,7 +45,7 @@ if __name__ == "__main__":
     for eps, N_shots in zip( eps_col, N_shots_col):
         x0 = np.array([0.11,0.21,0.32, 0.51,0.63,0.31,0.22,0.11,0.11, 0.22,0.11,0.11, 0.33,0.22,0.15])
         lambda_true = np.array([0.1,0.2,0.3, 0.5,0.6,0.3,0.2,0.1,0.1, 0.2,0.1,0.1, 0.3,0.22,0.15])
-        nu= 4.8
+        nu= 3.75
         # eps = 1e-2
         # N_shots=25
         # print(eps, N_shots)
