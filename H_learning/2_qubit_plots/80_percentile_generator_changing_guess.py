@@ -56,7 +56,7 @@ if __name__ == "__main__":
             # eps = 1e-2
             # N_shots=25
             # print(eps, N_shots)
-            repeat = 1
+            repeat = 200
             counter = 0
             T_all_exp = []
             l2_error_all_exp = []
