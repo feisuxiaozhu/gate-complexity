@@ -146,28 +146,35 @@ def y_and_errors(med, p35, p65, p25=None, p75=None):
 
     yerr_whisk = None
     if p25 is not None and p75 is not None:
-        p25 = np.asarray(p25, float); p75 = np.asarray(p75, float)
+        p25 = np.asarray(p25, float)
+        p75 = np.asarray(p75, float)
         lo_w = np.minimum(p25, p75)
         hi_w = np.maximum(p25, p75)
         y_upper_w = np.log10(1.0 / lo_w) - y
         y_lower_w = y - np.log10(1.0 / hi_w)
         yerr_whisk = np.vstack([y_lower_w, y_upper_w])
+
     return y, yerr_box, yerr_whisk
 
-# ---------------- PRL-ish style ----------------
+# ---------- bigger fonts ----------
 plt.rcParams.update({
-    "figure.dpi": 300, "savefig.dpi": 600,
-    "font.size": 8, "axes.labelsize": 9,
-    "xtick.labelsize": 8, "ytick.labelsize": 8,
-    "legend.fontsize": 7, "lines.linewidth": 1.2,
-    "axes.linewidth": 0.8, "mathtext.default": "it",
+    "figure.dpi": 300,
+    "savefig.dpi": 600,
+    "font.size": 12,          # base font
+    "axes.labelsize": 13,     # x/y labels
+    "xtick.labelsize": 12,    # tick labels
+    "ytick.labelsize": 12,
+    "legend.fontsize": 9.5,    # legend
+    "lines.linewidth": 1.6,   # thicker lines
+    "axes.linewidth": 1.0,
+    "mathtext.default": "it",
 })
 
-# PRL single-column width ~3.37 in
-fig = plt.figure(figsize=(3.37, 2.60))
-ax = plt.gca()
+# keep PRL single-column width; height a bit taller for readability
+fig = plt.figure(figsize=(3.37, 2.9))
+ax = fig.gca()
 
-# ---------------- plot ----------------
+# --------- plot (expects your `data` dict to be defined above) ----------
 for nu, d in sorted(data.items()):
     T_total = np.asarray(d["T_total"], float)
     med     = np.asarray(d["median"], float)
@@ -179,29 +186,29 @@ for nu, d in sorted(data.items()):
     x = np.log10(T_total)
     y, yerr_box, yerr_whisk = y_and_errors(med, p35, p65, p25, p75)
 
-    line = ax.errorbar(
+    ln = ax.errorbar(
         x, y, yerr=yerr_box,
-        fmt='o-', markersize=3, capsize=2.5,
-        elinewidth=1.0, alpha=0.95, label=rf'$\nu={nu}$'
+        fmt='o-', markersize=4.2, capsize=3.0,
+        elinewidth=1.2, alpha=0.95, label=rf'$\nu={nu}$'
     )
-    color = line[0].get_color()
+    c = ln[0].get_color()
     ax.errorbar(
         x, y, yerr=yerr_whisk,
-        fmt='none', ecolor=color, elinewidth=0.8, alpha=0.6, capsize=4
+        fmt='none', ecolor=c, elinewidth=1.0, alpha=0.6, capsize=5
     )
 
-# ---- dotted slope-1 line, shifted down a bit ----
+# dotted slope-1 guide, shifted down
 x1, x2 = ax.get_xlim()
 y1, y2 = ax.get_ylim()
-dy = -0.45 * (y2 - y1)  # shift by 15% of y-range
-ax.plot([x1, x2], [x1 + dy, x2 + dy], ':', color='k', linewidth=1.0, label='slope $1$')
+dy = -0.45 * (y2 - y1)
+ax.plot([x1, x2], [x1 + dy, x2 + dy], ':', color='k', linewidth=1.2, label='slope $1$')
 
 # math axis labels
-ax.set_xlabel(r'$\log_{10} T_{\mathrm{total}}$')
-ax.set_ylabel(r'$\log_{10}(1/\varepsilon_{\ell_2})$')
+ax.set_xlabel(r'$\log_{10}\!\left(T_{\mathrm{total}}\right)$')
+ax.set_ylabel(r'$\log_{10}\!\left(1/\varepsilon_{\ell_2}\right)$')
 
-ax.grid(True, linestyle='--', linewidth=0.5, alpha=0.5)
-ax.legend(ncol=2, frameon=False, handlelength=2.0, columnspacing=0.8)
+ax.grid(True, linestyle='--', linewidth=0.6, alpha=0.5)
+ax.legend(ncol=2, frameon=False, handlelength=1, columnspacing=1.0)
 
 fig.tight_layout()
 plt.show()

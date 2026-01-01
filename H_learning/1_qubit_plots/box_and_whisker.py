@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ---------------- data (as given) ----------------
+# ---------------- data ----------------
 data = {
   1.8: {
         "T_total": [4.941e+04,6.092e+05,7.454e+06,6.051e+07,7.337e+08],
@@ -27,14 +27,14 @@ data = {
         "p65":     [7.791e-03,5.660e-04,7.888e-05,8.166e-06,1.069e-06],
         "p75":     [1.068e-02,7.108e-04,1.083e-04,1.149e-05,3.705e-06],
     },
-  2.2: {
-        "T_total": [6.768e+04,5.558e+05,6.801e+06,8.281e+07,6.694e+08],
-        "median":  [2.548e-03,2.759e-04,2.823e-05,2.555e-06,3.488e-07],
-        "p25":     [1.526e-03,1.716e-04,1.617e-05,1.457e-06,2.196e-07],
-        "p35":     [1.961e-03,2.026e-04,1.937e-05,1.897e-06,2.580e-07],
-        "p65":     [3.235e-03,3.997e-04,3.864e-05,3.461e-06,4.800e-07],
-        "p75":     [3.664e-03,4.955e-04,4.722e-05,4.474e-06,6.509e-07],
-    },
+#   2.2: {
+#         "T_total": [6.768e+04,5.558e+05,6.801e+06,8.281e+07,6.694e+08],
+#         "median":  [2.548e-03,2.759e-04,2.823e-05,2.555e-06,3.488e-07],
+#         "p25":     [1.526e-03,1.716e-04,1.617e-05,1.457e-06,2.196e-07],
+#         "p35":     [1.961e-03,2.026e-04,1.937e-05,1.897e-06,2.580e-07],
+#         "p65":     [3.235e-03,3.997e-04,3.864e-05,3.461e-06,4.800e-07],
+#         "p75":     [3.664e-03,4.955e-04,4.722e-05,4.474e-06,6.509e-07],
+#     },
   2.4: {
         "T_total": [6.484e+04,5.325e+05,6.516e+06,7.934e+07,6.413e+08],
         "median":  [1.867e-03,2.515e-04,1.867e-05,1.604e-06,2.076e-07],
@@ -78,22 +78,22 @@ def y_and_errors(med, p35, p65, p25=None, p75=None):
         yerr_whisk = np.vstack([y_lower_w, y_upper_w])
     return y, yerr_box, yerr_whisk
 
-# ---------------- PRL-ish style ----------------
+# ---------------- PRL-like style (bigger) ----------------
 plt.rcParams.update({
     "figure.dpi": 300,
     "savefig.dpi": 600,
-    "font.size": 8,
-    "axes.labelsize": 9,
-    "xtick.labelsize": 8,
-    "ytick.labelsize": 8,
-    "legend.fontsize": 7,
-    "lines.linewidth": 1.2,
-    "axes.linewidth": 0.8,
+    "font.size": 12,          # base font
+    "axes.labelsize": 13,     # axis labels
+    "xtick.labelsize": 12,
+    "ytick.labelsize": 12,
+    "legend.fontsize": 9.5,
+    "lines.linewidth": 1.6,
+    "axes.linewidth": 1.0,
     "mathtext.default": "it",
 })
 
-# PRL single-column width ~3.37 in
-fig = plt.figure(figsize=(3.37, 2.60))
+# single-column width, slightly taller for readability
+fig = plt.figure(figsize=(3.37, 2.9))
 ax = plt.gca()
 
 # ---------------- plot ----------------
@@ -108,31 +108,33 @@ for nu, d in sorted(data.items()):
     x = np.log10(T_total)
     y, yerr_box, yerr_whisk = y_and_errors(med, p35, p65, p25, p75)
 
-    line = ax.errorbar(
-        x, y, yerr=yerr_box, fmt='o-', markersize=3, capsize=2.5,
-        elinewidth=1.0, alpha=0.95, label=rf'$\nu={nu}$'
+    ln = ax.errorbar(
+        x, y, yerr=yerr_box,
+        fmt='o-', markersize=4.2, capsize=3.0,
+        elinewidth=1.2, alpha=0.95, label=rf'$\nu={nu}$'
     )
-    color = line[0].get_color()
+    c = ln[0].get_color()
     ax.errorbar(
-        x, y, yerr=yerr_whisk, fmt='none',
-        ecolor=color, elinewidth=0.8, alpha=0.6, capsize=4
+        x, y, yerr=yerr_whisk,
+        fmt='none', ecolor=c, elinewidth=1.0, alpha=0.6, capsize=5
     )
 
-# dotted slope-1 guide (any intercept)
+# dotted slope-1 guide, shifted down a bit
 x1, x2 = ax.get_xlim()
-b = -1.5
-ax.plot([x1, x2], [x1 + b, x2 + b], ':', color='k', linewidth=1.0, label='slope $1$')
+y1, y2 = ax.get_ylim()
+dy = -0.25 * (y2 - y1)   # move down by 35% of the y-range
+ax.plot([x1, x2], [x1 + dy, x2 + dy], ':', color='k', linewidth=1.2, label='slope $1$')
 
 # math axis labels
-ax.set_xlabel(r'$\log_{10} T_{\mathrm{total}}$')
-ax.set_ylabel(r'$\log_{10}(1/\epsilon_{\ell_2})$')
+ax.set_xlabel(r'$\log_{10}\!\left(T_{\mathrm{total}}\right)$')
+ax.set_ylabel(r'$\log_{10}\!\left(1/\varepsilon_{\ell_2}\right)$')
 
-ax.grid(True, linestyle='--', linewidth=0.5, alpha=0.5)
-ax.legend(ncol=2, frameon=False, handlelength=2.0, columnspacing=0.8)
+ax.grid(True, linestyle='--', linewidth=0.6, alpha=0.5)
+ax.legend(ncol=2, frameon=False, handlelength=1, columnspacing=1.0)
 
 fig.tight_layout()
 plt.show()
 
-# To save for submission:
+# To save:
 # fig.savefig("prl_single_column_plot.pdf", bbox_inches="tight")
 # fig.savefig("prl_single_column_plot.png", bbox_inches="tight")
