@@ -26,7 +26,7 @@ def spectral_gap(H_tot):
     evals = np.sort(evals)        
     return evals[1] - evals[0]
 
-def run_shots(state,operator,N= 54,seed = None,p=0.05):
+def run_shots(state,operator,N= 54,seed = None,p=0.03):
     rng = np.random.default_rng(seed)
     exp_val = expect(operator, state)          
     p_plus   = (1.0 + exp_val) / 2.0    
