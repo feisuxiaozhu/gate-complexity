@@ -26,7 +26,7 @@ def spectral_gap(H_tot):
     evals = np.sort(evals)        
     return evals[1] - evals[0]
 
-def run_shots(state,operator,N= 54,seed = None,p=0.1):
+def run_shots(state,operator,N= 54,seed = None,p=0.25):
     rng = np.random.default_rng(seed)
     exp_val = expect(operator, state)          
     p_plus   = (1.0 + exp_val) / 2.0    
@@ -77,6 +77,7 @@ def delta_E_RFE(lambda_1, lambda_2, lambda_3, nu, beta):
 if __name__ == "__main__":
     H_true = 0.3 * sigmaz() + 0.1 * sigmax() + 0.5*sigmay()
     nu = 10
+    shots = 20
     E_delta_vec = []
     E_delta_true =[]
     for s1 in [1]:
@@ -89,7 +90,7 @@ if __name__ == "__main__":
                 O_c = Oc_table[beta]
                 O_s = Os_table[beta]
             phi_plus = def_phi_plus(s1,beta)
-            gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-3,N_shots=540)
+            gap_est = robust_gap_estimate(phi_plus,H_tot,O_c,O_s,upper=nu,eps=1e-3,N_shots=20)
             E_delta_vec.append(gap_est)
             E_delta_true.append(float(spectral_gap(H_tot)))
 
