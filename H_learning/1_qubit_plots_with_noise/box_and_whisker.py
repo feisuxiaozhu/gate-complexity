@@ -11,14 +11,14 @@ data = {
         "p65":     [3.492e-02,7.689e-03,2.439e-03,1.441e-03,1.040e-03],
         "p75":     [5.450e-02,9.271e-03,3.336e-03,2.255e-03,1.956e-03],
     },
-  1.9: {
-        "T_total": [4.826e+04,5.949e+05,7.279e+06,5.909e+07,7.165e+08],
-        "median":  [1.195e-02,1.252e-03,1.374e-04,1.512e-05,1.373e-06],
-        "p25":     [6.088e-03,5.551e-04,6.340e-05,7.292e-06,5.934e-07],
-        "p35":     [7.782e-03,7.953e-04,9.054e-05,1.023e-05,8.349e-07],
-        "p65":     [2.199e-02,1.944e-03,2.414e-04,2.607e-05,2.512e-06],
-        "p75":     [2.894e-02,4.480e-03,8.024e-03,2.220e-04,5.697e-05],
-    },
+#   1.9: {
+#         "T_total": [4.826e+04,5.949e+05,7.279e+06,5.909e+07,7.165e+08],
+#         "median":  [1.195e-02,1.252e-03,1.374e-04,1.512e-05,1.373e-06],
+#         "p25":     [6.088e-03,5.551e-04,6.340e-05,7.292e-06,5.934e-07],
+#         "p35":     [7.782e-03,7.953e-04,9.054e-05,1.023e-05,8.349e-07],
+#         "p65":     [2.199e-02,1.944e-03,2.414e-04,2.607e-05,2.512e-06],
+#         "p75":     [2.894e-02,4.480e-03,8.024e-03,2.220e-04,5.697e-05],
+#     },
   2: {
         "T_total": [4.715e+04,5.813e+05,7.113e+06,8.661e+07,7.001e+08],
         "median":  [5.856e-03,4.731e-04,5.369e-05,6.229e-06,8.568e-07],
@@ -74,19 +74,19 @@ def y_and_errors(med, p35, p65, p25=None, p75=None):
 plt.rcParams.update({
     "figure.dpi": 300,
     "savefig.dpi": 600,
-    "font.size": 8,
-    "axes.labelsize": 9,
-    "xtick.labelsize": 8,
-    "ytick.labelsize": 8,
-    "legend.fontsize": 7,
-    "lines.linewidth": 1.2,
-    "axes.linewidth": 0.8,
+    "font.size": 12,          # base font
+    "axes.labelsize": 13,     # x/y labels
+    "xtick.labelsize": 12,    # tick labels
+    "ytick.labelsize": 12,
+    "legend.fontsize": 9.5,    # legend
+    "lines.linewidth": 1.6,   # thicker lines
+    "axes.linewidth": 1.0,
     "mathtext.default": "it",
 })
 
 # PRL single-column width ~3.37 in
-fig = plt.figure(figsize=(3.37, 2.60))
-ax = plt.gca()
+fig = plt.figure(figsize=(3.37, 2.9))
+ax = fig.gca()
 
 # ---------------- plot ----------------
 for nu, d in sorted(data.items()):
