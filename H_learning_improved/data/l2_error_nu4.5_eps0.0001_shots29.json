@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "qubits": 2,
+    "control_strength": 4.5,
+    "epsilon": 0.0001,
+    "shots": 29,
+    "repeats": 200,
+    "noise": 0.0,
+    "initial_guess_scale": 1.0,
+    "upper_norm_factor": 2.0,
+    "max_evaluations": null
+  },
+  "seed": 20260714,
+  "seed_entropy": 20260714,
+  "seed_spawn_key": [
+    0
+  ],
+  "workers": 1,
+  "upper": 11.38636091071304,
+  "upper_norm": "trace_norm",
+  "modeled_total_time": 147288395.9649092,
+  "modeled_time_convention": "sum(configurations * shots * evolution_time)",
+  "initial_guess_distance": 0.061644140029689785,
+  "summary": {
+    "repeats": 200,
+    "success_rate": 0.705,
+    "mean": 0.002593193507897793,
+    "std": 0.009025789878046826,
+    "p25": 8.835636842124451e-06,
+    "p35": 9.662380393478432e-06,
+    "median": 1.0864238228274909e-05,
+    "p65": 2.4003318826783876e-05,
+    "p75": 0.0002957673006785085,
+    "p80": 0.000527393904053498,
+    "solver_success_rate": 1.0,
+    "mean_function_evaluations": 4.045
+  },
+  "timings_seconds": {
+    "shared_probability_preparation": 0.0027477000003273133,
+    "sampling": 0.13182189999861293,
+    "fitting": 1.1249843000005058,
+    "sweep_compute_total": 1.2712305000004562
+  },
+  "environment": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "ARMv8 (64-bit) Family 8 Model 1 Revision 201, Qualcomm Technologies Inc",
+    "cpu_count": 12,
+    "packages": {
+      "numpy": "2.5.1",
+      "scipy": "1.18.0",
+      "pandas": "3.0.3",
+      "qutip": "5.3.0"
+    }
+  }
+}

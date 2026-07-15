@@ -1,0 +1,103 @@
+{
+  "generated_at_utc": "2026-07-15T00:52:10.293292+00:00",
+  "workload": {
+    "qubits": 2,
+    "nu": 4.5,
+    "epsilon": 0.0001,
+    "shots": 29,
+    "repeats": 200,
+    "noise": 0.0,
+    "seed": 20260714,
+    "workers": 4
+  },
+  "environment": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "ARMv8 (64-bit) Family 8 Model 1 Revision 201, Qualcomm Technologies Inc",
+    "cpu_count": 12,
+    "packages": {
+      "numpy": "2.5.1",
+      "scipy": "1.18.0",
+      "pandas": "3.0.3",
+      "qutip": "5.3.0"
+    }
+  },
+  "short_trials": {
+    "repeats_per_trial": 10,
+    "raw_seconds": {
+      "legacy": [
+        11.20231739999872,
+        11.416262500000812,
+        11.16242500000044
+      ],
+      "optimized_single_worker": [
+        0.06256010000106471,
+        0.06210240000109479,
+        0.06941890000052808
+      ],
+      "optimized_multiworker": [
+        1.561966700000994,
+        1.5312213999986852,
+        1.5572589999992488
+      ]
+    },
+    "median_seconds": {
+      "legacy": 11.20231739999872,
+      "optimized_single_worker": 0.06256010000106471,
+      "optimized_multiworker": 1.5572589999992488
+    }
+  },
+  "full_run_seconds": {
+    "legacy": {
+      "probability_and_sampling": 87.41092299999946,
+      "fitting": 142.32484939999995,
+      "total": 229.7357723999994
+    },
+    "optimized_single_worker": {
+      "probability_preparation": 0.0016049999994720565,
+      "sampling": 0.13628170000083628,
+      "fitting": 1.032904800000324,
+      "total": 1.171112500000163
+    },
+    "optimized_multiworker": {
+      "probability_preparation": 0.0016712000015104422,
+      "sampling": 0.1484466000001703,
+      "fitting": 1.7546707999990758,
+      "total": 1.9052757999997993
+    }
+  },
+  "speedup": {
+    "algorithmic_single_worker": 196.1688329686238,
+    "practical_multiworker": 120.57874896643499
+  },
+  "result_summaries": {
+    "legacy": {
+      "mean": 0.0013371654265597176,
+      "median": 1.0960211527697156e-05,
+      "p80": 9.829018053417525e-05,
+      "success_rate": 0.8
+    },
+    "optimized_single_worker": {
+      "mean": 0.002593193507897793,
+      "median": 1.0864238228274909e-05,
+      "p80": 0.000527393904053498,
+      "success_rate": 0.705
+    },
+    "optimized_multiworker": {
+      "mean": 0.002593193507897793,
+      "median": 1.0864238228274909e-05,
+      "p80": 0.000527393904053498,
+      "success_rate": 0.705
+    },
+    "single_and_multi_outputs_identical": true,
+    "historical_comparison": {
+      "samples": 200,
+      "mean": 0.0011737206872092492,
+      "median": 1.056044613071503e-05,
+      "p80": 0.000149655438929,
+      "success_rate": 0.77,
+      "ks_statistic": 0.09,
+      "ks_pvalue": 0.39352743357720954
+    }
+  }
+}

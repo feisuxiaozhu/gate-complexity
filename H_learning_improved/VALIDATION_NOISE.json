@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "parameters": {
+    "qubits": 2,
+    "nu": 4.5,
+    "epsilon": 0.001,
+    "shots": 27,
+    "repeats": 10,
+    "noise": 0.03,
+    "seed": 20260714
+  },
+  "probabilities": {
+    "maximum_absolute_error": 7.421063763501934e-12,
+    "tolerance": 1.5482243366854263e-11,
+    "maximum_evolution_time": 3096.4486733708522,
+    "iterations": 24
+  },
+  "jacobian": {
+    "maximum_absolute_error": 8.361453279759345e-09,
+    "tolerance": 2e-08
+  },
+  "fixed_target_solver": {
+    "coefficient_difference": 8.453022002235094e-12,
+    "optimized_error_from_truth": 1.7967780822017482e-05,
+    "legacy_error_from_truth": 1.7967777708177445e-05
+  },
+  "distributions": {
+    "legacy": {
+      "mean": 0.004571690451041935,
+      "median": 9.979128161337735e-05,
+      "p80": 0.00017950419789268052,
+      "success_rate": 0.8
+    },
+    "optimized": {
+      "mean": 0.00499769170389088,
+      "median": 0.00019370738267061245,
+      "p80": 0.000846061591025251,
+      "success_rate": 0.8
+    },
+    "ks_statistic": 0.30000000000000004,
+    "ks_pvalue": 0.7869297884777761,
+    "historical": null
+  },
+  "timings_seconds": {
+    "legacy": 10.682154300000548,
+    "optimized": 0.06778459999986808
+  }
+}
